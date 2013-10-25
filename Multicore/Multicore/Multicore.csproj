@@ -46,14 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaz\Form1.cs">
+    <Compile Include="Interfaz\frmMulticore.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Interfaz\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Interfaz\frmMulticore.Designer.cs">
+      <DependentUpon>frmMulticore.cs</DependentUpon>
     </Compile>
-    <Compile Include="Negocio\Program.cs" />
+    <Compile Include="Negocio\clsAnalisisTexto.cs" />
+    <Compile Include="Negocio\clsMulticore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Interfaz\frmMulticore.resx">
+      <DependentUpon>frmMulticore.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
