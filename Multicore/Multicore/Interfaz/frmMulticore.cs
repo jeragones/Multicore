@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Multicore.Negocio;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace Multicore
 {
@@ -54,7 +55,30 @@ namespace Multicore
 
         private void btnEncriptar_Click(object sender, EventArgs e)
         {
-            clsEncriptar.hola();
+            //clsEncriptar.hola(Msg.Text);
+            string mensaje = Msg.Text;
+            rest.AppendText("Esto es el mensaje sin cifrar: " + mensaje);
+
+
+
+            SymmetricAlgorithm algoritmo = SymmetricAlgorithm.Create("Rijndael");
+            //Se podría haber creado el algoritmo de esta otra manera:
+            //RijndaelManaged algoritmoEncriptador = new RijndaelManaged();
+            clsEncriptar.ConfigurarAlgoritmo(algoritmo);
+            clsEncriptar.GenerarClave(algoritmo);
+            clsEncriptar.GenerarIV(algoritmo);
+            byte[] mensajeEncriptado = clsEncriptar.Encriptar(mensaje, algoritmo);
+            rest.AppendText("Esto es el mensaje cifrado:");
+            foreach (byte b in mensajeEncriptado)
+            {
+                String rr = ("{0:X2} " + b);
+                rest.AppendText(rr);
+            }
+            byte[] mensajeDesencriptado = clsEncriptar.Desencriptar(mensajeEncriptado, algoritmo);
+            string mensajeDescrifrado = Encoding.UTF8.GetString(mensajeDesencriptado);
+            rest.AppendText("Esto es el mensaje descifrado: " + mensajeDescrifrado);
+            
+            algoritmo.Clear();
         }
     }
 }

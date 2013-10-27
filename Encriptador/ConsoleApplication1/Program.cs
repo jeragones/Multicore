@@ -13,7 +13,7 @@ namespace ConsoleApplication1
     string mensaje = "Daniel";
     Console.WriteLine("Esto es el mensaje sin cifrar: " + mensaje);
     Console.WriteLine("Pulse una tecla para continuar…\n");
-    Console.ReadKey();
+    //Console.ReadKey();
     // Creamos el algoritmo encriptador
     SymmetricAlgorithm algoritmo = SymmetricAlgorithm.Create("Rijndael");
     //Se podría haber creado el algoritmo de esta otra manera:
@@ -28,7 +28,7 @@ namespace ConsoleApplication1
       Console.Write("{0:X2} ", b);
     }
     Console.WriteLine("\nPulse una tecla para continuar…\n");
-    Console.ReadKey();
+    //Console.ReadKey();
     byte[] mensajeDesencriptado = Desencriptar(mensajeEncriptado, algoritmo);
     string mensajeDescrifrado = Encoding.UTF8.GetString(mensajeDesencriptado);
     Console.WriteLine("Esto es el mensaje descifrado: " + mensajeDescrifrado);
@@ -53,7 +53,7 @@ namespace ConsoleApplication1
     Console.WriteLine("Modo de cifrado: {0}", algoritmo.Mode);
     Console.WriteLine("Modo de relleno: {0}", algoritmo.Padding);
     Console.WriteLine("Pulse una tecla para continuar…\n");
-    Console.ReadKey();
+    //Console.ReadKey();
   }
   /// <summary>
   /// Tres formas de generar una clave.
@@ -66,8 +66,8 @@ namespace ConsoleApplication1
     // Establecemos la longitud que queremos que tenga la clave a generar.
     algoritmo.KeySize = 256;
     Console.WriteLine("Longitud de la clave:   {0}", algoritmo.KeySize);
-    Console.WriteLine("Pulse una tecla para continuar…\n");
-    Console.ReadKey();
+    //Console.WriteLine("Pulse una tecla para continuar…\n");
+    //Console.ReadKey();
     // Leer sin más el valor de la clave hara que se genere.
     // sacamos la clave por consola
     Console.WriteLine("La clave: ");
@@ -76,17 +76,18 @@ namespace ConsoleApplication1
     Console.Write("{0:X2} ", b);
     }
     Console.WriteLine("\nPulse una tecla para continuar…\n");
-    Console.ReadKey();
+    //Console.ReadKey();
     // Podemos generar otra nueva
     algoritmo.GenerateKey();
     // sacamos la nueva clave por consola
     Console.WriteLine("Otra clave: ");
     foreach (byte b in algoritmo.Key)
     {
-    Console.Write("{0:X2} ", b);
+        String rr=("{0:X2} "+ b);
+        Console.Write("{0:X2} ", b);
     }
     Console.WriteLine("\nPulse una tecla para continuar…\n");
-    Console.ReadKey();
+    //Console.ReadKey();
     // Otra forma de crear claves sería con RNG (Random Number Generator)
     RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
     // Se rellena el array de bytes de la clave con datos aleatorios
@@ -97,8 +98,8 @@ namespace ConsoleApplication1
     {
     Console.Write("{0:X2} ", b);
     }
-    Console.WriteLine("\nPulse una tecla para continuar…\n");
-    Console.ReadKey();
+    //Console.WriteLine("\nPulse una tecla para continuar…\n");
+    //Console.ReadKey();
   }
   /// <summary>
   /// Para generar un vector de inicialización

@@ -6,57 +6,38 @@ using System.Security.Cryptography;
 using System.Text;
 
 
+
 namespace Multicore.Negocio
 {
-    class clsEncriptar
+    public class clsEncriptar
     {
-         public static void hola()
+        /*
+         public static void hola(String msg)
   {
      // Este es el mensaje que vamos a encriptar.
-    string mensaje = "Programando seguridad en C#.NET";
-    Console.WriteLine("Esto es el mensaje sin cifrar: " + mensaje);
-    Console.WriteLine("Pulse una tecla para continuar…\n");
-    Console.ReadKey();
+      
+    
     // Creamos el algoritmo encriptador
-    SymmetricAlgorithm algoritmo = SymmetricAlgorithm.Create("Rijndael");
-    //Se podría haber creado el algoritmo de esta otra manera:
-    //RijndaelManaged algoritmoEncriptador = new RijndaelManaged();
-    ConfigurarAlgoritmo(algoritmo);
-    GenerarClave(algoritmo);
-    GenerarIV(algoritmo);
-    byte[] mensajeEncriptado = Encriptar(mensaje, algoritmo);
-    Console.WriteLine("Esto es el mensaje cifrado:");
-    foreach (byte b in mensajeEncriptado)
-    {
-      Console.Write("{0:X2} ", b);
-    }
-    Console.WriteLine("\nPulse una tecla para continuar…\n");
-    Console.ReadKey();
-    byte[] mensajeDesencriptado = Desencriptar(mensajeEncriptado, algoritmo);
-    string mensajeDescrifrado = Encoding.UTF8.GetString(mensajeDesencriptado);
-    Console.WriteLine("Esto es el mensaje descifrado: " + mensajeDescrifrado);
-    Console.WriteLine("Pulse una tecla para terminar…\n");
-    Console.ReadKey();
-    algoritmo.Clear();
-  }
+    
+  }*/
   /// <summary>
   /// Configuración del algoritmo simétrico
   /// </summary>
   /// <param name=”algoritmo”>
   /// Una instancia del algoritmo simétrico.
   /// </param>
-  private static void ConfigurarAlgoritmo(SymmetricAlgorithm algoritmo)
+  public static void ConfigurarAlgoritmo(SymmetricAlgorithm algoritmo)
   {
     // Cambiamos el valor del tamaño de bloque
     algoritmo.BlockSize = 128;
     // Establecemos el modo de cifrado y con el modo de relleno
     algoritmo.Mode = CipherMode.CBC;
     algoritmo.Padding = PaddingMode.PKCS7;
-    Console.WriteLine("Longitud de bloque: {0}", algoritmo.BlockSize);
-    Console.WriteLine("Modo de cifrado: {0}", algoritmo.Mode);
-    Console.WriteLine("Modo de relleno: {0}", algoritmo.Padding);
-    Console.WriteLine("Pulse una tecla para continuar…\n");
-    Console.ReadKey();
+    //Console.WriteLine("Longitud de bloque: {0}", algoritmo.BlockSize);
+    //Console.WriteLine("Modo de cifrado: {0}", algoritmo.Mode);
+    //Console.WriteLine("Modo de relleno: {0}", algoritmo.Padding);
+    //Console.WriteLine("Pulse una tecla para continuar…\n");
+    //Console.ReadKey();
   }
   /// <summary>
   /// Tres formas de generar una clave.
@@ -64,44 +45,44 @@ namespace Multicore.Negocio
   /// <param name=”algoritmo”>
   /// Una instancia del algoritmo simétrico.
   /// </param>
-  private static void GenerarClave(SymmetricAlgorithm algoritmo)
+  public static void GenerarClave(SymmetricAlgorithm algoritmo)
   {
     // Establecemos la longitud que queremos que tenga la clave a generar.
     algoritmo.KeySize = 256;
-    Console.WriteLine("Longitud de la clave:   {0}", algoritmo.KeySize);
-    Console.WriteLine("Pulse una tecla para continuar…\n");
-    Console.ReadKey();
+    //Console.WriteLine("Longitud de la clave:   {0}", algoritmo.KeySize);
+    //Console.WriteLine("Pulse una tecla para continuar…\n");
+    //Console.ReadKey();
     // Leer sin más el valor de la clave hara que se genere.
     // sacamos la clave por consola
-    Console.WriteLine("La clave: ");
+    //Console.WriteLine("La clave: ");
     foreach (byte b in algoritmo.Key)
     {
-    Console.Write("{0:X2} ", b);
+    //Console.Write("{0:X2} ", b);
     }
-    Console.WriteLine("\nPulse una tecla para continuar…\n");
-    Console.ReadKey();
+    //Console.WriteLine("\nPulse una tecla para continuar…\n");
+    //Console.ReadKey();
     // Podemos generar otra nueva
     algoritmo.GenerateKey();
     // sacamos la nueva clave por consola
-    Console.WriteLine("Otra clave: ");
+    //Console.WriteLine("Otra clave: ");
     foreach (byte b in algoritmo.Key)
     {
-    Console.Write("{0:X2} ", b);
+    //Console.Write("{0:X2} ", b);
     }
-    Console.WriteLine("\nPulse una tecla para continuar…\n");
-    Console.ReadKey();
+    //Console.WriteLine("\nPulse una tecla para continuar…\n");
+    //Console.ReadKey();
     // Otra forma de crear claves sería con RNG (Random Number Generator)
     RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
     // Se rellena el array de bytes de la clave con datos aleatorios
     randomNumberGenerator.GetBytes(algoritmo.Key);
     // sacamos la clave por consola
-    Console.WriteLine("Otra forma de obtener una clave: ");
+    //Console.WriteLine("Otra forma de obtener una clave: ");
     foreach (byte b in algoritmo.Key)
     {
-    Console.Write("{0:X2} ", b);
+    //Console.Write("{0:X2} ", b);
     }
-    Console.WriteLine("\nPulse una tecla para continuar…\n");
-    Console.ReadKey();
+    //Console.WriteLine("\nPulse una tecla para continuar…\n");
+    //Console.ReadKey();
   }
   /// <summary>
   /// Para generar un vector de inicialización
@@ -109,18 +90,18 @@ namespace Multicore.Negocio
   /// <param name=”algoritmo”>
   /// Una instancia del algoritmo simétrico.
   /// </param>
-  private static void GenerarIV(SymmetricAlgorithm algoritmo)
+  public static void GenerarIV(SymmetricAlgorithm algoritmo)
   {
     // Si haces lo siguiente se genera un nuevo IV
     algoritmo.GenerateIV();
     // sacamos el IV por consola
-    Console.WriteLine("IV (Vector de inicialización): ");
+    //Console.WriteLine("IV (Vector de inicialización): ");
     foreach (byte b in algoritmo.IV)
     {
-    Console.Write("{0:X2} ", b);
+    //Console.Write("{0:X2} ", b);
     }
-    Console.WriteLine("\nPulse una tecla para continuar…\n");
-    Console.ReadKey();
+    //Console.WriteLine("\nPulse una tecla para continuar…\n");
+    //Console.ReadKey();
   }
   /// <summary>
   /// Encripta un mensaje
