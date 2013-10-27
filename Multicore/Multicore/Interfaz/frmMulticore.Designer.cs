@@ -44,6 +44,8 @@
             this.temaLibreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlAnalisis = new System.Windows.Forms.Panel();
             this.pnlEncriptacion = new System.Windows.Forms.Panel();
+            this.rest = new System.Windows.Forms.TextBox();
+            this.Msg = new System.Windows.Forms.TextBox();
             this.btnEncriptar = new System.Windows.Forms.Button();
             this.btnAnalisis = new System.Windows.Forms.Button();
             this.txtTexto = new System.Windows.Forms.TextBox();
@@ -56,8 +58,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblIdioma = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.Msg = new System.Windows.Forms.TextBox();
-            this.rest = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.pnlAnalisis.SuspendLayout();
             this.pnlEncriptacion.SuspendLayout();
@@ -170,10 +170,10 @@
             // 
             // pnlAnalisis
             // 
-            this.pnlAnalisis.Controls.Add(this.pnlEncriptacion);
             this.pnlAnalisis.Controls.Add(this.btnAnalisis);
             this.pnlAnalisis.Controls.Add(this.txtTexto);
             this.pnlAnalisis.Controls.Add(this.pnlAcciones);
+            this.pnlAnalisis.Controls.Add(this.pnlEncriptacion);
             this.pnlAnalisis.Location = new System.Drawing.Point(0, 27);
             this.pnlAnalisis.Name = "pnlAnalisis";
             this.pnlAnalisis.Size = new System.Drawing.Size(597, 400);
@@ -188,6 +188,21 @@
             this.pnlEncriptacion.Name = "pnlEncriptacion";
             this.pnlEncriptacion.Size = new System.Drawing.Size(597, 400);
             this.pnlEncriptacion.TabIndex = 2;
+            // 
+            // rest
+            // 
+            this.rest.Location = new System.Drawing.Point(12, 104);
+            this.rest.Multiline = true;
+            this.rest.Name = "rest";
+            this.rest.Size = new System.Drawing.Size(408, 101);
+            this.rest.TabIndex = 5;
+            // 
+            // Msg
+            // 
+            this.Msg.Location = new System.Drawing.Point(11, 16);
+            this.Msg.Name = "Msg";
+            this.Msg.Size = new System.Drawing.Size(100, 20);
+            this.Msg.TabIndex = 4;
             // 
             // btnEncriptar
             // 
@@ -309,21 +324,6 @@
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Idioma:";
-            // 
-            // Msg
-            // 
-            this.Msg.Location = new System.Drawing.Point(11, 16);
-            this.Msg.Name = "Msg";
-            this.Msg.Size = new System.Drawing.Size(100, 20);
-            this.Msg.TabIndex = 4;
-            // 
-            // rest
-            // 
-            this.rest.Location = new System.Drawing.Point(12, 104);
-            this.rest.Multiline = true;
-            this.rest.Name = "rest";
-            this.rest.Size = new System.Drawing.Size(408, 101);
-            this.rest.TabIndex = 5;
             // 
             // frmMulticore
             // 

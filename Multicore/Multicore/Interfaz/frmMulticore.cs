@@ -22,7 +22,7 @@ namespace Multicore
         private void btnAnalisis_Click(object sender, EventArgs e)
         {
             clsAnalisisTexto insAnalisisTexto = new clsAnalisisTexto();
-            //insAnalisisTexto.analizarTexto(txtTexto.Text, false);
+            
             
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Archivos txt|*.txt";
@@ -42,7 +42,7 @@ namespace Multicore
             texto = sr.ReadToEnd();
             sr.Close();
             txtTexto.Text = texto;
-            
+            insAnalisisTexto.analizarTexto(txtTexto.Text, false);
 
 
 

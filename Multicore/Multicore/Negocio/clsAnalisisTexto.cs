@@ -10,7 +10,7 @@ namespace Multicore.Negocio
 {
     class clsAnalisisTexto
     {
-        public static string sIdioma = "";
+        public static object[] asIdioma = new object[] { "", 0 };
         public static int iCantidadPalabras = 0;
         public static int iCantidadCaracteres = 0;
         public static LinkedList<object[]> lsPalabrasComunes = new LinkedList<object[]>();
@@ -20,86 +20,154 @@ namespace Multicore.Negocio
         /// </summary>
         /// <param name="_sTexto"></param>
         /// <param name="_bConcurrencia"></param>
-        public void analizarTexto(string _sTexto, bool _bConcurrencia) 
+        public void analizarTexto(string _sTexto, bool _bConcurrencia)
         {
+            string sPalabra;
             string sPath = Directory.GetParent(Path.GetDirectoryName(Application.StartupPath)).FullName + "\\Datos\\diccionario.txt";
-            //LinkedList<object[]> lsCaracteres = new LinkedList<object[]>();
+            string[] asIdiomas = leerArchivo(sPath);
+            LinkedList<object[]> lsIdiomas = new LinkedList<object[]>();
             string[] asPalabras = _sTexto.Split(new char[] { ' ' });
-            iCantidadPalabras = asPalabras.Length;
-
-            iCantidadCaracteres = _sTexto.Length;
-
-            
-            
+            object[,] moIdiomas = new object[asIdiomas.Length, 2];
 
             /* ***************************************************************************************** */
-            if (_bConcurrencia)
+            if (_bConcurrencia && !String.IsNullOrEmpty(asIdiomas[0]))
             {
-                Parallel.ForEach(asPalabras, sPalabra =>
+                Parallel.ForEach(asIdiomas, sTmp =>
                 {
-                    if (sPalabra != "")
+                    string[] sSeparador = sTmp.Split(new char[] { ':' });
+                    string[] asPalabra = sSeparador[1].Split(new char[] { ',' });
+                    lsIdiomas.AddLast(new object[] { sSeparador[0], asPalabra });
+                });
+                Parallel.For(0, lsIdiomas.Count, i =>
+                {
+                    moIdiomas[i, 0] = lsIdiomas.ElementAt(i)[0];
+                    moIdiomas[i, 1] = 0;
+                });
+                Parallel.ForEach(asPalabras, sTmp =>
+                {
+                    sPalabra = limpiarPalabra(sTmp, _bConcurrencia);
+                    if (!String.IsNullOrEmpty(sTmp))
                     {
+                        iCantidadCaracteres += sTmp.Length;
+                        iCantidadPalabras++;
                         palabrasComunes(sPalabra, _bConcurrencia);
-                        //lsCaracteres = caracteresComunes(sPalabra, lsCaracteres, _bConcurrencia);
+                        moIdiomas = analizarIdioma(sPalabra, lsIdiomas, _bConcurrencia, moIdiomas);
                     }
                 });
             }
-            else /* ------------------------------------------------------------------------------------ */ 
+            else /* ------------------------------------------------------------------------------------ */
             {
-                foreach (string sPalabra in asPalabras)
+                foreach (string sTmp in asIdiomas)
                 {
-                    if (sPalabra != "") 
+                    string[] sSeparador = sTmp.Split(new char[] { ':' });
+                    string[] asPalabra = sSeparador[1].Split(new char[] { ',' });
+                    lsIdiomas.AddLast(new object[] { sSeparador[0], asPalabra });
+                }
+                for (int i = 0; i < lsIdiomas.Count; i++)
+                {
+                    moIdiomas[i, 0] = lsIdiomas.ElementAt(i)[0];
+                    moIdiomas[i, 1] = 0;
+                }
+                foreach (string sTmp in asPalabras)
+                {
+                    if (!String.IsNullOrEmpty(sTmp))
                     {
-                        palabrasComunes(sPalabra, _bConcurrencia);
-                        //lsCaracteres = caracteresComunes(sPalabra, lsCaracteres, _bConcurrencia);
+                        sPalabra = limpiarPalabra(sTmp, _bConcurrencia);
+                        if (!String.IsNullOrEmpty(sTmp))
+                        {
+                            iCantidadCaracteres += sTmp.Length;
+                            iCantidadPalabras++;
+                            palabrasComunes(sPalabra, _bConcurrencia);
+                            moIdiomas = analizarIdioma(sPalabra, lsIdiomas, _bConcurrencia, moIdiomas);
+                        }
                     }
                 }
+                for (int i = 0; i < moIdiomas.Length / 2; i++)
+                {
+                    if (String.IsNullOrEmpty((string)asIdioma[0]) && (int)asIdioma[1] == 0)
+                    {
+                        asIdioma[0] = moIdiomas[i, 0];
+                        asIdioma[1] = moIdiomas[i, 1];
+                    }
+                    else if ((int)asIdioma[1] < (int)moIdiomas[i, 1])
+                    {
+                        asIdioma[0] = moIdiomas[i, 0];
+                        asIdioma[1] = moIdiomas[i, 1];
+                    }
+                }
+                Console.WriteLine(asIdioma[0] + " - " + asIdioma[1]);
             }
             /* ***************************************************************************************** */
-            string[] asIdiomas = leerArchivo(sPath);
-            if (String.IsNullOrEmpty(asIdiomas[0]))
-                analizarIdioma(asIdiomas);
-        }
 
-        //private LinkedList<string[]> limpiarPalabra(string[] _asPalabras, bool _bConcurrencia) 
-        //{
-        //    LinkedList<string[]> asPalabras = new LinkedList<string[]>();
-        //    /* ***************************************************************************************** */
-        //    if (_bConcurrencia)
-        //    {
-        //        Parallel.ForEach(_asPalabras, sPalabra =>
-        //        {
-        //            if (sPalabra != "")
-        //            {
-        //                string[] asPalabra = sPalabra.Split(new char[] {',','.','-','!'});
-        //                palabrasComunes(sPalabra, _bConcurrencia);
-        //                //lsCaracteres = caracteresComunes(sPalabra, lsCaracteres, _bConcurrencia);
-        //            }
-        //        });
-        //    }
-        //    else /* ------------------------------------------------------------------------------------ */
-        //    {
-        //        /*foreach (string sPalabra in asPalabras)
-        //        {
-        //            if (sPalabra != "")
-        //            {
-        //                palabrasComunes(sPalabra, _bConcurrencia);
-        //                //lsCaracteres = caracteresComunes(sPalabra, lsCaracteres, _bConcurrencia);
-        //            }
-        //        }*/
-        //    }
-        //    /* ***************************************************************************************** */
-        //}
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        private void analizarIdioma(string[] _asIdiomas) 
+        /// <param name="_sPalabra"></param>
+        /// <param name="_bConcurrencia"></param>
+        /// <returns></returns>
+        private string limpiarPalabra(string _sPalabra, bool _bConcurrencia)
         {
-
+            string sPalabra = "";
+            string[] asPalabra = _sPalabra.Split(new char[] { ',', '.', '-', '!', '?', '¿', ';', ':', '"', '\'', '\n' });
+            /* ***************************************************************************************** */
+            if (_bConcurrencia)
+            {
+                Parallel.For(0, asPalabra.Length, i =>
+                {
+                    if (asPalabra[i].Length > 1)
+                        sPalabra = asPalabra[i];
+                });
+            }
+            else /* ------------------------------------------------------------------------------------ */
+            {
+                for (int i = 0; i < asPalabra.Length; i++)
+                {
+                    if (asPalabra[i].Length > 0)
+                        sPalabra = asPalabra[i];
+                }
+            }
+            /* ***************************************************************************************** */
+            return sPalabra;
         }
 
-        private string[] leerArchivo(string _sPath) 
+        /// <summary>
+        /// 
+        /// </summary>
+        private object[,] analizarIdioma(string _sPalabra, LinkedList<object[]> _asIdiomas, bool _bConcurrencia, object[,] moIdioma)
+        {
+            int iTamano = ((string[])((object[])_asIdiomas.ElementAt(0)).ElementAt(1)).Length;
+            /* ***************************************************************************************** */
+            if (_bConcurrencia)
+            {
+                Parallel.For(0, iTamano, i =>
+                {
+                    Parallel.For(0, moIdioma.Length, j =>
+                    {
+                        if (_sPalabra.Equals(((string[])((object[])_asIdiomas.ElementAt(j)).ElementAt(1))[i],
+                                         StringComparison.OrdinalIgnoreCase))
+                            moIdioma[j, 1] = (int)moIdioma[j, 1] + 1;
+                    });
+                });
+            }
+            else /* ------------------------------------------------------------------------------------ */
+            {
+                for (int i = 0; i < iTamano; i++)
+                {
+                    for (int j = 0; j < moIdioma.Length / 2; j++)
+                    {
+                        if (_sPalabra.Equals(((string[])((object[])_asIdiomas.ElementAt(j)).ElementAt(1))[i],
+                                         StringComparison.OrdinalIgnoreCase))
+                            moIdioma[j, 1] = (int)moIdioma[j, 1] + 1;
+                    }
+                }
+            }
+            /* ***************************************************************************************** */
+            return moIdioma;
+        }
+
+        private string[] leerArchivo(string _sPath)
         {
             System.IO.StreamReader srFile = new System.IO.StreamReader(_sPath, System.Text.Encoding.Default);
             string sTexto = srFile.ReadToEnd();
@@ -110,69 +178,12 @@ namespace Multicore.Negocio
                 return null;
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="_sPalabra"></param>
-        /// <param name="_lsCaracteres"></param>
-        /// <param name="_bConcurrencia"></param>
-        /// <returns></returns>
-        /*private LinkedList<object[]> caracteresComunes(string _sPalabra, LinkedList<object[]> _lsCaracteres, bool _bConcurrencia)
-        {
-            bool bExiste = true;
-            /* ***************************************************************************************** */
-            /*if (_bConcurrencia)
-            {
-                Parallel.ForEach(_sPalabra, cCaracter =>
-                {
-                    Parallel.ForEach(_lsCaracteres, aoCaracter =>
-                    {
-                        if (cCaracter == (char)aoCaracter[0]) 
-                        {
-                            int iCantidad = (int)aoCaracter[1];
-                            aoCaracter[1] = iCantidad++;
-                            bExiste = false;
-                        }
-                    });
-                    if (bExiste) 
-                    {
-                        _lsCaracteres.AddLast(new object[]{cCaracter,1});
-                        bExiste = true;
-                    }
-                });
-            }
-            else /* ------------------------------------------------------------------------------------ */
-            /*{
-                foreach (char cCaracter in _sPalabra)
-                {
-                    foreach (object[] aoCaracter in _lsCaracteres)
-                    {
-                        if (cCaracter == (char)aoCaracter[0])
-                        {
-                            int iCantidad = (int)aoCaracter[1];
-                            aoCaracter[1] = ++iCantidad;
-                            bExiste = false;
-                        }
-                    }
-                    if (bExiste)
-                    {
-                        _lsCaracteres.AddLast(new object[] { cCaracter, 1 });
-                        bExiste = true;
-                    }
-                }
-            }
-            /* ***************************************************************************************** */
-            /*var lsCaracteres = _lsCaracteres.OrderByDescending(x => x[1]).ToList();
-            return new LinkedList<object[]>(lsCaracteres);
-        }*/
-
         /// <summary>
         /// 
         /// </summary>
         /// <param name="_sPalabra"></param>
         /// <param name="_bConcurrencia"></param>
-        private void palabrasComunes(string _sPalabra, bool _bConcurrencia) 
+        private void palabrasComunes(string _sPalabra, bool _bConcurrencia)
         {
             bool bExiste = true;
             /* ***************************************************************************************** */
@@ -199,8 +210,8 @@ namespace Multicore.Negocio
                 {
                     if (_sPalabra.Equals((string)sPalabra[0], StringComparison.OrdinalIgnoreCase))
                     {
-                        int iCantidad = (int)sPalabra[1];
-                        sPalabra[1] = ++iCantidad;
+                        //int iCantidad = (int)sPalabra[1];
+                        sPalabra[1] = ((int)sPalabra[1]) + 1;/*++iCantidad;*/
                         bExiste = false;
                     }
                 }
@@ -212,7 +223,7 @@ namespace Multicore.Negocio
             }
             /* ***************************************************************************************** */
             var lsPalabras = lsPalabrasComunes.OrderByDescending(x => x[1]).ToList();
-            lsPalabrasComunes = new LinkedList<object[]>(lsPalabras);
+            //lsPalabrasComunes = new LinkedList<object[]>(lsPalabras);
         }
     }
 }
