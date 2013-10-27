@@ -51,5 +51,10 @@ namespace Multicore
 
 
         }
+
+        private void btnEncriptar_Click(object sender, EventArgs e)
+        {
+            clsEncriptar.hola();
+        }
     }
 }

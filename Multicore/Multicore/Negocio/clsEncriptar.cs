@@ -10,7 +10,7 @@ namespace Multicore.Negocio
 {
     class clsEncriptar
     {
-         static void Main()
+         public static void hola()
   {
      // Este es el mensaje que vamos a encriptar.
     string mensaje = "Programando seguridad en C#.NET";

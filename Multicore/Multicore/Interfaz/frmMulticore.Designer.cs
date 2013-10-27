@@ -43,6 +43,9 @@
             this.factorizaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.temaLibreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlAnalisis = new System.Windows.Forms.Panel();
+            this.pnlEncriptacion = new System.Windows.Forms.Panel();
+            this.btnEncriptar = new System.Windows.Forms.Button();
+            this.txtEncriptar = new System.Windows.Forms.TextBox();
             this.btnAnalisis = new System.Windows.Forms.Button();
             this.txtTexto = new System.Windows.Forms.TextBox();
             this.pnlAcciones = new System.Windows.Forms.Panel();
@@ -54,13 +57,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblIdioma = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pnlEncriptacion = new System.Windows.Forms.Panel();
-            this.txtEncriptar = new System.Windows.Forms.TextBox();
-            this.btnEncriptar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnlAnalisis.SuspendLayout();
-            this.pnlAcciones.SuspendLayout();
             this.pnlEncriptacion.SuspendLayout();
+            this.pnlAcciones.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -178,6 +178,33 @@
             this.pnlAnalisis.Size = new System.Drawing.Size(597, 400);
             this.pnlAnalisis.TabIndex = 1;
             // 
+            // pnlEncriptacion
+            // 
+            this.pnlEncriptacion.Controls.Add(this.btnEncriptar);
+            this.pnlEncriptacion.Controls.Add(this.txtEncriptar);
+            this.pnlEncriptacion.Location = new System.Drawing.Point(1, 26);
+            this.pnlEncriptacion.Name = "pnlEncriptacion";
+            this.pnlEncriptacion.Size = new System.Drawing.Size(597, 400);
+            this.pnlEncriptacion.TabIndex = 2;
+            // 
+            // btnEncriptar
+            // 
+            this.btnEncriptar.Location = new System.Drawing.Point(510, 196);
+            this.btnEncriptar.Name = "btnEncriptar";
+            this.btnEncriptar.Size = new System.Drawing.Size(75, 23);
+            this.btnEncriptar.TabIndex = 3;
+            this.btnEncriptar.Text = "button1";
+            this.btnEncriptar.UseVisualStyleBackColor = true;
+            this.btnEncriptar.Click += new System.EventHandler(this.btnEncriptar_Click);
+            // 
+            // txtEncriptar
+            // 
+            this.txtEncriptar.Location = new System.Drawing.Point(12, 17);
+            this.txtEncriptar.Multiline = true;
+            this.txtEncriptar.Name = "txtEncriptar";
+            this.txtEncriptar.Size = new System.Drawing.Size(573, 173);
+            this.txtEncriptar.TabIndex = 2;
+            // 
             // btnAnalisis
             // 
             this.btnAnalisis.Location = new System.Drawing.Point(510, 193);
@@ -289,32 +316,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Idioma:";
             // 
-            // pnlEncriptacion
-            // 
-            this.pnlEncriptacion.Controls.Add(this.btnEncriptar);
-            this.pnlEncriptacion.Controls.Add(this.txtEncriptar);
-            this.pnlEncriptacion.Location = new System.Drawing.Point(1, 26);
-            this.pnlEncriptacion.Name = "pnlEncriptacion";
-            this.pnlEncriptacion.Size = new System.Drawing.Size(597, 400);
-            this.pnlEncriptacion.TabIndex = 2;
-            // 
-            // txtEncriptar
-            // 
-            this.txtEncriptar.Location = new System.Drawing.Point(12, 17);
-            this.txtEncriptar.Multiline = true;
-            this.txtEncriptar.Name = "txtEncriptar";
-            this.txtEncriptar.Size = new System.Drawing.Size(573, 173);
-            this.txtEncriptar.TabIndex = 2;
-            // 
-            // btnEncriptar
-            // 
-            this.btnEncriptar.Location = new System.Drawing.Point(510, 196);
-            this.btnEncriptar.Name = "btnEncriptar";
-            this.btnEncriptar.Size = new System.Drawing.Size(75, 23);
-            this.btnEncriptar.TabIndex = 3;
-            this.btnEncriptar.Text = "button1";
-            this.btnEncriptar.UseVisualStyleBackColor = true;
-            // 
             // frmMulticore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -329,10 +330,10 @@
             this.menuStrip1.PerformLayout();
             this.pnlAnalisis.ResumeLayout(false);
             this.pnlAnalisis.PerformLayout();
-            this.pnlAcciones.ResumeLayout(false);
-            this.pnlAcciones.PerformLayout();
             this.pnlEncriptacion.ResumeLayout(false);
             this.pnlEncriptacion.PerformLayout();
+            this.pnlAcciones.ResumeLayout(false);
+            this.pnlAcciones.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

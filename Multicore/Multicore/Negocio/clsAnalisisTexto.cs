@@ -61,35 +61,35 @@ namespace Multicore.Negocio
                 analizarIdioma(asIdiomas);
         }
 
-        private LinkedList<string[]> limpiarPalabra(string[] _asPalabras, bool _bConcurrencia) 
-        {
-            LinkedList<string[]> asPalabras = new LinkedList<string[]>();
-            /* ***************************************************************************************** */
-            if (_bConcurrencia)
-            {
-                Parallel.ForEach(_asPalabras, sPalabra =>
-                {
-                    if (sPalabra != "")
-                    {
-                        string[] asPalabra = sPalabra.Split(new char[] {',','.','-','!'});
-                        palabrasComunes(sPalabra, _bConcurrencia);
-                        //lsCaracteres = caracteresComunes(sPalabra, lsCaracteres, _bConcurrencia);
-                    }
-                });
-            }
-            else /* ------------------------------------------------------------------------------------ */
-            {
-                foreach (string sPalabra in asPalabras)
-                {
-                    if (sPalabra != "")
-                    {
-                        palabrasComunes(sPalabra, _bConcurrencia);
-                        //lsCaracteres = caracteresComunes(sPalabra, lsCaracteres, _bConcurrencia);
-                    }
-                }
-            }
-            /* ***************************************************************************************** */
-        }
+        //private LinkedList<string[]> limpiarPalabra(string[] _asPalabras, bool _bConcurrencia) 
+        //{
+        //    LinkedList<string[]> asPalabras = new LinkedList<string[]>();
+        //    /* ***************************************************************************************** */
+        //    if (_bConcurrencia)
+        //    {
+        //        Parallel.ForEach(_asPalabras, sPalabra =>
+        //        {
+        //            if (sPalabra != "")
+        //            {
+        //                string[] asPalabra = sPalabra.Split(new char[] {',','.','-','!'});
+        //                palabrasComunes(sPalabra, _bConcurrencia);
+        //                //lsCaracteres = caracteresComunes(sPalabra, lsCaracteres, _bConcurrencia);
+        //            }
+        //        });
+        //    }
+        //    else /* ------------------------------------------------------------------------------------ */
+        //    {
+        //        /*foreach (string sPalabra in asPalabras)
+        //        {
+        //            if (sPalabra != "")
+        //            {
+        //                palabrasComunes(sPalabra, _bConcurrencia);
+        //                //lsCaracteres = caracteresComunes(sPalabra, lsCaracteres, _bConcurrencia);
+        //            }
+        //        }*/
+        //    }
+        //    /* ***************************************************************************************** */
+        //}
 
         /// <summary>
         /// 
