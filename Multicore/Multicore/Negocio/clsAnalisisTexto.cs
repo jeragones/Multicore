@@ -24,11 +24,13 @@ namespace Multicore.Negocio
         {
             string sPath = Directory.GetParent(Path.GetDirectoryName(Application.StartupPath)).FullName + "\\Datos\\diccionario.txt";
             //LinkedList<object[]> lsCaracteres = new LinkedList<object[]>();
+            string[] asPalabras = _sTexto.Split(new char[] { ' ' });
+            iCantidadPalabras = asPalabras.Length;
 
             iCantidadCaracteres = _sTexto.Length;
 
-            string[] asPalabras = _sTexto.Split(new char[]{' '});
-            iCantidadPalabras = asPalabras.Length;
+            
+            
 
             /* ***************************************************************************************** */
             if (_bConcurrencia)
@@ -57,6 +59,36 @@ namespace Multicore.Negocio
             string[] asIdiomas = leerArchivo(sPath);
             if (String.IsNullOrEmpty(asIdiomas[0]))
                 analizarIdioma(asIdiomas);
+        }
+
+        private LinkedList<string[]> limpiarPalabra(string[] _asPalabras, bool _bConcurrencia) 
+        {
+            LinkedList<string[]> asPalabras = new LinkedList<string[]>();
+            /* ***************************************************************************************** */
+            if (_bConcurrencia)
+            {
+                Parallel.ForEach(_asPalabras, sPalabra =>
+                {
+                    if (sPalabra != "")
+                    {
+                        string[] asPalabra = sPalabra.Split(new char[] {',','.','-','!'});
+                        palabrasComunes(sPalabra, _bConcurrencia);
+                        //lsCaracteres = caracteresComunes(sPalabra, lsCaracteres, _bConcurrencia);
+                    }
+                });
+            }
+            else /* ------------------------------------------------------------------------------------ */
+            {
+                foreach (string sPalabra in asPalabras)
+                {
+                    if (sPalabra != "")
+                    {
+                        palabrasComunes(sPalabra, _bConcurrencia);
+                        //lsCaracteres = caracteresComunes(sPalabra, lsCaracteres, _bConcurrencia);
+                    }
+                }
+            }
+            /* ***************************************************************************************** */
         }
 
         /// <summary>

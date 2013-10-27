@@ -30,6 +30,9 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.opcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.normalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.paraleloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.análisisDeTextoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,23 +43,24 @@
             this.factorizaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.temaLibreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlAnalisis = new System.Windows.Forms.Panel();
+            this.btnAnalisis = new System.Windows.Forms.Button();
             this.txtTexto = new System.Windows.Forms.TextBox();
             this.pnlAcciones = new System.Windows.Forms.Panel();
+            this.txtPalabrasComunes = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblCaracteres = new System.Windows.Forms.Label();
+            this.lblPalabras = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.lblIdioma = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lblPalabras = new System.Windows.Forms.Label();
-            this.lblCaracteres = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtPalabrasComunes = new System.Windows.Forms.TextBox();
-            this.btnAnalisis = new System.Windows.Forms.Button();
-            this.opcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.normalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.paraleloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlEncriptacion = new System.Windows.Forms.Panel();
+            this.txtEncriptar = new System.Windows.Forms.TextBox();
+            this.btnEncriptar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnlAnalisis.SuspendLayout();
             this.pnlAcciones.SuspendLayout();
+            this.pnlEncriptacion.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -79,10 +83,31 @@
             this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
+            // opcionesToolStripMenuItem
+            // 
+            this.opcionesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.normalToolStripMenuItem,
+            this.paraleloToolStripMenuItem});
+            this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
+            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.opcionesToolStripMenuItem.Text = "Opciones";
+            // 
+            // normalToolStripMenuItem
+            // 
+            this.normalToolStripMenuItem.Name = "normalToolStripMenuItem";
+            this.normalToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.normalToolStripMenuItem.Text = "Normal";
+            // 
+            // paraleloToolStripMenuItem
+            // 
+            this.paraleloToolStripMenuItem.Name = "paraleloToolStripMenuItem";
+            this.paraleloToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.paraleloToolStripMenuItem.Text = "Paralelo";
+            // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             // 
             // eToolStripMenuItem
@@ -144,6 +169,7 @@
             // 
             // pnlAnalisis
             // 
+            this.pnlAnalisis.Controls.Add(this.pnlEncriptacion);
             this.pnlAnalisis.Controls.Add(this.btnAnalisis);
             this.pnlAnalisis.Controls.Add(this.txtTexto);
             this.pnlAnalisis.Controls.Add(this.pnlAcciones);
@@ -151,6 +177,16 @@
             this.pnlAnalisis.Name = "pnlAnalisis";
             this.pnlAnalisis.Size = new System.Drawing.Size(597, 400);
             this.pnlAnalisis.TabIndex = 1;
+            // 
+            // btnAnalisis
+            // 
+            this.btnAnalisis.Location = new System.Drawing.Point(510, 193);
+            this.btnAnalisis.Name = "btnAnalisis";
+            this.btnAnalisis.Size = new System.Drawing.Size(75, 23);
+            this.btnAnalisis.TabIndex = 2;
+            this.btnAnalisis.Text = "Analizar";
+            this.btnAnalisis.UseVisualStyleBackColor = true;
+            this.btnAnalisis.Click += new System.EventHandler(this.btnAnalisis_Click);
             // 
             // txtTexto
             // 
@@ -176,6 +212,64 @@
             this.pnlAcciones.Size = new System.Drawing.Size(573, 166);
             this.pnlAcciones.TabIndex = 0;
             // 
+            // txtPalabrasComunes
+            // 
+            this.txtPalabrasComunes.BackColor = System.Drawing.SystemColors.Control;
+            this.txtPalabrasComunes.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPalabrasComunes.Location = new System.Drawing.Point(145, 87);
+            this.txtPalabrasComunes.Multiline = true;
+            this.txtPalabrasComunes.Name = "txtPalabrasComunes";
+            this.txtPalabrasComunes.Size = new System.Drawing.Size(412, 66);
+            this.txtPalabrasComunes.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label4.Location = new System.Drawing.Point(12, 87);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(97, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Palabras comunes:";
+            // 
+            // lblCaracteres
+            // 
+            this.lblCaracteres.AutoSize = true;
+            this.lblCaracteres.Location = new System.Drawing.Point(142, 62);
+            this.lblCaracteres.Name = "lblCaracteres";
+            this.lblCaracteres.Size = new System.Drawing.Size(31, 13);
+            this.lblCaracteres.TabIndex = 5;
+            this.lblCaracteres.Text = "        \r\n";
+            // 
+            // lblPalabras
+            // 
+            this.lblPalabras.AutoSize = true;
+            this.lblPalabras.Location = new System.Drawing.Point(142, 36);
+            this.lblPalabras.Name = "lblPalabras";
+            this.lblPalabras.Size = new System.Drawing.Size(31, 13);
+            this.lblPalabras.TabIndex = 4;
+            this.lblPalabras.Text = "        \r\n";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label3.Location = new System.Drawing.Point(12, 62);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(120, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Cantidad de caracteres:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label2.Location = new System.Drawing.Point(12, 36);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(110, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Cantidad de palabras:";
+            // 
             // lblIdioma
             // 
             this.lblIdioma.AutoSize = true;
@@ -195,102 +289,39 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Idioma:";
             // 
-            // label2
+            // pnlEncriptacion
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label2.Location = new System.Drawing.Point(12, 36);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(110, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Cantidad de palabras:";
+            this.pnlEncriptacion.Controls.Add(this.btnEncriptar);
+            this.pnlEncriptacion.Controls.Add(this.txtEncriptar);
+            this.pnlEncriptacion.Location = new System.Drawing.Point(1, 26);
+            this.pnlEncriptacion.Name = "pnlEncriptacion";
+            this.pnlEncriptacion.Size = new System.Drawing.Size(597, 400);
+            this.pnlEncriptacion.TabIndex = 2;
             // 
-            // label3
+            // txtEncriptar
             // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label3.Location = new System.Drawing.Point(12, 62);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(120, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Cantidad de caracteres:";
+            this.txtEncriptar.Location = new System.Drawing.Point(12, 17);
+            this.txtEncriptar.Multiline = true;
+            this.txtEncriptar.Name = "txtEncriptar";
+            this.txtEncriptar.Size = new System.Drawing.Size(573, 173);
+            this.txtEncriptar.TabIndex = 2;
             // 
-            // lblPalabras
+            // btnEncriptar
             // 
-            this.lblPalabras.AutoSize = true;
-            this.lblPalabras.Location = new System.Drawing.Point(142, 36);
-            this.lblPalabras.Name = "lblPalabras";
-            this.lblPalabras.Size = new System.Drawing.Size(31, 13);
-            this.lblPalabras.TabIndex = 4;
-            this.lblPalabras.Text = "        \r\n";
-            // 
-            // lblCaracteres
-            // 
-            this.lblCaracteres.AutoSize = true;
-            this.lblCaracteres.Location = new System.Drawing.Point(142, 62);
-            this.lblCaracteres.Name = "lblCaracteres";
-            this.lblCaracteres.Size = new System.Drawing.Size(31, 13);
-            this.lblCaracteres.TabIndex = 5;
-            this.lblCaracteres.Text = "        \r\n";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label4.Location = new System.Drawing.Point(12, 87);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Palabras comunes:";
-            // 
-            // txtPalabrasComunes
-            // 
-            this.txtPalabrasComunes.BackColor = System.Drawing.SystemColors.Control;
-            this.txtPalabrasComunes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPalabrasComunes.Location = new System.Drawing.Point(145, 87);
-            this.txtPalabrasComunes.Multiline = true;
-            this.txtPalabrasComunes.Name = "txtPalabrasComunes";
-            this.txtPalabrasComunes.Size = new System.Drawing.Size(412, 66);
-            this.txtPalabrasComunes.TabIndex = 7;
-            // 
-            // btnAnalisis
-            // 
-            this.btnAnalisis.Location = new System.Drawing.Point(510, 193);
-            this.btnAnalisis.Name = "btnAnalisis";
-            this.btnAnalisis.Size = new System.Drawing.Size(75, 23);
-            this.btnAnalisis.TabIndex = 2;
-            this.btnAnalisis.Text = "Analizar";
-            this.btnAnalisis.UseVisualStyleBackColor = true;
-            this.btnAnalisis.Click += new System.EventHandler(this.btnAnalisis_Click);
-            // 
-            // opcionesToolStripMenuItem
-            // 
-            this.opcionesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.normalToolStripMenuItem,
-            this.paraleloToolStripMenuItem});
-            this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
-            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.opcionesToolStripMenuItem.Text = "Opciones";
-            // 
-            // normalToolStripMenuItem
-            // 
-            this.normalToolStripMenuItem.Name = "normalToolStripMenuItem";
-            this.normalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.normalToolStripMenuItem.Text = "Normal";
-            // 
-            // paraleloToolStripMenuItem
-            // 
-            this.paraleloToolStripMenuItem.Name = "paraleloToolStripMenuItem";
-            this.paraleloToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.paraleloToolStripMenuItem.Text = "Paralelo";
+            this.btnEncriptar.Location = new System.Drawing.Point(510, 196);
+            this.btnEncriptar.Name = "btnEncriptar";
+            this.btnEncriptar.Size = new System.Drawing.Size(75, 23);
+            this.btnEncriptar.TabIndex = 3;
+            this.btnEncriptar.Text = "button1";
+            this.btnEncriptar.UseVisualStyleBackColor = true;
             // 
             // frmMulticore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(598, 452);
-            this.Controls.Add(this.pnlAnalisis);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.pnlAnalisis);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMulticore";
             this.Text = "Ejecuciones Paralelas";
@@ -300,6 +331,8 @@
             this.pnlAnalisis.PerformLayout();
             this.pnlAcciones.ResumeLayout(false);
             this.pnlAcciones.PerformLayout();
+            this.pnlEncriptacion.ResumeLayout(false);
+            this.pnlEncriptacion.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -333,6 +366,9 @@
         private System.Windows.Forms.ToolStripMenuItem normalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem paraleloToolStripMenuItem;
         private System.Windows.Forms.Button btnAnalisis;
+        private System.Windows.Forms.Panel pnlEncriptacion;
+        private System.Windows.Forms.Button btnEncriptar;
+        private System.Windows.Forms.TextBox txtEncriptar;
     }
 }
 
