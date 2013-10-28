@@ -1,7 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
+
 
 namespace ConsoleApplication1
 {
@@ -81,10 +84,11 @@ namespace ConsoleApplication1
     algoritmo.GenerateKey();
     // sacamos la nueva clave por consola
     Console.WriteLine("Otra clave: ");
+      
     foreach (byte b in algoritmo.Key)
     {
         String rr=("{0:X2} "+ b);
-        Console.Write("{0:X2} ", b);
+        Console.Write("{0:X2} ",2);
     }
     Console.WriteLine("\nPulse una tecla para continuar…\n");
     //Console.ReadKey();

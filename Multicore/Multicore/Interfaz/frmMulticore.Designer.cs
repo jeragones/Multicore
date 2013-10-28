@@ -181,8 +181,6 @@
             // 
             // pnlEncriptacion
             // 
-            this.pnlEncriptacion.Controls.Add(this.rest);
-            this.pnlEncriptacion.Controls.Add(this.Msg);
             this.pnlEncriptacion.Controls.Add(this.btnEncriptar);
             this.pnlEncriptacion.Location = new System.Drawing.Point(1, 26);
             this.pnlEncriptacion.Name = "pnlEncriptacion";
@@ -206,7 +204,7 @@
             // 
             // btnEncriptar
             // 
-            this.btnEncriptar.Location = new System.Drawing.Point(36, 53);
+            this.btnEncriptar.Location = new System.Drawing.Point(11, 15);
             this.btnEncriptar.Name = "btnEncriptar";
             this.btnEncriptar.Size = new System.Drawing.Size(75, 23);
             this.btnEncriptar.TabIndex = 3;
@@ -340,7 +338,6 @@
             this.pnlAnalisis.ResumeLayout(false);
             this.pnlAnalisis.PerformLayout();
             this.pnlEncriptacion.ResumeLayout(false);
-            this.pnlEncriptacion.PerformLayout();
             this.pnlAcciones.ResumeLayout(false);
             this.pnlAcciones.PerformLayout();
             this.ResumeLayout(false);
@@ -378,8 +375,6 @@
         private System.Windows.Forms.Button btnAnalisis;
         private System.Windows.Forms.Panel pnlEncriptacion;
         private System.Windows.Forms.Button btnEncriptar;
-        private System.Windows.Forms.TextBox Msg;
-        public System.Windows.Forms.TextBox rest;
     }
 }
 

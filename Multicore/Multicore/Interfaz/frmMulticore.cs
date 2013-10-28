@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using Multicore.Negocio;
 using System.IO;
 using System.Security.Cryptography;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Multicore
 {
@@ -55,30 +57,59 @@ namespace Multicore
 
         private void btnEncriptar_Click(object sender, EventArgs e)
         {
-            //clsEncriptar.hola(Msg.Text);
-            string mensaje = Msg.Text;
-            rest.AppendText("Esto es el mensaje sin cifrar: " + mensaje);
-
-
-
+            StreamWriter file = new System.IO.StreamWriter(@"C:\Mensage Cifrado.txt");
+            string mensaje ="";
+            string texto="";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Archivos txt|*.txt";
+            //openFileDialog.FileName = "Seleccione un archivo";
+            openFileDialog.Title = "Seleccione un archivo";
+            openFileDialog.InitialDirectory = "C:\\";
+            openFileDialog.FileName = mensaje;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                mensaje = openFileDialog.FileName;
+                System.IO.StreamReader sr = new System.IO.StreamReader(mensaje, System.Text.Encoding.Default);
+                texto = sr.ReadToEnd();
+            }
+            Console.WriteLine("Esto es el mensaje sin cifrar: ");
+            Console.WriteLine(texto);
             SymmetricAlgorithm algoritmo = SymmetricAlgorithm.Create("Rijndael");
             //Se podría haber creado el algoritmo de esta otra manera:
             //RijndaelManaged algoritmoEncriptador = new RijndaelManaged();
             clsEncriptar.ConfigurarAlgoritmo(algoritmo);
             clsEncriptar.GenerarClave(algoritmo);
             clsEncriptar.GenerarIV(algoritmo);
-            byte[] mensajeEncriptado = clsEncriptar.Encriptar(mensaje, algoritmo);
-            rest.AppendText("Esto es el mensaje cifrado:");
+            byte[] mensajeEncriptado = clsEncriptar.Encriptar(texto, algoritmo);
+            Console.WriteLine("\n");
+            Console.WriteLine("Esto es el mensaje cifrado:\n");
+            /*Parallel.ForEach(mensajeEncriptado, b =>
+            {
+                Console.Write("{0:X2} ", b);
+            });*/
+            
+                
             foreach (byte b in mensajeEncriptado)
             {
-                String rr = ("{0:X2} " + b);
-                rest.AppendText(rr);
+                Console.Write("{0:X2} " , b);
+                file.Write("{0:X2} ", b);
+                
             }
+            file.Close();
             byte[] mensajeDesencriptado = clsEncriptar.Desencriptar(mensajeEncriptado, algoritmo);
             string mensajeDescrifrado = Encoding.UTF8.GetString(mensajeDesencriptado);
-            rest.AppendText("Esto es el mensaje descifrado: " + mensajeDescrifrado);
+            Console.WriteLine("\n");
+            Console.WriteLine("Esto es el mensaje descifrado: " + mensajeDescrifrado);
             
             algoritmo.Clear();
-        }
+
+
+
+            
+
+            
+
+
+             }
     }
 }

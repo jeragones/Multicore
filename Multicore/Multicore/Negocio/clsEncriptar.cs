@@ -7,19 +7,12 @@ using System.Text;
 
 
 
+
 namespace Multicore.Negocio
 {
     public class clsEncriptar
     {
-        /*
-         public static void hola(String msg)
-  {
-     // Este es el mensaje que vamos a encriptar.
-      
-    
-    // Creamos el algoritmo encriptador
-    
-  }*/
+        
   /// <summary>
   /// Configuración del algoritmo simétrico
   /// </summary>
@@ -33,9 +26,9 @@ namespace Multicore.Negocio
     // Establecemos el modo de cifrado y con el modo de relleno
     algoritmo.Mode = CipherMode.CBC;
     algoritmo.Padding = PaddingMode.PKCS7;
-    //Console.WriteLine("Longitud de bloque: {0}", algoritmo.BlockSize);
-    //Console.WriteLine("Modo de cifrado: {0}", algoritmo.Mode);
-    //Console.WriteLine("Modo de relleno: {0}", algoritmo.Padding);
+    Console.WriteLine("Longitud de bloque: {0}", algoritmo.BlockSize);
+    Console.WriteLine("Modo de cifrado: {0}", algoritmo.Mode);
+    Console.WriteLine("Modo de relleno: {0}", algoritmo.Padding);
     //Console.WriteLine("Pulse una tecla para continuar…\n");
     //Console.ReadKey();
   }
@@ -49,29 +42,28 @@ namespace Multicore.Negocio
   {
     // Establecemos la longitud que queremos que tenga la clave a generar.
     algoritmo.KeySize = 256;
-    //Console.WriteLine("Longitud de la clave:   {0}", algoritmo.KeySize);
-    //Console.WriteLine("Pulse una tecla para continuar…\n");
-    //Console.ReadKey();
+    Console.WriteLine("\n");
+    Console.WriteLine("Longitud de la clave:   {0}", algoritmo.KeySize);
     // Leer sin más el valor de la clave hara que se genere.
     // sacamos la clave por consola
-    //Console.WriteLine("La clave: ");
+    Console.WriteLine("\n");
+    Console.WriteLine("La clave:");
     foreach (byte b in algoritmo.Key)
     {
-    //Console.Write("{0:X2} ", b);
+        Console.Write("{0:X2} ", b);
     }
-    //Console.WriteLine("\nPulse una tecla para continuar…\n");
-    //Console.ReadKey();
-    // Podemos generar otra nueva
+   /* // Podemos generar otra nueva
     algoritmo.GenerateKey();
     // sacamos la nueva clave por consola
-    //Console.WriteLine("Otra clave: ");
+    Console.WriteLine("\n");
+    Console.WriteLine("Otra clave:");
     foreach (byte b in algoritmo.Key)
     {
-    //Console.Write("{0:X2} ", b);
-    }
-    //Console.WriteLine("\nPulse una tecla para continuar…\n");
-    //Console.ReadKey();
-    // Otra forma de crear claves sería con RNG (Random Number Generator)
+        Console.Write("{0:X2} ", b);
+    }*/
+
+
+    /*// Otra forma de crear claves sería con RNG (Random Number Generator)
     RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
     // Se rellena el array de bytes de la clave con datos aleatorios
     randomNumberGenerator.GetBytes(algoritmo.Key);
@@ -79,10 +71,10 @@ namespace Multicore.Negocio
     //Console.WriteLine("Otra forma de obtener una clave: ");
     foreach (byte b in algoritmo.Key)
     {
-    //Console.Write("{0:X2} ", b);
-    }
-    //Console.WriteLine("\nPulse una tecla para continuar…\n");
-    //Console.ReadKey();
+        Console.Write("{0:X2} ", b);
+    }*/
+
+    
   }
   /// <summary>
   /// Para generar un vector de inicialización
@@ -95,13 +87,13 @@ namespace Multicore.Negocio
     // Si haces lo siguiente se genera un nuevo IV
     algoritmo.GenerateIV();
     // sacamos el IV por consola
-    //Console.WriteLine("IV (Vector de inicialización): ");
+    Console.WriteLine("\n");
+    Console.WriteLine("IV (Vector de inicialización):");
     foreach (byte b in algoritmo.IV)
     {
-    //Console.Write("{0:X2} ", b);
+        Console.Write("{0:X2} ", b);
     }
-    //Console.WriteLine("\nPulse una tecla para continuar…\n");
-    //Console.ReadKey();
+  
   }
   /// <summary>
   /// Encripta un mensaje
@@ -150,8 +142,14 @@ namespace Multicore.Negocio
     // Liberamos.
     memoryStream.Close();
     cryptoStream.Close();
+
+    
+
+
     // Obtenemos el texto cifrado del MemoryStream
   return memoryStream.ToArray();
+ 
+
   }
   /// <summary>
   /// Desencripta un mensaje
