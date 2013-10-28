@@ -58,6 +58,7 @@
     <Compile Include="Negocio\clsAnalisisTexto.cs" />
     <Compile Include="Negocio\clsEncriptar.cs" />
     <Compile Include="Negocio\clsMulticore.cs" />
+    <Compile Include="Negocio\clsOrdenar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Interfaz\frmMulticore.resx">
       <DependentUpon>frmMulticore.cs</DependentUpon>
