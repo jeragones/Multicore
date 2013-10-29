@@ -15,7 +15,7 @@ namespace Multicore.Negocio
     public class clsEncriptar
     {   
         /// <summary>
-        /// Metodo de cifrado por sustitucion
+        /// Metodo de cifrado por sustitucion (Cifrado Cesar)
         /// </summary>
         /// <param name="texto"> Texto que se desea encriptar </param>
         /// <param name="salto"> Numero de saltos entre los caragteres de la tabla ascii</param>
@@ -34,7 +34,7 @@ namespace Multicore.Negocio
             if (parallel == false)
             {
                 //variable que medira el tiempo de ejecucion
-                var timer = Stopwatch.StartNew();
+                //var timer = Stopwatch.StartNew();
                 for (int i = 0; i < texto.Length; i++)
                 {
                     //obtiene el valor ascii
@@ -47,15 +47,15 @@ namespace Multicore.Negocio
                     //convieerte el valor ascii a caracter
                     encriptado += Convert.ToChar(letra);
                 }
-                timer.Stop();
+                //timer.Stop();
                 resultado[0] = encriptado;
-                resultado[1] = timer.Elapsed;
+                //resultado[1] = timer.Elapsed.TotalSeconds;
             }
             else if(parallel==true)
             {
                 //variable que medira el tiempo de ejecucion
-                var timer = Stopwatch.StartNew();
-                Parallel.For(0, texto.Count(), (i) =>
+                //var timer = Stopwatch.StartNew();
+                Parallel.For(0, texto.Count(), i =>
                 {
                     //obtiene el valor ascii
                     letra = Convert.ToInt32(texto[i]) + salto;
@@ -68,11 +68,41 @@ namespace Multicore.Negocio
                     encriptado += Convert.ToChar(letra);
                 });
                 
-                timer.Stop();
+                //timer.Stop();
                 resultado[0] = encriptado;
-                resultado[1] = timer.Elapsed;
+                //resultado[1] = timer.Elapsed.TotalSeconds;
             }
             return resultado;
         }
+
+
+
+        static void CustomParallelExtractedMaxHalfParallelism(double[] array, double factor)
+        {
+            var degreeOfParallelism = Environment.ProcessorCount / 2;
+
+            var tasks = new Task[degreeOfParallelism];
+
+            for (int taskNumber = 0; taskNumber < degreeOfParallelism; taskNumber++)
+            {
+                // capturing taskNumber in lambda wouldn't work correctly
+                int taskNumberCopy = taskNumber;
+
+                tasks[taskNumber] = Task.Factory.StartNew(
+                    () =>
+                    {
+                        var max = array.Length * (taskNumberCopy + 1) / degreeOfParallelism;
+                        for (int i = array.Length * taskNumberCopy / degreeOfParallelism;
+                            i < max;
+                            i++)
+                        {
+                            array[i] = array[i] * factor;
+                        }
+                    });
+            }
+
+            Task.WaitAll(tasks);
+        }
+
     }
 }

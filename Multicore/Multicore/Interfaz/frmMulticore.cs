@@ -78,15 +78,24 @@ namespace Multicore
             salto = Convert.ToInt16(comboSalto.SelectedItem);
             if (radioParallel.Checked)
             {
+                var timer = Stopwatch.StartNew();
                 resultado = clsEncriptar.encriptarCesar(texto, salto, true);
+                timer.Stop();
+                labelresultado.Text = Convert.ToString(timer.Elapsed.TotalSeconds);
             }
             else
             {
+                var timer = Stopwatch.StartNew();
                 resultado = clsEncriptar.encriptarCesar(texto, salto, false);
+                timer.Stop();
+                labelresultado.Text = Convert.ToString(timer.Elapsed.TotalSeconds);
             }
             //Console.WriteLine(resultado[0]);
             //Console.WriteLine(resultado[1]);
-            labelresultado.Text =Convert.ToString( resultado[1]);
+            
+
+            
+
 
 
              }

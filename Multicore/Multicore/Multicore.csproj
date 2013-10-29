@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FE55EE09-C095-48C0-B7C6-2FF1E325AAAA}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Multicore</RootNamespace>
     <AssemblyName>Multicore</AssemblyName>
@@ -59,6 +59,7 @@
     <Compile Include="Negocio\clsEncriptar.cs" />
     <Compile Include="Negocio\clsMulticore.cs" />
     <Compile Include="Negocio\clsOrdenar.cs" />
+    <Compile Include="Negocio\prueba.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Interfaz\frmMulticore.resx">
       <DependentUpon>frmMulticore.cs</DependentUpon>
