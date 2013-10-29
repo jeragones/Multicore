@@ -57,7 +57,7 @@ namespace Multicore
 
         private void btnEncriptar_Click(object sender, EventArgs e)
         {
-            StreamWriter file = new System.IO.StreamWriter(@"C:\Mensage Cifrado.txt");
+           
             string mensaje ="";
             string texto="";
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -83,19 +83,16 @@ namespace Multicore
             byte[] mensajeEncriptado = clsEncriptar.Encriptar(texto, algoritmo);
             Console.WriteLine("\n");
             Console.WriteLine("Esto es el mensaje cifrado:\n");
-            /*Parallel.ForEach(mensajeEncriptado, b =>
-            {
-                Console.Write("{0:X2} ", b);
-            });*/
+            
             
                 
-            foreach (byte b in mensajeEncriptado)
+            /*foreach (byte b in mensajeEncriptado)
             {
                 Console.Write("{0:X2} " , b);
-                file.Write("{0:X2} ", b);
                 
-            }
-            file.Close();
+                
+            }*/
+            
             byte[] mensajeDesencriptado = clsEncriptar.Desencriptar(mensajeEncriptado, algoritmo);
             string mensajeDescrifrado = Encoding.UTF8.GetString(mensajeDesencriptado);
             Console.WriteLine("\n");

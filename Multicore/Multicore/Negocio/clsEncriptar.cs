@@ -4,6 +4,8 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 
 
@@ -29,9 +31,9 @@ namespace Multicore.Negocio
     Console.WriteLine("Longitud de bloque: {0}", algoritmo.BlockSize);
     Console.WriteLine("Modo de cifrado: {0}", algoritmo.Mode);
     Console.WriteLine("Modo de relleno: {0}", algoritmo.Padding);
-    //Console.WriteLine("Pulse una tecla para continuar…\n");
-    //Console.ReadKey();
-  }
+    }
+
+
   /// <summary>
   /// Tres formas de generar una clave.
   /// </summary>
@@ -52,30 +54,9 @@ namespace Multicore.Negocio
     {
         Console.Write("{0:X2} ", b);
     }
-   /* // Podemos generar otra nueva
-    algoritmo.GenerateKey();
-    // sacamos la nueva clave por consola
-    Console.WriteLine("\n");
-    Console.WriteLine("Otra clave:");
-    foreach (byte b in algoritmo.Key)
-    {
-        Console.Write("{0:X2} ", b);
-    }*/
-
-
-    /*// Otra forma de crear claves sería con RNG (Random Number Generator)
-    RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
-    // Se rellena el array de bytes de la clave con datos aleatorios
-    randomNumberGenerator.GetBytes(algoritmo.Key);
-    // sacamos la clave por consola
-    //Console.WriteLine("Otra forma de obtener una clave: ");
-    foreach (byte b in algoritmo.Key)
-    {
-        Console.Write("{0:X2} ", b);
-    }*/
-
-    
   }
+
+
   /// <summary>
   /// Para generar un vector de inicialización
   /// </summary>
@@ -143,10 +124,27 @@ namespace Multicore.Negocio
     memoryStream.Close();
     cryptoStream.Close();
 
-    
-
-
     // Obtenemos el texto cifrado del MemoryStream
+    StreamWriter file = new System.IO.StreamWriter(@"C:\Users\jdbr\Desktop\MensageCifrado.txt");
+    byte[] encriptado = memoryStream.ToArray();
+    var timer = Stopwatch.StartNew();
+    foreach (byte b in encriptado)
+    {
+       
+        file.Write("{0:X2} ", b);
+
+    }
+
+
+    /*Parallel.ForEach(encriptado, b => {
+        file.Write("{0:X2} ", b);
+    });*/
+    timer.Stop();
+    file.WriteLine(timer.Elapsed);
+    file.WriteLine(timer.ElapsedMilliseconds);
+    file.WriteLine(timer.ElapsedTicks);
+
+    file.Close();
   return memoryStream.ToArray();
  
 
