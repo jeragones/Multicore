@@ -55,6 +55,11 @@
             this.lblIdioma = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlEncriptacion = new System.Windows.Forms.Panel();
+            this.labelresultado = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.radioParallel = new System.Windows.Forms.RadioButton();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboSalto = new System.Windows.Forms.ComboBox();
             this.btnEncriptar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnlAnalisis.SuspendLayout();
@@ -173,7 +178,7 @@
             this.pnlAnalisis.Controls.Add(this.pnlAcciones);
             this.pnlAnalisis.Location = new System.Drawing.Point(0, 27);
             this.pnlAnalisis.Name = "pnlAnalisis";
-            this.pnlAnalisis.Size = new System.Drawing.Size(597, 410);
+            this.pnlAnalisis.Size = new System.Drawing.Size(597, 354);
             this.pnlAnalisis.TabIndex = 1;
             // 
             // btnAnalisis
@@ -207,7 +212,7 @@
             this.pnlAcciones.Controls.Add(this.label1);
             this.pnlAcciones.Location = new System.Drawing.Point(12, 222);
             this.pnlAcciones.Name = "pnlAcciones";
-            this.pnlAcciones.Size = new System.Drawing.Size(573, 166);
+            this.pnlAcciones.Size = new System.Drawing.Size(573, 124);
             this.pnlAcciones.TabIndex = 0;
             // 
             // txtPalabrasComunes
@@ -289,19 +294,80 @@
             // 
             // pnlEncriptacion
             // 
+            this.pnlEncriptacion.Controls.Add(this.labelresultado);
+            this.pnlEncriptacion.Controls.Add(this.label6);
+            this.pnlEncriptacion.Controls.Add(this.radioParallel);
+            this.pnlEncriptacion.Controls.Add(this.label5);
+            this.pnlEncriptacion.Controls.Add(this.comboSalto);
             this.pnlEncriptacion.Controls.Add(this.btnEncriptar);
-            this.pnlEncriptacion.Location = new System.Drawing.Point(12, 443);
+            this.pnlEncriptacion.Location = new System.Drawing.Point(12, 387);
             this.pnlEncriptacion.Name = "pnlEncriptacion";
-            this.pnlEncriptacion.Size = new System.Drawing.Size(106, 58);
+            this.pnlEncriptacion.Size = new System.Drawing.Size(573, 120);
             this.pnlEncriptacion.TabIndex = 2;
+            this.pnlEncriptacion.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlEncriptacion_Paint);
+            // 
+            // labelresultado
+            // 
+            this.labelresultado.AutoSize = true;
+            this.labelresultado.Location = new System.Drawing.Point(287, 46);
+            this.labelresultado.Name = "labelresultado";
+            this.labelresultado.Size = new System.Drawing.Size(0, 13);
+            this.labelresultado.TabIndex = 9;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(271, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(116, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Tiempo de Ejecucuión:";
+            // 
+            // radioParallel
+            // 
+            this.radioParallel.AutoSize = true;
+            this.radioParallel.Location = new System.Drawing.Point(18, 60);
+            this.radioParallel.Name = "radioParallel";
+            this.radioParallel.Size = new System.Drawing.Size(59, 17);
+            this.radioParallel.TabIndex = 7;
+            this.radioParallel.TabStop = true;
+            this.radioParallel.Text = "Parallel";
+            this.radioParallel.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 12);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(91, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Numero de Saltos";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // comboSalto
+            // 
+            this.comboSalto.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"});
+            this.comboSalto.Location = new System.Drawing.Point(16, 28);
+            this.comboSalto.Name = "comboSalto";
+            this.comboSalto.Size = new System.Drawing.Size(47, 21);
+            this.comboSalto.TabIndex = 5;
             // 
             // btnEncriptar
             // 
-            this.btnEncriptar.Location = new System.Drawing.Point(11, 15);
+            this.btnEncriptar.Location = new System.Drawing.Point(18, 83);
             this.btnEncriptar.Name = "btnEncriptar";
             this.btnEncriptar.Size = new System.Drawing.Size(75, 23);
             this.btnEncriptar.TabIndex = 3;
-            this.btnEncriptar.Text = "button1";
+            this.btnEncriptar.Text = "Encriptar";
             this.btnEncriptar.UseVisualStyleBackColor = true;
             this.btnEncriptar.Click += new System.EventHandler(this.btnEncriptar_Click);
             // 
@@ -309,7 +375,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(598, 513);
+            this.ClientSize = new System.Drawing.Size(598, 520);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnlAnalisis);
             this.Controls.Add(this.pnlEncriptacion);
@@ -323,6 +389,7 @@
             this.pnlAcciones.ResumeLayout(false);
             this.pnlAcciones.PerformLayout();
             this.pnlEncriptacion.ResumeLayout(false);
+            this.pnlEncriptacion.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -358,6 +425,11 @@
         private System.Windows.Forms.Button btnAnalisis;
         private System.Windows.Forms.Panel pnlEncriptacion;
         private System.Windows.Forms.Button btnEncriptar;
+        private System.Windows.Forms.ComboBox comboSalto;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.RadioButton radioParallel;
+        private System.Windows.Forms.Label labelresultado;
+        private System.Windows.Forms.Label label6;
     }
 }
 

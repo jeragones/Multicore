@@ -57,9 +57,11 @@ namespace Multicore
 
         private void btnEncriptar_Click(object sender, EventArgs e)
         {
-           
+            object[] resultado = new object[2];
             string mensaje ="";
             string texto="";
+            string encriptado = "";
+            int salto = 0;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Archivos txt|*.txt";
             //openFileDialog.FileName = "Seleccione un archivo";
@@ -72,41 +74,36 @@ namespace Multicore
                 System.IO.StreamReader sr = new System.IO.StreamReader(mensaje, System.Text.Encoding.Default);
                 texto = sr.ReadToEnd();
             }
-            Console.WriteLine("Esto es el mensaje sin cifrar: ");
-            Console.WriteLine(texto);
-            SymmetricAlgorithm algoritmo = SymmetricAlgorithm.Create("Rijndael");
-            //Se podría haber creado el algoritmo de esta otra manera:
-            //RijndaelManaged algoritmoEncriptador = new RijndaelManaged();
-            clsEncriptar.ConfigurarAlgoritmo(algoritmo);
-            clsEncriptar.GenerarClave(algoritmo);
-            clsEncriptar.GenerarIV(algoritmo);
-            byte[] mensajeEncriptado = clsEncriptar.Encriptar(texto, algoritmo);
-            Console.WriteLine("\n");
-            Console.WriteLine("Esto es el mensaje cifrado:\n");
-            
-            
-                
-            /*foreach (byte b in mensajeEncriptado)
+
+            salto = Convert.ToInt16(comboSalto.SelectedItem);
+            if (radioParallel.Checked)
             {
-                Console.Write("{0:X2} " , b);
-                
-                
-            }*/
-            
-            byte[] mensajeDesencriptado = clsEncriptar.Desencriptar(mensajeEncriptado, algoritmo);
-            string mensajeDescrifrado = Encoding.UTF8.GetString(mensajeDesencriptado);
-            Console.WriteLine("\n");
-            Console.WriteLine("Esto es el mensaje descifrado: " + mensajeDescrifrado);
-            
-            algoritmo.Clear();
-
-
-
-            
-
-            
+                resultado = clsEncriptar.encriptarCesar(texto, salto, true);
+            }
+            else
+            {
+                resultado = clsEncriptar.encriptarCesar(texto, salto, false);
+            }
+            //Console.WriteLine(resultado[0]);
+            //Console.WriteLine(resultado[1]);
+            labelresultado.Text =Convert.ToString( resultado[1]);
 
 
              }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlEncriptacion_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
