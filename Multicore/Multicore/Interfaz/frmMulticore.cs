@@ -57,7 +57,7 @@ namespace Multicore
 
         private void btnEncriptar_Click(object sender, EventArgs e)
         {
-            object[] resultado = new object[2];
+            
             string mensaje ="";
             string texto="";
             string encriptado = "";
@@ -79,20 +79,22 @@ namespace Multicore
             if (radioParallel.Checked)
             {
                 var timer = Stopwatch.StartNew();
-                resultado = clsEncriptar.encriptarCesar(texto, salto, true);
+                encriptado = clsEncriptar.encrip(texto, salto, true);
                 timer.Stop();
                 labelresultado.Text = Convert.ToString(timer.Elapsed.TotalSeconds);
             }
             else
             {
                 var timer = Stopwatch.StartNew();
-                resultado = clsEncriptar.encriptarCesar(texto, salto, false);
+                encriptado = clsEncriptar.encrip(texto, salto, false);
                 timer.Stop();
                 labelresultado.Text = Convert.ToString(timer.Elapsed.TotalSeconds);
             }
             //Console.WriteLine(resultado[0]);
             //Console.WriteLine(resultado[1]);
             
+            
+
 
             
 
