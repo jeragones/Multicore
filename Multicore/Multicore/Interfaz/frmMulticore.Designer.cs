@@ -57,10 +57,10 @@
             this.pnlEncriptacion = new System.Windows.Forms.Panel();
             this.labelresultado = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.radioParallel = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
             this.comboSalto = new System.Windows.Forms.ComboBox();
             this.btnEncriptar = new System.Windows.Forms.Button();
+            this.checkParallel = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.pnlAnalisis.SuspendLayout();
             this.pnlAcciones.SuspendLayout();
@@ -294,9 +294,9 @@
             // 
             // pnlEncriptacion
             // 
+            this.pnlEncriptacion.Controls.Add(this.checkParallel);
             this.pnlEncriptacion.Controls.Add(this.labelresultado);
             this.pnlEncriptacion.Controls.Add(this.label6);
-            this.pnlEncriptacion.Controls.Add(this.radioParallel);
             this.pnlEncriptacion.Controls.Add(this.label5);
             this.pnlEncriptacion.Controls.Add(this.comboSalto);
             this.pnlEncriptacion.Controls.Add(this.btnEncriptar);
@@ -322,17 +322,6 @@
             this.label6.Size = new System.Drawing.Size(116, 13);
             this.label6.TabIndex = 8;
             this.label6.Text = "Tiempo de Ejecucuión:";
-            // 
-            // radioParallel
-            // 
-            this.radioParallel.AutoSize = true;
-            this.radioParallel.Location = new System.Drawing.Point(18, 60);
-            this.radioParallel.Name = "radioParallel";
-            this.radioParallel.Size = new System.Drawing.Size(59, 17);
-            this.radioParallel.TabIndex = 7;
-            this.radioParallel.TabStop = true;
-            this.radioParallel.Text = "Parallel";
-            this.radioParallel.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -363,13 +352,23 @@
             // 
             // btnEncriptar
             // 
-            this.btnEncriptar.Location = new System.Drawing.Point(18, 83);
+            this.btnEncriptar.Location = new System.Drawing.Point(16, 83);
             this.btnEncriptar.Name = "btnEncriptar";
             this.btnEncriptar.Size = new System.Drawing.Size(75, 23);
             this.btnEncriptar.TabIndex = 3;
             this.btnEncriptar.Text = "Encriptar";
             this.btnEncriptar.UseVisualStyleBackColor = true;
             this.btnEncriptar.Click += new System.EventHandler(this.btnEncriptar_Click);
+            // 
+            // checkParallel
+            // 
+            this.checkParallel.AutoSize = true;
+            this.checkParallel.Location = new System.Drawing.Point(16, 60);
+            this.checkParallel.Name = "checkParallel";
+            this.checkParallel.Size = new System.Drawing.Size(60, 17);
+            this.checkParallel.TabIndex = 10;
+            this.checkParallel.Text = "Parallel";
+            this.checkParallel.UseVisualStyleBackColor = true;
             // 
             // frmMulticore
             // 
@@ -427,9 +426,9 @@
         private System.Windows.Forms.Button btnEncriptar;
         private System.Windows.Forms.ComboBox comboSalto;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.RadioButton radioParallel;
         private System.Windows.Forms.Label labelresultado;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox checkParallel;
     }
 }
 
