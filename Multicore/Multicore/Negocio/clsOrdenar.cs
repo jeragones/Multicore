@@ -8,81 +8,151 @@ namespace Multicore.Negocio
     class clsOrdenar
     {
 
+        private static List<object[]> loLista = new List<object[]>();
+
+        public void setLista(List<object[]> _loLista) 
+        {
+            loLista = _loLista;
+        }
+
         public LinkedList<object[]> quickSort(LinkedList<object[]> _loLista) 
         {
 
             return _loLista;
         }
 
-        public List<object[]> mergeSort(List<object[]> _loLista, int _iColumna)
+
+        //Método portal que llama al método recursivo inicial
+        public static void MergeSort(object[] x, int m)
         {
-            mergeSort(_loLista, 0, _loLista.Count - 1, _iColumna);
-            return null;
+            MergeSort(x, 0, x.Length - 1, m);
         }
 
-        private static void mergeSort(List<object[]> _loLista, int _iInicio, int _iFin, int _iColumna) 
+        static private void MergeSort(object[] x, int desde, int hasta, int m)
         {
             //Condicion de parada
-            if (_iInicio == _iFin)
+            if (desde == hasta)
                 return;
             //Calculo la mitad del array
-            int iMitad = (_iInicio + _iFin) / 2;
+            int mitad = (desde + hasta) / 2;
             //Voy a ordenar recursivamente la primera mitad
             //y luego la segunda
             //_loLista mergeSort(_loLista, _iInicio, iMitad, _iColumna);
-            mergeSort(_loLista, iMitad + 1, _iFin, _iColumna);
+            MergeSort(x, desde, mitad, m);
+            MergeSort(x, mitad + 1, hasta, m);
             //Mezclo las dos mitades ordenadas
-            object[] liAux = merge(_loLista, _iInicio, iMitad, iMitad + 1, _iFin, _iColumna);
-            //Array.Copy(liAux, 0, _loLista, _iInicio, liAux.Count);
+            object[] aux = Merge(x, desde, mitad, mitad + 1, hasta, m);
+            Array.Copy(aux, 0, x, desde, aux.Length);
         }
 
-        private static object[] merge(List<object[]> _loLista, int _iInicio1, int _iFin1, int _iInicio2, int _iFin2, int _iColumna)
+        //Método que mezcla las dos mitades ordenadas
+        static private object[] Merge(object[] x, int desde1, int hasta1, int desde2, int hasta2, int m)
         {
-            int iTmp = _iFin1 - _iInicio1 + _iFin2 - _iInicio2 + 2;
-            object[] loResult = new object[iTmp];
+            int a = desde1;
+            int b = desde2;
+            object[] result = new object[hasta1 - desde1 + hasta2 - desde2 + 2];
 
-            for (int i = 0; i < iTmp; i++)
+            for (int i = 0; i < result.Length; i++)
             {
-                if (_iInicio2 != _loLista.Count)
+                if (b != x.Length)
                 {
-                    if (_iInicio1 > _iFin1 && _iInicio2 <= _iFin2)
+                    if (a > hasta1 && b <= hasta2)
                     {
-                        loResult[i] = _loLista[_iInicio2];
-                        _iInicio2++;
+                        result[i] = x[b];
+                        b++;
                     }
-                    if (_iInicio2 > _iFin2 && _iInicio1 <= _iFin1)
+                    if (b > hasta2 && a <= hasta1)
                     {
-                        loResult[i] = _loLista[_iInicio1];
-                        _iInicio1++;
+                        result[i] = x[a];
+                        a++;
                     }
-                    if (_iInicio1 <= _iFin1 && _iInicio2 <= _iFin2)
+                    if (a <= hasta1 && b <= hasta2)
                     {
                         // s1 = s2 : 0
-                        // s1 > s2 : 1
-                        // s1 < s2 : -1
-                        if (((string)_loLista[_iInicio2][1]).CompareTo((string)_loLista[_iInicio1][1]) == -1) 
-                        //if (_loLista[_iInicio2] <= _loLista[_iInicio1])
+                        //                // s1 > s2 : 1
+                        //                // s1 < s2 : -1
+                        string[] jj = (string[])x[a];
+                        if (((string[])x[b])[m].CompareTo(((string[])x[a])[m]) <= 0)
                         {
-                            loResult[i] = _loLista[_iInicio2];
-                            _iInicio2++;
+                            result[i] = x[b];
+                            b++;
                         }
                         else
                         {
-                            loResult[i] = _loLista[_iInicio1];
-                            _iInicio1++;
+                            result[i] = x[a];
+                            a++;
                         }
                     }
                 }
                 else
                 {
-                    if (_iInicio1 <= _iFin1)
+                    if (a <= hasta1)
                     {
-                        loResult[i] = _loLista[_iInicio1];
-                        _iInicio1++;
+                        result[i] = x[a];
+                        a++;
                     }
                 }
             }
-            return loResult;
+            return result;
         }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public static void quicksort(object[] x, int m)
+        {
+            Quicksort(x, 0, x.Length - 1, m);
+        }
+
+        public static void Quicksort(object[] elements, int left, int right, int m)
+        {
+            int i = left, j = right;
+            string pivot = ((string[])elements[(left + right) / 2])[m];
+
+            while (i <= j)
+            {
+                while (((string[])elements[i])[m].CompareTo(pivot) < 0)
+                {
+                    i++;
+                }
+
+                while (((string[])elements[j])[m].CompareTo(pivot) > 0)
+                {
+                    j--;
+                }
+
+                if (i <= j)
+                {
+                    // Swap
+                    string[] tmp = (string[])elements[i];
+                    elements[i] = elements[j];
+                    elements[j] = tmp;
+
+                    i++;
+                    j--;
+                }
+            }
+
+            // Recursive calls
+            if (left < j)
+            {
+                Quicksort(elements, left, j, m);
+            }
+
+            if (i < right)
+            {
+                Quicksort(elements, i, right, m);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+        
     }
 }

@@ -11,6 +11,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Multicore.Interfaz;
 
 namespace Multicore
 {
@@ -24,27 +25,28 @@ namespace Multicore
         private void btnAnalisis_Click(object sender, EventArgs e)
         {
             clsAnalisisTexto insAnalisisTexto = new clsAnalisisTexto();
+            borreme form = new borreme();
+            form.Show();
             
-            
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Archivos txt|*.txt";
-            //openFileDialog.FileName = "Seleccione un archivo";
-            openFileDialog.Title = "Seleccione un archivo";
-            openFileDialog.InitialDirectory = "C:\\";
-            openFileDialog.FileName = this.txtTexto.Text;
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                this.txtTexto.Text = openFileDialog.FileName;
-            }
+            //OpenFileDialog openFileDialog = new OpenFileDialog();
+            //openFileDialog.Filter = "Archivos txt|*.txt";
+            ////openFileDialog.FileName = "Seleccione un archivo";
+            //openFileDialog.Title = "Seleccione un archivo";
+            //openFileDialog.InitialDirectory = "C:\\";
+            //openFileDialog.FileName = this.txtTexto.Text;
+            //if (openFileDialog.ShowDialog() == DialogResult.OK)
+            //{
+            //    this.txtTexto.Text = openFileDialog.FileName;
+            //}
             
 
 
-            System.IO.StreamReader sr = new System.IO.StreamReader(@txtTexto.Text, System.Text.Encoding.Default);
-            string texto;
-            texto = sr.ReadToEnd();
-            sr.Close();
-            txtTexto.Text = texto;
-            insAnalisisTexto.analizarTexto(txtTexto.Text, false);
+            //System.IO.StreamReader sr = new System.IO.StreamReader(@txtTexto.Text, System.Text.Encoding.Default);
+            //string texto;
+            //texto = sr.ReadToEnd();
+            //sr.Close();
+            //txtTexto.Text = texto;
+            //insAnalisisTexto.analizarTexto(txtTexto.Text, false);
 
 
 
