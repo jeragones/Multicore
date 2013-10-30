@@ -29,7 +29,7 @@ namespace Multicore.Negocio
             int iMitad = (_iInicio + _iFin) / 2;
             //Voy a ordenar recursivamente la primera mitad
             //y luego la segunda
-            _loLista mergeSort(_loLista, _iInicio, iMitad, _iColumna);
+            //_loLista mergeSort(_loLista, _iInicio, iMitad, _iColumna);
             mergeSort(_loLista, iMitad + 1, _iFin, _iColumna);
             //Mezclo las dos mitades ordenadas
             object[] liAux = merge(_loLista, _iInicio, iMitad, iMitad + 1, _iFin, _iColumna);
