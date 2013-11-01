@@ -147,15 +147,25 @@ namespace Multicore.Negocio
             int letra;
             Parallel.For(0, encriptado.Length, i =>
             {
-                //obtiene el valor ascii
-                letra = Convert.ToInt32(encriptado[i]) - salto;
-                //pasa de Z a A 
-                if (letra < 41)
+                int carac = Convert.ToInt32(encriptado[i]);
+                if (carac > 64 && carac < 91 || carac > 96 && carac < 123)
                 {
-                    letra = letra + 26;
+                    //obtiene el valor ascii
+                    letra = Convert.ToInt32(encriptado[i]) - salto;
+                    //pasa de Z a A y viceversa
+                    if (letra < 65 || letra > 90 && letra < 97 || letra > 122)
+                    {
+                        letra = letra + 26;
+                    }
+
+                    //convieerte el valor ascii a caracter
+                    desencriptado += Convert.ToChar(letra);
                 }
-                //convieerte el valor ascii a caracter
-                desencriptado += Convert.ToChar(letra);
+                else
+                {
+                    encriptado += Convert.ToChar(carac);
+                }
+
             });
 
             return desencriptado;
@@ -175,15 +185,23 @@ namespace Multicore.Negocio
             int letra;
             for (int i = 0; i < encriptado.Length; i++)
             {
-                //obtiene el valor ascii
-                letra = Convert.ToInt32(encriptado[i]) - salto;
-                //pasa de Z a A 
-                if (letra < 41)
+                int carac = Convert.ToInt32(encriptado[i]);
+                if (carac > 64 && carac < 91 || carac > 96 && carac < 123)
                 {
-                    letra = letra + 26;
+                    //obtiene el valor ascii
+                    letra = Convert.ToInt32(encriptado[i]) - salto;
+                    //pasa de Z a A 
+                    if (letra < 41)
+                    {
+                        letra = letra + 26;
+                    }
+                    //convieerte el valor ascii a caracter
+                    desencriptado += Convert.ToChar(letra);
                 }
-                //convieerte el valor ascii a caracter
-                desencriptado += Convert.ToChar(letra);
+                else
+                {
+                    desencriptado += Convert.ToChar(carac);
+                }
             }
             return desencriptado;
         }
@@ -237,50 +255,5 @@ namespace Multicore.Negocio
             return desencriptado;
 
         }
-
-
-        
-
-
-        // 65 = A
-        // 90 =Z
-        // 97 =a
-        //122 = z
-        
-        //arreglar problema con Z
-        public static string desencriptarCesar_prueba(string texto, int salto)
-        {
-
-            string encriptado = "";
-
-            int letra = 0;
-            for (int i = 0; i < texto.Length; i++)
-            {
-                int carac = Convert.ToInt32(texto[i]);
-                if (carac > 64 && carac < 91 || carac > 96 && carac < 123)
-                {
-                    letra = Convert.ToInt32(texto[i]) - salto;
-                                       
-                    if (letra < 65 ||letra > 90 && letra < 97 || letra > 122)
-                    {
-                        letra = letra + 26;
-                    }
-
-                    encriptado += Convert.ToChar(letra);
-                }
-                else
-                {
-                    encriptado += Convert.ToChar(carac);
-                }
-            }
-            return encriptado;
-        }
-
-
-
-
-
-
-
     }
 }

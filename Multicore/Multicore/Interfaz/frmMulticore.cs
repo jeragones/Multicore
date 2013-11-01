@@ -32,7 +32,7 @@ namespace Multicore
 
         private void btnEncriptar_Click(object sender, EventArgs e)
         {
-            /*
+            
             string mensaje ="";
             string texto="";
             string encriptado = "";
@@ -70,7 +70,7 @@ namespace Multicore
 
             writer.WriteLine(encriptado);
             writer.Close();
-            */
+            
             
             
           
