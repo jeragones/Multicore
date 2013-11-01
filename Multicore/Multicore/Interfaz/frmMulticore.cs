@@ -71,8 +71,7 @@ namespace Multicore
             writer.WriteLine(encriptado);
             writer.Close();
             */
-            //string l = clsEncriptar.encriptarCesar_prueba("[Z]",2);
-            string m = clsEncriptar.desencriptarCesar_prueba(l, 2);
+            
             
           
             
