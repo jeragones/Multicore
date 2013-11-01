@@ -57,10 +57,9 @@
             this.pnlEncriptacion = new System.Windows.Forms.Panel();
             this.labelresultado = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboSalto = new System.Windows.Forms.ComboBox();
             this.btnEncriptar = new System.Windows.Forms.Button();
             this.checkParallel = new System.Windows.Forms.CheckBox();
+            this.btnDesencriptar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnlAnalisis.SuspendLayout();
             this.pnlAcciones.SuspendLayout();
@@ -294,17 +293,15 @@
             // 
             // pnlEncriptacion
             // 
+            this.pnlEncriptacion.Controls.Add(this.btnDesencriptar);
             this.pnlEncriptacion.Controls.Add(this.checkParallel);
             this.pnlEncriptacion.Controls.Add(this.labelresultado);
             this.pnlEncriptacion.Controls.Add(this.label6);
-            this.pnlEncriptacion.Controls.Add(this.label5);
-            this.pnlEncriptacion.Controls.Add(this.comboSalto);
             this.pnlEncriptacion.Controls.Add(this.btnEncriptar);
             this.pnlEncriptacion.Location = new System.Drawing.Point(12, 387);
             this.pnlEncriptacion.Name = "pnlEncriptacion";
             this.pnlEncriptacion.Size = new System.Drawing.Size(573, 120);
             this.pnlEncriptacion.TabIndex = 2;
-            this.pnlEncriptacion.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlEncriptacion_Paint);
             // 
             // labelresultado
             // 
@@ -323,36 +320,9 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "Tiempo de Ejecucuión:";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 12);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(91, 13);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Numero de Saltos";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
-            // 
-            // comboSalto
-            // 
-            this.comboSalto.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9"});
-            this.comboSalto.Location = new System.Drawing.Point(16, 28);
-            this.comboSalto.Name = "comboSalto";
-            this.comboSalto.Size = new System.Drawing.Size(47, 21);
-            this.comboSalto.TabIndex = 5;
-            // 
             // btnEncriptar
             // 
-            this.btnEncriptar.Location = new System.Drawing.Point(16, 83);
+            this.btnEncriptar.Location = new System.Drawing.Point(16, 36);
             this.btnEncriptar.Name = "btnEncriptar";
             this.btnEncriptar.Size = new System.Drawing.Size(75, 23);
             this.btnEncriptar.TabIndex = 3;
@@ -363,12 +333,22 @@
             // checkParallel
             // 
             this.checkParallel.AutoSize = true;
-            this.checkParallel.Location = new System.Drawing.Point(16, 60);
+            this.checkParallel.Location = new System.Drawing.Point(16, 12);
             this.checkParallel.Name = "checkParallel";
             this.checkParallel.Size = new System.Drawing.Size(60, 17);
             this.checkParallel.TabIndex = 10;
             this.checkParallel.Text = "Parallel";
             this.checkParallel.UseVisualStyleBackColor = true;
+            // 
+            // btnDesencriptar
+            // 
+            this.btnDesencriptar.Location = new System.Drawing.Point(16, 65);
+            this.btnDesencriptar.Name = "btnDesencriptar";
+            this.btnDesencriptar.Size = new System.Drawing.Size(75, 23);
+            this.btnDesencriptar.TabIndex = 11;
+            this.btnDesencriptar.Text = "Desencriptar";
+            this.btnDesencriptar.UseVisualStyleBackColor = true;
+            this.btnDesencriptar.Click += new System.EventHandler(this.btnDesencriptar_Click);
             // 
             // frmMulticore
             // 
@@ -424,10 +404,9 @@
         private System.Windows.Forms.Button btnAnalisis;
         private System.Windows.Forms.Panel pnlEncriptacion;
         private System.Windows.Forms.Button btnEncriptar;
-        private System.Windows.Forms.ComboBox comboSalto;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label labelresultado;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnDesencriptar;
         private System.Windows.Forms.CheckBox checkParallel;
     }
 }

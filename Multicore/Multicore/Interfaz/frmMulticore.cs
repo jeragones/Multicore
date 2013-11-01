@@ -27,46 +27,19 @@ namespace Multicore
             clsAnalisisTexto insAnalisisTexto = new clsAnalisisTexto();
             borreme form = new borreme();
             form.Show();
-            
-            //OpenFileDialog openFileDialog = new OpenFileDialog();
-            //openFileDialog.Filter = "Archivos txt|*.txt";
-            ////openFileDialog.FileName = "Seleccione un archivo";
-            //openFileDialog.Title = "Seleccione un archivo";
-            //openFileDialog.InitialDirectory = "C:\\";
-            //openFileDialog.FileName = this.txtTexto.Text;
-            //if (openFileDialog.ShowDialog() == DialogResult.OK)
-            //{
-            //    this.txtTexto.Text = openFileDialog.FileName;
-            //}
-            
-
-
-            //System.IO.StreamReader sr = new System.IO.StreamReader(@txtTexto.Text, System.Text.Encoding.Default);
-            //string texto;
-            //texto = sr.ReadToEnd();
-            //sr.Close();
-            //txtTexto.Text = texto;
-            //insAnalisisTexto.analizarTexto(txtTexto.Text, false);
-
-
-
-
-
-
-
 
         }
 
         private void btnEncriptar_Click(object sender, EventArgs e)
         {
-            
+            /*
             string mensaje ="";
             string texto="";
             string encriptado = "";
-            int salto = 0;
+            int salto = 3;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Archivos txt|*.txt";
-            //openFileDialog.FileName = "Seleccione un archivo";
+            openFileDialog.FileName = "Seleccione un archivo";
             openFileDialog.Title = "Seleccione un archivo";
             openFileDialog.InitialDirectory = "C:\\";
             openFileDialog.FileName = mensaje;
@@ -77,46 +50,75 @@ namespace Multicore
                 texto = sr.ReadToEnd();
             }
 
-            salto = Convert.ToInt16(comboSalto.SelectedItem);
+            
             if (checkParallel.Checked)
             {
                 var timer = Stopwatch.StartNew();
-                encriptado = clsEncriptar.encrip(texto, salto, true);
+                encriptado = clsEncriptar.encriptCesar(texto, salto, true);
                 timer.Stop();
                 labelresultado.Text = Convert.ToString(timer.Elapsed);
             }
             else
             {
                 var timer = Stopwatch.StartNew();
-                encriptado = clsEncriptar.encrip(texto, salto, false);
+                encriptado = clsEncriptar.encriptCesar(texto, salto, false);
                 timer.Stop();
                 labelresultado.Text = Convert.ToString(timer.Elapsed);
             }
-            //Console.WriteLine(resultado[0]);
-            //Console.WriteLine(resultado[1]);
+            string fileName = (@"C:\Users\jdbr\Desktop\Encriptado.txt");
+            StreamWriter writer = File.CreateText(fileName);
+
+            writer.WriteLine(encriptado);
+            writer.Close();
+            */
+            //string l = clsEncriptar.encriptarCesar_prueba("[Z]",2);
+            string m = clsEncriptar.desencriptarCesar_prueba(l, 2);
             
+          
             
-
-
-            
-
-
-
              }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnDesencriptar_Click(object sender, EventArgs e)
         {
+            string mensaje = "";
+            string texto = "";
+            string desencriptado = "";
+            int salto = 3;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Archivos txt|*.txt";
+            openFileDialog.FileName = "Seleccione un archivo";
+            openFileDialog.Title = "Seleccione un archivo";
+            openFileDialog.InitialDirectory = "C:\\";
+            openFileDialog.FileName = mensaje;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                mensaje = openFileDialog.FileName;
+                System.IO.StreamReader sr = new System.IO.StreamReader(mensaje, System.Text.Encoding.Default);
+                texto = sr.ReadToEnd();
+            }
+
+            
+            if (checkParallel.Checked)
+            {
+                var timer = Stopwatch.StartNew();
+                desencriptado = clsEncriptar.desencriptCesar(texto, salto, true);
+                timer.Stop();
+                labelresultado.Text = Convert.ToString(timer.Elapsed);
+            }
+            else
+            {
+                var timer = Stopwatch.StartNew();
+                desencriptado = clsEncriptar.desencriptCesar(texto, salto, false);
+                timer.Stop();
+                labelresultado.Text = Convert.ToString(timer.Elapsed);
+            }
+            string fileName = (@"C:\Users\jdbr\Desktop\Desencriptado.txt");
+            StreamWriter writer = File.CreateText(fileName);
+
+            writer.WriteLine(desencriptado);
+            writer.Close();
             
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnlEncriptacion_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
