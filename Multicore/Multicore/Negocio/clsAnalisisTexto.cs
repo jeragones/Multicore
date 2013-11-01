@@ -17,7 +17,7 @@ namespace Multicore.Negocio
     /// </summary>
     class clsAnalisisTexto
     {
-        private object[] asIdioma = new object[] { "", 0 };
+        private object[] aoIdioma = new object[] { "", 0 };
         private int iCantidadPalabras = 0;
         private int iCantidadCaracteres = 0;
         private LinkedList<object[]> loPalabrasComunes = new LinkedList<object[]>();
@@ -28,7 +28,7 @@ namespace Multicore.Negocio
         /// <returns>Nombre del lenguaje</returns>
         public string getIdioma() 
         {
-            return (string)asIdioma[0];
+            return (string)aoIdioma[0];
         }
 
         /// <summary>
@@ -113,18 +113,17 @@ namespace Multicore.Negocio
 
                 Parallel.For(0, moIdiomas.Length / 2, i => 
                 {
-                    if (String.IsNullOrEmpty((string)asIdioma[0]) && (int)asIdioma[1] == 0)
+                    if (String.IsNullOrEmpty((string)aoIdioma[0]) && (int)aoIdioma[1] == 0)
                     {
-                        asIdioma[0] = moIdiomas[i, 0];
-                        asIdioma[1] = moIdiomas[i, 1];
+                        aoIdioma[0] = moIdiomas[i, 0];
+                        aoIdioma[1] = moIdiomas[i, 1];
                     }
-                    else if ((int)asIdioma[1] < (int)moIdiomas[i, 1])
+                    else if ((int)aoIdioma[1] < (int)moIdiomas[i, 1])
                     {
-                        asIdioma[0] = moIdiomas[i, 0];
-                        asIdioma[1] = moIdiomas[i, 1];
+                        aoIdioma[0] = moIdiomas[i, 0];
+                        aoIdioma[1] = moIdiomas[i, 1];
                     }
                 });
-                
             }
             else /* ------------------------------------------------------------------------------------ */
             {
@@ -158,15 +157,15 @@ namespace Multicore.Negocio
                 
                 for (int i = 0; i < moIdiomas.Length / 2; i++)
                 {
-                    if (String.IsNullOrEmpty((string)asIdioma[0]) && (int)asIdioma[1] == 0)
+                    if (String.IsNullOrEmpty((string)aoIdioma[0]) && (int)aoIdioma[1] == 0)
                     {
-                        asIdioma[0] = moIdiomas[i, 0];
-                        asIdioma[1] = moIdiomas[i, 1];
+                        aoIdioma[0] = moIdiomas[i, 0];
+                        aoIdioma[1] = moIdiomas[i, 1];
                     }
-                    else if ((int)asIdioma[1] < (int)moIdiomas[i, 1])
+                    else if ((int)aoIdioma[1] < (int)moIdiomas[i, 1])
                     {
-                        asIdioma[0] = moIdiomas[i, 0];
-                        asIdioma[1] = moIdiomas[i, 1];
+                        aoIdioma[0] = moIdiomas[i, 0];
+                        aoIdioma[1] = moIdiomas[i, 1];
                     }
                 }
             }

@@ -39,11 +39,11 @@ namespace Multicore.Interfaz
 
 
 
-            clsOrdenar.MergeSort(words, 1); // distritos
-            clsOrdenar.MergeSort(words1, 5); // 
+            clsOrdenar.mergeSort(words, 0, true); // distritos
+            clsOrdenar.mergeSort(words1, 5, false); // 
             //int h = 0;
-            //clsOrdenar.quicksort(words, 1);
-            //clsOrdenar.quicksort(words1, 1);
+            //clsOrdenar.quicksort(words, 1,false);
+            //clsOrdenar.quicksort(words1, 1,false);
             int g = 0;
         }
     }
