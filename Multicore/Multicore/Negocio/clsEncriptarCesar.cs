@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Multicore.Negocio
 {
-    public class clsEncriptar
+    public class clsEncriptarCesar
     {   
         /// <summary>
         /// Metodo de cifrado por sustitucion secuencial(Cifrado Cesar)

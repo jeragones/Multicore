@@ -54,14 +54,14 @@ namespace Multicore
             if (checkParallel.Checked)
             {
                 var timer = Stopwatch.StartNew();
-                encriptado = clsEncriptar.encriptCesar(texto, salto, true);
+                encriptado = clsEncriptarCesar.encriptCesar(texto, salto, true);
                 timer.Stop();
                 labelresultado.Text = Convert.ToString(timer.Elapsed);
             }
             else
             {
                 var timer = Stopwatch.StartNew();
-                encriptado = clsEncriptar.encriptCesar(texto, salto, false);
+                encriptado = clsEncriptarCesar.encriptCesar(texto, salto, false);
                 timer.Stop();
                 labelresultado.Text = Convert.ToString(timer.Elapsed);
             }
@@ -100,14 +100,14 @@ namespace Multicore
             if (checkParallel.Checked)
             {
                 var timer = Stopwatch.StartNew();
-                desencriptado = clsEncriptar.desencriptCesar(texto, salto, true);
+                desencriptado = clsEncriptarCesar.desencriptCesar(texto, salto, true);
                 timer.Stop();
                 labelresultado.Text = Convert.ToString(timer.Elapsed);
             }
             else
             {
                 var timer = Stopwatch.StartNew();
-                desencriptado = clsEncriptar.desencriptCesar(texto, salto, false);
+                desencriptado = clsEncriptarCesar.desencriptCesar(texto, salto, false);
                 timer.Stop();
                 labelresultado.Text = Convert.ToString(timer.Elapsed);
             }
