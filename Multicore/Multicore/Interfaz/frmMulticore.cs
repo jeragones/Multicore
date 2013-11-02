@@ -119,5 +119,37 @@ namespace Multicore
             
         }
 
+        private void encriptDesencript_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void generarClave_Click(object sender, EventArgs e)
+        {
+            string mensaje = "";
+            string texto = "";
+            string desencriptado = "";
+            string[] res = null;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Archivos txt|*.txt";
+            openFileDialog.FileName = "Seleccione un archivo";
+            openFileDialog.Title = "Seleccione un archivo";
+            openFileDialog.InitialDirectory = "C:\\";
+            openFileDialog.FileName = mensaje;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                mensaje = openFileDialog.FileName;
+                System.IO.StreamReader sr = new System.IO.StreamReader(mensaje, System.Text.Encoding.Default);
+                texto = sr.ReadToEnd();
+            }
+            res = clsEncriptarXOR.XOR(texto);
+
+            string fileName = (@"C:\Users\jdbr\Desktop\DesencriptadoXOR.txt");
+            StreamWriter writer = File.CreateText(fileName);
+
+            writer.WriteLine(desencriptado);
+            writer.Close();
+        }
+
     }
 }
