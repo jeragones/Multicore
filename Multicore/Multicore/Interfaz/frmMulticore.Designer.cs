@@ -55,13 +55,14 @@
             this.lblIdioma = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlEncriptacion = new System.Windows.Forms.Panel();
-            this.encriptDesencript = new System.Windows.Forms.Button();
+            this.cargarClave = new System.Windows.Forms.Button();
             this.encriptarXOR = new System.Windows.Forms.Button();
             this.btnDesencriptar = new System.Windows.Forms.Button();
             this.checkParallel = new System.Windows.Forms.CheckBox();
             this.labelresultado = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.btnEncriptar = new System.Windows.Forms.Button();
+            this.desencriptar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnlAnalisis.SuspendLayout();
             this.pnlAcciones.SuspendLayout();
@@ -295,7 +296,8 @@
             // 
             // pnlEncriptacion
             // 
-            this.pnlEncriptacion.Controls.Add(this.encriptDesencript);
+            this.pnlEncriptacion.Controls.Add(this.desencriptar);
+            this.pnlEncriptacion.Controls.Add(this.cargarClave);
             this.pnlEncriptacion.Controls.Add(this.encriptarXOR);
             this.pnlEncriptacion.Controls.Add(this.btnDesencriptar);
             this.pnlEncriptacion.Controls.Add(this.checkParallel);
@@ -307,19 +309,19 @@
             this.pnlEncriptacion.Size = new System.Drawing.Size(573, 120);
             this.pnlEncriptacion.TabIndex = 2;
             // 
-            // encriptDesencript
+            // cargarClave
             // 
-            this.encriptDesencript.Location = new System.Drawing.Point(429, 83);
-            this.encriptDesencript.Name = "encriptDesencript";
-            this.encriptDesencript.Size = new System.Drawing.Size(129, 23);
-            this.encriptDesencript.TabIndex = 13;
-            this.encriptDesencript.Text = "Desencriptar";
-            this.encriptDesencript.UseVisualStyleBackColor = true;
-            this.encriptDesencript.Click += new System.EventHandler(this.encriptDesencript_Click);
+            this.cargarClave.Location = new System.Drawing.Point(429, 41);
+            this.cargarClave.Name = "cargarClave";
+            this.cargarClave.Size = new System.Drawing.Size(86, 23);
+            this.cargarClave.TabIndex = 13;
+            this.cargarClave.Text = "Cargar Clave";
+            this.cargarClave.UseVisualStyleBackColor = true;
+            this.cargarClave.Click += new System.EventHandler(this.encriptDesencript_Click);
             // 
             // encriptarXOR
             // 
-            this.encriptarXOR.Location = new System.Drawing.Point(441, 12);
+            this.encriptarXOR.Location = new System.Drawing.Point(429, 12);
             this.encriptarXOR.Name = "encriptarXOR";
             this.encriptarXOR.Size = new System.Drawing.Size(86, 23);
             this.encriptarXOR.TabIndex = 12;
@@ -373,6 +375,16 @@
             this.btnEncriptar.Text = "Encriptar";
             this.btnEncriptar.UseVisualStyleBackColor = true;
             this.btnEncriptar.Click += new System.EventHandler(this.btnEncriptar_Click);
+            // 
+            // desencriptar
+            // 
+            this.desencriptar.Location = new System.Drawing.Point(429, 70);
+            this.desencriptar.Name = "desencriptar";
+            this.desencriptar.Size = new System.Drawing.Size(86, 23);
+            this.desencriptar.TabIndex = 14;
+            this.desencriptar.Text = "Desencriptar XOR";
+            this.desencriptar.UseVisualStyleBackColor = true;
+            this.desencriptar.Click += new System.EventHandler(this.desencriptar_Click);
             // 
             // frmMulticore
             // 
@@ -432,8 +444,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnDesencriptar;
         private System.Windows.Forms.CheckBox checkParallel;
-        private System.Windows.Forms.Button encriptDesencript;
+        private System.Windows.Forms.Button cargarClave;
         private System.Windows.Forms.Button encriptarXOR;
+        private System.Windows.Forms.Button desencriptar;
     }
 }
 

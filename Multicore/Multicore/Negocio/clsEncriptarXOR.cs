@@ -33,7 +33,7 @@ namespace Multicore.Negocio
         /// <param name="clave">Clave necesaria para encriptar y desencriptar</param>
         /// <param name="texto">Texto que se desea encriptar</param>
         /// <returns>Retorna el texto encriptado</returns>
-        private static string encriptXOR(string clave, string texto)
+        public static string encriptXOR(string clave, string texto)
         {
             string encrip = "";
             if (!(clave.Length < texto.Length))
@@ -58,7 +58,7 @@ namespace Multicore.Negocio
 
         public static string[] XOR(string txt)
         {
-            string[] result=null;
+            string[] result= new string[2];
             string clave = generarClave(txt);
             string mensaje = encriptXOR(clave, txt);
             result[0] = clave;

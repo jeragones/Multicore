@@ -17,6 +17,7 @@ namespace Multicore
 {
     public partial class frmMulticore : Form
     {
+        public string clave = "";
         public frmMulticore()
         {
             InitializeComponent();
@@ -121,6 +122,21 @@ namespace Multicore
 
         private void encriptDesencript_Click(object sender, EventArgs e)
         {
+            string mensaje = "";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Archivos Key|*.key";
+            openFileDialog.FileName = "Seleccione un Archivo Clave ";
+            openFileDialog.Title = "Seleccione un archivo";
+            openFileDialog.InitialDirectory = "C:\\";
+            openFileDialog.FileName = mensaje;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                mensaje = openFileDialog.FileName;
+                System.IO.StreamReader sr = new System.IO.StreamReader(mensaje, System.Text.Encoding.Default);
+                clave = sr.ReadToEnd();
+            }
+
+
 
         }
 
@@ -128,7 +144,6 @@ namespace Multicore
         {
             string mensaje = "";
             string texto = "";
-            string desencriptado = "";
             string[] res = null;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Archivos txt|*.txt";
@@ -144,11 +159,43 @@ namespace Multicore
             }
             res = clsEncriptarXOR.XOR(texto);
 
-            string fileName = (@"C:\Users\jdbr\Desktop\DesencriptadoXOR.txt");
-            StreamWriter writer = File.CreateText(fileName);
+            string fileNameEncriptado = (@"C:\Users\jdbr\Desktop\EncriptadoXOR.txt");
+            string fileNameClave = (@"C:\Users\jdbr\Desktop\ClaveXOR.key");
+            StreamWriter writerEncrip = File.CreateText(fileNameEncriptado);
+            StreamWriter writerClave = File.CreateText(fileNameClave);
+            writerEncrip.WriteLine(res[1]);
+            writerClave.WriteLine(res[0]);
+            writerEncrip.Close();
+            writerClave.Close();
+        }
 
-            writer.WriteLine(desencriptado);
-            writer.Close();
+        private void desencriptar_Click(object sender, EventArgs e)
+        {
+            string mensaje = "";
+            string texto = "";
+            
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Archivos txt|*.txt";
+            openFileDialog.FileName = "Seleccione un archivo";
+            openFileDialog.Title = "Seleccione un archivo";
+            openFileDialog.InitialDirectory = "C:\\";
+            openFileDialog.FileName = mensaje;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                mensaje = openFileDialog.FileName;
+                System.IO.StreamReader sr = new System.IO.StreamReader(mensaje, System.Text.Encoding.Default);
+                texto = sr.ReadToEnd();
+            }
+
+            string des=clsEncriptarXOR.encriptXOR(clave,texto);
+            string fileNameEncriptado = (@"C:\Users\jdbr\Desktop\DesencriptadoXOR.txt");
+           
+            StreamWriter writerEncrip = File.CreateText(fileNameEncriptado);
+            
+            writerEncrip.WriteLine(des);
+            
+            writerEncrip.Close();
+            
         }
 
     }
