@@ -124,7 +124,7 @@ namespace Multicore
         {
             string mensaje = "";
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Archivos Key|*.key";
+            openFileDialog.Filter = "Archivos Key|*.txt";
             openFileDialog.FileName = "Seleccione un Archivo Clave ";
             openFileDialog.Title = "Seleccione un archivo";
             openFileDialog.InitialDirectory = "C:\\";
@@ -160,7 +160,7 @@ namespace Multicore
             res = clsEncriptarXOR.XOR(texto);
 
             string fileNameEncriptado = (@"C:\Users\jdbr\Desktop\EncriptadoXOR.txt");
-            string fileNameClave = (@"C:\Users\jdbr\Desktop\ClaveXOR.key");
+            string fileNameClave = (@"C:\Users\jdbr\Desktop\ClaveXOR.txt");
             StreamWriter writerEncrip = File.CreateText(fileNameEncriptado);
             StreamWriter writerClave = File.CreateText(fileNameClave);
             writerEncrip.Write(res[1]);

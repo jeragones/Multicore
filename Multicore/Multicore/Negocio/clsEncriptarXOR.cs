@@ -19,10 +19,11 @@ namespace Multicore.Negocio
             
             Random random = new Random();
             foreach(char c in txt){
-                char x = (char)random.Next(64, 125);
+                char x = (char)random.Next(65, 90);
                 str += x;
                 
             }
+            
             return str;
         }
 
@@ -50,6 +51,7 @@ namespace Multicore.Negocio
             {
                 MessageBox.Show("Error: La clave debe ser mas larga que el texto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
             return encrip;
         }
 
