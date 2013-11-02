@@ -163,8 +163,8 @@ namespace Multicore
             string fileNameClave = (@"C:\Users\jdbr\Desktop\ClaveXOR.key");
             StreamWriter writerEncrip = File.CreateText(fileNameEncriptado);
             StreamWriter writerClave = File.CreateText(fileNameClave);
-            writerEncrip.WriteLine(res[1]);
-            writerClave.WriteLine(res[0]);
+            writerEncrip.Write(res[1]);
+            writerClave.Write(res[0]);
             writerEncrip.Close();
             writerClave.Close();
         }

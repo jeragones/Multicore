@@ -15,16 +15,15 @@ namespace Multicore.Negocio
         /// <returns>Retorna la clave creada aleatoriamente</returns>
         private static string generarClave(string txt)
         {
-            List<char> str = new List<char>();
-            int i = 0;
+            string str="";
+            
             Random random = new Random();
-            while (i < txt.Length)
-            {
-                char c = (char)random.Next(0, 100);
-                str.Add(c);
-                i++;
+            foreach(char c in txt){
+                char x = (char)random.Next(64, 125);
+                str += x;
+                
             }
-            return new string(str.ToArray());
+            return str;
         }
 
         /// <summary>
