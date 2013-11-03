@@ -19,7 +19,7 @@ namespace Multicore.Interfaz
 
         private void button1_Click(object sender, EventArgs e)
         {
-            object[] words1 = new object[] { new string[] { "m", "m", "m", "m","m","Delgado Rojas Adriana" },
+            /*object[] words1 = new object[] { new string[] { "m", "m", "m", "m","m","Delgado Rojas Adriana" },
                                              new string[] { "m", "m", "m", "m","m","Ramirez Lambda Gerardo" }, 
                                              new string[] { "m", "m", "m", "m","m","Quesada Gutierrez Karla" },
                                              new string[] { "m", "m", "m", "m","m","Miranda Jimenez Nelson" } };
@@ -44,7 +44,29 @@ namespace Multicore.Interfaz
             //int h = 0;
             //clsOrdenar.quicksort(words, 1,false);
             //clsOrdenar.quicksort(words1, 1,false);
-            int g = 0;
+            int g = 0;*/
+
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Archivos txt|*.txt";
+            //openFileDialog.FileName = "Seleccione un archivo";
+            openFileDialog.Title = "Seleccione un archivo";
+            openFileDialog.InitialDirectory = "C:\\";
+            openFileDialog.FileName = this.txtTexto.Text;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                this.txtTexto.Text = openFileDialog.FileName;
+            }
+
+
+
+            System.IO.StreamReader sr = new System.IO.StreamReader(@txtTexto.Text, System.Text.Encoding.Default);
+            string texto;
+            texto = sr.ReadToEnd();
+            sr.Close();
+            txtTexto.Text = texto;
+            clsAnalisisTexto insAnalisisTexto = new clsAnalisisTexto();
+            insAnalisisTexto.analizarTexto(txtTexto.Text, true);
         }
     }
 }

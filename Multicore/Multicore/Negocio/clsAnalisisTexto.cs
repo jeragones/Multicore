@@ -20,7 +20,7 @@ namespace Multicore.Negocio
         private object[] aoIdioma = new object[] { "", 0 };
         private int iCantidadPalabras = 0;
         private int iCantidadCaracteres = 0;
-        private LinkedList<object[]> loPalabrasComunes = new LinkedList<object[]>();
+        private List<object[]> loPalabrasComunes = new List<object[]>();
 
         /// <summary>
         /// Obtiene el idioma del idioma del texto
@@ -69,52 +69,6 @@ namespace Multicore.Negocio
             return sPalabras;
         }
 
-        //public void analizarTexto(string[] _asIdiomas) 
-        //{
-            
-        //    foreach (string sTmp in _asIdiomas)
-        //    {
-        //        string[] sSeparador = sTmp.Split(new char[] { ':' });
-        //        string[] asPalabra = sSeparador[1].Split(new char[] { ',' });
-        //        lsIdiomas.AddLast(new object[] { sSeparador[0], asPalabra });
-        //    }
-
-        //    for (int i = 0; i < lsIdiomas.Count; i++)
-        //    {
-        //        moIdiomas[i, 0] = lsIdiomas.ElementAt(i)[0];
-        //        moIdiomas[i, 1] = 0;
-        //    }
-
-        //    foreach (string sTmp in asPalabras)
-        //    {
-        //        if (!String.IsNullOrEmpty(sTmp))
-        //        {
-        //            sPalabra = limpiarPalabra(sTmp, _bConcurrencia);
-        //            if (!String.IsNullOrEmpty(sTmp))
-        //            {
-        //                iCantidadCaracteres += sTmp.Length;
-        //                iCantidadPalabras++;
-        //                palabrasComunes(sPalabra, _bConcurrencia);
-        //                moIdiomas = analizarIdioma(sPalabra, lsIdiomas, _bConcurrencia, moIdiomas);
-        //            }
-        //        }
-        //    }
-
-        //    for (int i = 0; i < moIdiomas.Length / 2; i++)
-        //    {
-        //        if (String.IsNullOrEmpty((string)aoIdioma[0]) && (int)aoIdioma[1] == 0)
-        //        {
-        //            aoIdioma[0] = moIdiomas[i, 0];
-        //            aoIdioma[1] = moIdiomas[i, 1];
-        //        }
-        //        else if ((int)aoIdioma[1] < (int)moIdiomas[i, 1])
-        //        {
-        //            aoIdioma[0] = moIdiomas[i, 0];
-        //            aoIdioma[1] = moIdiomas[i, 1];
-        //        }
-        //    }
-        //}
-
         /// <summary>
         /// Recorre el texto analizandolo con funciones auxiliares
         /// </summary>
@@ -127,20 +81,12 @@ namespace Multicore.Negocio
             LinkedList<object[]> lsIdiomas = new LinkedList<object[]>();
             string[] asPalabras = _sTexto.Split(new char[] { ' ' });
             object[,] moIdiomas;
-            //object[,] moIdiomas = new object[asIdiomas.Length, 2];
 
             if (!String.IsNullOrEmpty(asIdiomas[0])) 
             {
                 /* ***************************************************************************************** */
                 if (_bConcurrencia)
                 {
-
-                    int iLongitud = asPalabras.Length / 3;
-                    
-                    int[] aiSegmento1 = { 0, iLongitud };
-                    int[] aiSegmento2 = { iLongitud, iLongitud * 2 };
-                    int[] aiSegmento3 = { iLongitud * 2, asPalabras.Length };
-
                     object[] aoIdioma1 = null;
                     object[] aoIdioma2 = null;
                     object[] aoIdioma3 = null;
@@ -155,39 +101,53 @@ namespace Multicore.Negocio
                     lsIdiomas.AddLast(aoIdioma2);
                     lsIdiomas.AddLast(aoIdioma3);
 
-                    // ................................................
-                    moIdiomas = idiomas(lsIdiomas, asIdiomas.Length);
-                    // ................................................
+                    object[] aoDatos1 = null;
+                    object[] aoDatos2 = null;
+                    object[] aoDatos3 = null;
 
-                    int[] aiPalabraCaracter1;
-                    int[] aiPalabraCaracter2;
-                    int[] aiPalabraCaracter3;
-
+                    int iTamano = asPalabras.Length;
+                    int iSegmento = (iTamano / 3) + 1;
+                    var vLista = asPalabras.Select((x, i) => new { Index = i, Value = x })
+                                           .GroupBy(x => x.Index / iSegmento)
+                                           .Select(x => x.Select(v => v.Value).ToList())
+                                           .ToList();
                     Parallel.Invoke(
-                        () => { aiPalabraCaracter1 = analisisTextual(asPalabras, moIdiomas, lsIdiomas, aiSegmento1, _bConcurrencia); },
-                        () => { aiPalabraCaracter2 = analisisTextual(asPalabras, moIdiomas, lsIdiomas, aiSegmento2, _bConcurrencia); },
-                        () => { aiPalabraCaracter3 = analisisTextual(asPalabras, moIdiomas, lsIdiomas, aiSegmento3, _bConcurrencia); }
+                        () => 
+                        {
+                            aoDatos1 = analisisTextual(vLista.ElementAt(0).ToArray(), asIdiomas.Length, lsIdiomas, _bConcurrencia); 
+                        },
+                        () => 
+                        {
+                            aoDatos2 = analisisTextual(vLista.ElementAt(1).ToArray(), asIdiomas.Length, lsIdiomas, _bConcurrencia); 
+                        },
+                        () => 
+                        {
+                            aoDatos3 = analisisTextual(vLista.ElementAt(2).ToArray(), asIdiomas.Length, lsIdiomas, _bConcurrencia); 
+                        }
                     );
-                    var lista = loPalabrasComunes.Select((x, i) => new { Index = i, Value = x })
-                                .GroupBy(x => x.Index / 25)
-                                .Select(x => x.Select(v => v.Value).ToList())
-                                .ToList();
-                    
+                    iCantidadPalabras = ((int[])aoDatos1[0])[0] + ((int[])aoDatos2[0])[0] + ((int[])aoDatos3[0])[0];
+                    iCantidadCaracteres = ((int[])aoDatos1[0])[1] + ((int[])aoDatos2[0])[1] + ((int[])aoDatos3[0])[1];
+                    moIdiomas = (object[,])aoDatos1[1];
+                    moIdiomas[0, 1] = (int)moIdiomas[0, 1] + (int)((object[,])aoDatos2[1])[0, 1] + (int)((object[,])aoDatos3[1])[0, 1];
+                    moIdiomas[1, 1] = (int)moIdiomas[1, 1] + (int)((object[,])aoDatos2[1])[1, 1] + (int)((object[,])aoDatos3[1])[1, 1];
+                    moIdiomas[2, 1] = (int)moIdiomas[2, 1] + (int)((object[,])aoDatos2[1])[2, 1] + (int)((object[,])aoDatos3[1])[2, 1];
                     identificarIdioma(moIdiomas);
                 }
                 else /* ------------------------------------------------------------------------------------ */
                 {
                     lsIdiomas = separar(asIdiomas);
                     moIdiomas = idiomas(lsIdiomas, asIdiomas.Length);
-                    int[] aiPalabraCaracter =
-                    //moIdiomas = 
-                    analisisTextual(asPalabras, moIdiomas, lsIdiomas, new int[] { 0, asPalabras.Length }, _bConcurrencia);
-                    iCantidadPalabras = aiPalabraCaracter[0];
-                    iCantidadCaracteres = aiPalabraCaracter[1];
+                    object[] aoDatos = analisisTextual(asPalabras, asIdiomas.Length, lsIdiomas, _bConcurrencia);
+                    iCantidadPalabras = ((int[])aoDatos[0])[0];
+                    iCantidadCaracteres = ((int[])aoDatos[0])[1];
+                    moIdiomas = (object[,])aoDatos[1];
                     identificarIdioma(moIdiomas);
                 }
                 /* ***************************************************************************************** */
             }
+            var lsPalabras = loPalabrasComunes.OrderByDescending(x => x[1]).ToList();
+            loPalabrasComunes = new List<object[]>(lsPalabras);
+            int t = 5;
         }
 
         /// <summary>
@@ -219,28 +179,32 @@ namespace Multicore.Negocio
         /// <param name="_moIdiomas"></param>
         /// <param name="lsIdiomas"></param>
         /// <returns></returns>
-        private /*object[,]*/ int[] analisisTextual(string[] _asPalabras, object[,] _moIdiomas, LinkedList<object[]> lsIdiomas, int[] _aiIndices, bool _bConcurrencia) 
+        private object[] analisisTextual(string[] _asPalabras, int _iLongitud, LinkedList<object[]> lsIdiomas, bool _bConcurrencia) 
         {
             string sPalabra = "";
             int[] aiPalabracaracter = { 0, 0 };
-            object[,] moIdiomas = null;
+            object[] aoRetorno = new object[2];
+            object[,] moIdiomas = idiomas(lsIdiomas, _iLongitud); ;
             /* ***************************************************************************************** */
             if (_bConcurrencia)
             {
-                for (int i = _aiIndices[0]; i < _aiIndices[1]; i++)
+                for (int i = 0; i < _asPalabras.Length; i++)
                 {
-                    Parallel.Invoke(
-                        () => { sPalabra = limpiarPalabra(_asPalabras[i]); },
-                        () => { aiPalabracaracter[1] += _asPalabras[i].Length; },
-                        () => { aiPalabracaracter[0]++; }
-                    );
-                    palabrasComunes(sPalabra, _bConcurrencia);
-                    moIdiomas = analizarIdioma(sPalabra, lsIdiomas, _bConcurrencia, _moIdiomas);
+                    if (!String.IsNullOrEmpty(_asPalabras[i]))
+                    {
+                        Parallel.Invoke(
+                            () => { sPalabra = limpiarPalabra(_asPalabras[i]); },
+                            () => { aiPalabracaracter[1] += _asPalabras[i].Length; },
+                            () => { aiPalabracaracter[0]++; }
+                        );
+                        palabrasComunes(sPalabra, _bConcurrencia);
+                        moIdiomas = analizarIdioma(sPalabra, lsIdiomas, _bConcurrencia, moIdiomas);
+                    }
                 }
             }
             else /* ------------------------------------------------------------------------------------ */
             {
-                for (int i = _aiIndices[0]; i < _aiIndices[1]; i++)
+                for (int i = 0; i < _asPalabras.Length; i++)
                 {
                     sPalabra = limpiarPalabra(_asPalabras[i]);
                     if (!String.IsNullOrEmpty(_asPalabras[i]))
@@ -248,12 +212,14 @@ namespace Multicore.Negocio
                         aiPalabracaracter[1] += _asPalabras[i].Length;
                         aiPalabracaracter[0]++;
                         palabrasComunes(sPalabra, _bConcurrencia);
-                        moIdiomas = analizarIdioma(sPalabra, lsIdiomas, _bConcurrencia, _moIdiomas);
+                        moIdiomas = analizarIdioma(sPalabra, lsIdiomas, _bConcurrencia, moIdiomas);
                     }
                 }
             }
             /* ***************************************************************************************** */
-            return aiPalabracaracter;
+            aoRetorno[0] = aiPalabracaracter;
+            aoRetorno[1] = moIdiomas;
+            return aoRetorno;
         }
 
         /// <summary>
@@ -284,15 +250,15 @@ namespace Multicore.Negocio
         /// <summary>
         /// 777777777777777777777777777777777777777777777777777777777777777777777777777777777777
         /// </summary>
-        /// <param name="lsIdiomas"></param>
+        /// <param name="_lsIdiomas"></param>
         /// <param name="_iFila"></param>
         /// <returns></returns>
-        private object[,] idiomas(LinkedList<object[]> lsIdiomas, int _iFila) 
+        private object[,] idiomas(LinkedList<object[]> _lsIdiomas, int _iFila) 
         {
             object[,] moIdiomas = new object[_iFila, 2];
-            for (int i = 0; i < lsIdiomas.Count; i++)
+            for (int i = 0; i < _lsIdiomas.Count; i++)
             {
-                moIdiomas[i, 0] = lsIdiomas.ElementAt(i)[0];
+                moIdiomas[i, 0] = _lsIdiomas.ElementAt(i)[0];
                 moIdiomas[i, 1] = 0;
             }
             return moIdiomas;
@@ -350,7 +316,7 @@ namespace Multicore.Negocio
                 int[] aiSegmento1 = { 0, iLongitud };
                 int[] aiSegmento2 = { iLongitud, iLongitud * 2 };
                 int[] aiSegmento3 = { iLongitud * 2, iTamano };
-
+                
                 Parallel.Invoke(
                     () => 
                     { 
@@ -447,19 +413,22 @@ namespace Multicore.Negocio
         /// </summary>
         /// <param name="_sPalabra"></param>
         /// <param name="aiIndices"></param>
-        private bool palabrasComunes(string _sPalabra, LinkedList<object[]> _loPalabrasComunes) 
+        private object[] palabrasComunes(string _sPalabra, List<object[]> _loPalabrasComunes) 
         {
+            object[] aoDatos = new object[2];
             for (int i = 0; i < _loPalabrasComunes.Count; i++) 
             {
                 if (_sPalabra.Equals((string)_loPalabrasComunes.ElementAt(i)[0], StringComparison.Ordinal))
                 {
-                    //int iCantidad = (int)sPalabra[1];
-                    //sPalabra[1] = ++iCantidad;
                     _loPalabrasComunes.ElementAt(i)[1] = ((int)_loPalabrasComunes.ElementAt(i)[1]) + 1;
-                    return false;
+                    aoDatos[0] = false;
+                    aoDatos[1] = _loPalabrasComunes;
+                    return aoDatos;
                 }
             }
-            return true;
+            aoDatos[0] = true;
+            aoDatos[1] = _loPalabrasComunes;
+            return aoDatos;
         }
 
         /// <summary>
@@ -478,44 +447,51 @@ namespace Multicore.Negocio
             /* ***************************************************************************************** */
             if (_bConcurrencia)
             {
-                bool[] bExiste = { false, false, false };
+                object[] aoListas = new object[3];
+                
                 if (vLista.Count >= 3)
                 {
-                    //int[] iSegmento1 = { 0, iSegmento };
-                    //int[] iSegmento2 = { iSegmento, iSegmento * 2 };
-                    //int[] iSegmento3 = { iSegmento * 2, iTamano };
-
                     Parallel.Invoke(
-                        () => { bExiste[0] = palabrasComunes(_sPalabra, new LinkedList<object[]>(vLista.ElementAt(0))); },
-                        () => { bExiste[1] = palabrasComunes(_sPalabra, new LinkedList<object[]>(vLista.ElementAt(1))); },
-                        () => { bExiste[2] = palabrasComunes(_sPalabra, new LinkedList<object[]>(vLista.ElementAt(2))); }
+                        () => { aoListas[0] = palabrasComunes(_sPalabra, new List<object[]>(vLista.ElementAt(0))); },
+                        () => { aoListas[1] = palabrasComunes(_sPalabra, new List<object[]>(vLista.ElementAt(1))); },
+                        () => { aoListas[2] = palabrasComunes(_sPalabra, new List<object[]>(vLista.ElementAt(2))); }
                     );
-                    if (bExiste[0] && bExiste[1] && bExiste[2])
-                        loPalabrasComunes.AddLast(new object[] { _sPalabra, 1 });
+                    loPalabrasComunes = ((List<object[]>)((object[])aoListas[0])[1]).Concat(
+                                            ((List<object[]>)((object[])aoListas[1])[1]).Concat(
+                                                (List<object[]>)((object[])aoListas[2])[1])
+                                            .ToList())
+                                        .ToList();
+                    if (((bool)((object[])aoListas[0])[0]) && 
+                        ((bool)((object[])aoListas[1])[0]) && 
+                        ((bool)((object[])aoListas[2])[0]))
+                        loPalabrasComunes.Add(new object[] { _sPalabra, 1 });
                 }
                 else if (vLista.Count == 2)
                 {
                     Parallel.Invoke(
-                        () => { bExiste[0] = palabrasComunes(_sPalabra, new LinkedList<object[]>(vLista.ElementAt(0))); },
-                        () => { bExiste[1] = palabrasComunes(_sPalabra, new LinkedList<object[]>(vLista.ElementAt(1))); }
+                        () => { aoListas[0] = palabrasComunes(_sPalabra, new List<object[]>(vLista.ElementAt(0))); },
+                        () => { aoListas[1] = palabrasComunes(_sPalabra, new List<object[]>(vLista.ElementAt(1))); }
                     );
-                    if (bExiste[0] && bExiste[1])
-                        loPalabrasComunes.AddLast(new object[] { _sPalabra, 1 });
+                    loPalabrasComunes = ((List<object[]>)((object[])aoListas[0])[1]).Concat(
+                                            ((List<object[]>)((object[])aoListas[1])[1]))
+                                        .ToList();
+                    if (((bool)((object[])aoListas[0])[0]) &&
+                        ((bool)((object[])aoListas[1])[0]))
+                        loPalabrasComunes.Add(new object[] { _sPalabra, 1 });
                 }
                 else
                 {
-                    if (palabrasComunes(_sPalabra, loPalabrasComunes))
-                        loPalabrasComunes.AddLast(new object[] { _sPalabra, 1 });
+                    if ((bool)palabrasComunes(_sPalabra, loPalabrasComunes)[0])
+                        loPalabrasComunes.Add(new object[] { _sPalabra, 1 });
                 }
             }
             else /* ------------------------------------------------------------------------------------ */
             {
-                if (palabrasComunes(_sPalabra, loPalabrasComunes))
-                    loPalabrasComunes.AddLast(new object[] { _sPalabra, 1 });
+                if ((bool)palabrasComunes(_sPalabra, loPalabrasComunes)[0])
+                    loPalabrasComunes.Add(new object[] { _sPalabra, 1 });
             }
             /* ***************************************************************************************** */
-            var lsPalabras = loPalabrasComunes.OrderByDescending(x => x[1]).ToList();
-            loPalabrasComunes = new LinkedList<object[]>(lsPalabras);
+            
         }
     }
 }

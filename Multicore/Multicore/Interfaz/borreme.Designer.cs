@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
+            this.txtTexto = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -41,20 +42,30 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // txtTexto
+            // 
+            this.txtTexto.Location = new System.Drawing.Point(90, 12);
+            this.txtTexto.Name = "txtTexto";
+            this.txtTexto.Size = new System.Drawing.Size(100, 20);
+            this.txtTexto.TabIndex = 1;
+            // 
             // borreme
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.txtTexto);
             this.Controls.Add(this.button1);
             this.Name = "borreme";
             this.Text = "borreme";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtTexto;
     }
 }
