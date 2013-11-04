@@ -13,15 +13,16 @@ namespace Multicore.Negocio
         /// Metodo que genera la clave necesaria para encriptar y desencriptar
         /// </summary>
         /// <returns>Retorna la clave creada aleatoriamente</returns>
-        private static string generarClave(string txt)
+        private static string generarClave()
         {
             string str="";
             
             Random random = new Random();
-            foreach(char c in txt){
+            for (int i = 0; i < 50;i++ )
+            {
                 char x = (char)random.Next(65, 90);
                 str += x;
-                
+
             }
             
             return str;
@@ -36,21 +37,21 @@ namespace Multicore.Negocio
         public static string encriptXOR(string clave, string texto)
         {
             string encrip = "";
-            if (!(clave.Length < texto.Length))
+
+            int clv = 0;
+            foreach (char c in clave)
             {
-                
+                clv += (int)clave[i];
+            }
                 int i = 0;
                 foreach (char c in texto)
                 {
-                    int _c = (int)c ^ (int)clave[i];
+                    int _c = (int)c ^ i;
                     encrip+=((char)_c);
                     i++;
                 }
-            }
-            else
-            {
-                MessageBox.Show("Error: La clave debe ser mas larga que el texto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            
+            
             
             return encrip;
         }
@@ -60,7 +61,7 @@ namespace Multicore.Negocio
         public static string[] XOR(string txt)
         {
             string[] result= new string[2];
-            string clave = generarClave(txt);
+            string clave = generarClave();
             string mensaje = encriptXOR(clave, txt);
             result[0] = clave;
             result[1] = mensaje;
