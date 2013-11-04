@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Multicore.Negocio;
+using System.Diagnostics;
 
 namespace Multicore.Interfaz
 {
@@ -66,7 +67,20 @@ namespace Multicore.Interfaz
             sr.Close();
             txtTexto.Text = texto;
             clsAnalisisTexto insAnalisisTexto = new clsAnalisisTexto();
+
+            var timer = Stopwatch.StartNew();
             insAnalisisTexto.analizarTexto(txtTexto.Text, true);
+            timer.Stop();
+
+            var timer1 = Stopwatch.StartNew();
+            insAnalisisTexto.analizarTexto(txtTexto.Text, false);
+            timer1.Stop();
+
+            string c = insAnalisisTexto.getCantidadCaracteres();
+            string p = insAnalisisTexto.getCantidadPalagras();
+            StringBuilder pc = insAnalisisTexto.getPalabrasComunes();
+            string i = insAnalisisTexto.getIdioma();
+            int y = 0;
         }
     }
 }
