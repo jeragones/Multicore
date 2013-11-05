@@ -137,6 +137,7 @@ namespace Multicore
             }
 
 
+            
 
         }
 
@@ -167,6 +168,13 @@ namespace Multicore
             writerClave.Write(res[0]);
             writerEncrip.Close();
             writerClave.Close();
+        
+            /*
+            string s = clsEncriptarXOR.generarClave();
+            string en = clsEncriptarXOR.encriptXOR(s, "Daniel .-.,123456");
+            string des = clsEncriptarXOR.encriptXOR(s, en);
+            */
+            
         }
 
         private void desencriptar_Click(object sender, EventArgs e)
