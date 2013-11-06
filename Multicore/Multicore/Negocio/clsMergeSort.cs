@@ -168,127 +168,158 @@ namespace Multicore.Negocio
             return Convert.ToString(vTiempo.Elapsed);
         }
 
-        private static StringBuilder mergeSort(List<string> _aoLineas, int _iColumna, bool _bTipo, bool _bConcurrencia)
+        private static List<string[]> unirLista(List<string> _asLineas) 
         {
-            List<string[]> loLista = new List<string[]>();
-            StringBuilder sbTexto = new StringBuilder();
+            List<string[]> lsLista = new List<string[]>();
             string[] asTmp;
+            for (int i = 0; i < _asLineas.Count; i++)
+            {
+                asTmp = ((string)_asLineas[i]).Split(new char[] { ',' });
+                for (int j = 0; j < asTmp.Length; j++)
+                    asTmp[j] = asTmp[j].Replace("  ", string.Empty);
+                lsLista.Add(asTmp);
+            }
+            return lsLista;
+        }
+
+        private static StringBuilder mergeSort(List<string> _lsLineas, int _iColumna, bool _bTipo, bool _bConcurrencia)
+        {
+            List<string[]> lsLista = null;
+            StringBuilder sbTexto = new StringBuilder();
 
             /* ***************************************************************************************** */
             if (_bConcurrencia)
             {
-                int iSegmento = (_aoLineas.Count / 3) + 1;
-                var vLista = _aoLineas.Select((x, i) => new { Index = i, Value = x })
+                List<string[]> lsTmpLista1 = null;
+                List<string[]> lsTmpLista2 = null;
+                int iSegmento = (_lsLineas.Count / 3) + 1;
+                var vLista = _lsLineas.Select((x, i) => new { Index = i, Value = x })
                                       .GroupBy(x => x.Index / iSegmento)
                                       .Select(x => x.Select(v => v.Value).ToList())
                                       .ToList();
-                Parallel.Invoke(() => { });
+                Parallel.Invoke(
+                    () => 
+                    { 
+                        lsLista = unirLista(vLista.ElementAt(0)); 
+                    },
+                    () => 
+                    { 
+                        lsTmpLista1 = unirLista(vLista.ElementAt(1)); 
+                    },
+                    () => 
+                    { 
+                        lsTmpLista2 = unirLista(vLista.ElementAt(2)); 
+                    }
+                );
+                lsLista = lsLista.Concat(lsTmpLista1.Concat(lsTmpLista2).ToList()).ToList();
+                lsTmpLista1 = null;
+                lsTmpLista2 = null;
             }
             else /* ------------------------------------------------------------------------------------ */
-            {
-
-            }
+                lsLista = unirLista(_lsLineas);
             /* ***************************************************************************************** */
 
-            for (int i = 0; i < _aoLineas.Count; i++)
-            {
-                asTmp = ((string)_aoLineas[i]).Split(new char[] { ',' });
-                for (int j = 0; j < asTmp.Length; j++)
-                    asTmp[j] = asTmp[j].Replace("  ", string.Empty);
-                loLista.Add(asTmp);
-            }
-
-            
-
-            foreach (string[] sColumna in MergeSort(loLista.ToArray(), _iColumna))
+            foreach (string[] sColumna in MergeSort(lsLista.ToArray(), _iColumna, _bTipo, _bConcurrencia))
                 sbTexto.AppendLine(string.Join(",", sColumna));
-
-            loLista = null;
-
+            lsLista = null;
             return sbTexto;
         }
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private static object[] MergeSort(object[] x,int c)
+        private static object[] MergeSort(object[] _aoLista, int _iColumna, bool _bTipo, bool _bConcurrencia)
         {
-            MergeSort(x, 0, x.Length - 1, c);
-            return x;
+            MergeSort(_aoLista, 0, _aoLista.Length - 1, _iColumna,_bTipo,_bConcurrencia);
+            return _aoLista;
         }
 
-        static private void MergeSort(object[] x, int desde, int hasta, int c)
+        static private void MergeSort(object[] _aoLista, int _iInicio, int _iFin, int _iColumna, bool _bTipo, bool _bConcurrencia)
         {
-            if (desde == hasta)
+            if (_iInicio == _iFin)
                 return;
-            //Calculo la mitad del array
-            int mitad = (desde + hasta) / 2;
-            //Voy a ordenar recursivamente la primera mitad
-            //y luego la segunda
-            MergeSort(x, desde, mitad,c);
-            MergeSort(x, mitad + 1, hasta,c);
-            //Mezclo las dos mitades ordenadas
-            object[] aux = Merge(x, desde, mitad, mitad + 1, hasta, c);
-            Array.Copy(aux, 0, x, desde, aux.Length);
+            int iPivote = (_iInicio + _iFin) / 2;
+
+            /* ***************************************************************************************** */
+            if (_bConcurrencia)
+            {
+                Parallel.Invoke(
+                    () => 
+                    {
+                        MergeSort(_aoLista, _iInicio, iPivote, _iColumna, _bTipo, _bConcurrencia); 
+                    },
+                    () => 
+                    {
+                        MergeSort(_aoLista, iPivote + 1, _iFin, _iColumna, _bTipo, _bConcurrencia);
+                    }
+                );
+            }
+            else /* ------------------------------------------------------------------------------------ */
+            {
+                MergeSort(_aoLista, _iInicio, iPivote, _iColumna, _bTipo, _bConcurrencia);
+                MergeSort(_aoLista, iPivote + 1, _iFin, _iColumna, _bTipo, _bConcurrencia);
+            }
+            /* ***************************************************************************************** */
+
+            object[] aoTmp = Merge(_aoLista, _iInicio, iPivote, iPivote + 1, _iFin, _iColumna, _bTipo, _bConcurrencia);
+            Array.Copy(aoTmp, 0, _aoLista, _iInicio, aoTmp.Length);
         }
 
-        //Método que mezcla las dos mitades ordenadas
-        static private object[] Merge(object[] x, int desde1, int hasta1, int desde2, int hasta2, int c)
+        static private object[] Merge(object[] _aoLista, int _iInicio1, int _iFin1, int _iInicio2, int _iFin2, int _iColumna, bool _bTipo, bool _bConcurrencia)
         {
-            int a = desde1;
-            int b = desde2;
-            object[] result = new object[hasta1 - desde1 + hasta2 - desde2 + 2];
+            object[] aoResultado = new object[_iFin1 - _iInicio1 + _iFin2 - _iInicio2 + 2];
 
-            for (int i = 0; i < result.Length; i++)
+            for (int i = 0; i < aoResultado.Length; i++)
             {
-                if (b != x.Length)
+                if (_iInicio2 != _aoLista.Length)
                 {
-                    if (a > hasta1 && b <= hasta2)
+                    if (_iInicio1 > _iFin1 && _iInicio2 <= _iFin2)
                     {
-                        result[i] = x[b];
-                        b++;
+                        aoResultado[i] = _aoLista[_iInicio2];
+                        _iInicio2++;
                     }
-                    if (b > hasta2 && a <= hasta1)
+                    if (_iInicio2 > _iFin2 && _iInicio1 <= _iFin1)
                     {
-                        result[i] = x[a];
-                        a++;
+                        aoResultado[i] = _aoLista[_iInicio1];
+                        _iInicio1++;
                     }
-                    if (a <= hasta1 && b <= hasta2)
+                    if (_iInicio1 <= _iFin1 && _iInicio2 <= _iFin2)
                     {
-                        
-                        if (((string[])x[b])[c].CompareTo(((string[])x[a])[c]) <= 0)
+                        if (_bTipo)
                         {
-                            result[i] = x[b];
-                            b++;
+                            if (((string[])_aoLista[_iInicio2])[_iColumna].CompareTo(((string[])_aoLista[_iInicio1])[_iColumna]) <= 0)
+                            {
+                                aoResultado[i] = _aoLista[_iInicio2];
+                                _iInicio2++;
+                            }
+                            else
+                            {
+                                aoResultado[i] = _aoLista[_iInicio1];
+                                _iInicio1++;
+                            }
                         }
-                        else
+                        else 
                         {
-                            result[i] = x[a];
-                            a++;
+                            if (((string[])_aoLista[_iInicio2])[_iColumna].CompareTo(((string[])_aoLista[_iInicio1])[_iColumna]) >= 0)
+                            {
+                                aoResultado[i] = _aoLista[_iInicio2];
+                                _iInicio2++;
+                            }
+                            else
+                            {
+                                aoResultado[i] = _aoLista[_iInicio1];
+                                _iInicio1++;
+                            }
                         }
                     }
                 }
                 else
                 {
-                    if (a <= hasta1)
+                    if (_iInicio1 <= _iFin1)
                     {
-                        result[i] = x[a];
-                        a++;
+                        aoResultado[i] = _aoLista[_iInicio1];
+                        _iInicio1++;
                     }
                 }
             }
-            return result;
+            return aoResultado;
         }
     }
 }

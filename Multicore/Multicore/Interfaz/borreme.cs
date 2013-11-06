@@ -50,10 +50,10 @@ namespace Multicore.Interfaz
 
 
 
-            string jj = clsMergeSort.mergeSort(0,false,false);
+            //string jj = clsMergeSort.mergeSort(0,false,false);
             //var timer = Stopwatch.StartNew();
-            //string h1 = clsMergeSort.mergeSort(0, false, true); // distritos
-            //string h = clsMergeSort.mergeSort(0, false, false); // 
+            string h1 = clsMergeSort.mergeSort(0, false, true); // distritos
+            string h = clsMergeSort.mergeSort(0, false, false); // 
             //timer.Stop();
             //var timer1 = Stopwatch.StartNew();
             //string h1 = clsQuickSort.quickSort(0, false, true); // true -> desc
