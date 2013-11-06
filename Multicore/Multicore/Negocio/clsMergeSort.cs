@@ -5,30 +5,15 @@ using System.Text;
 
 namespace Multicore.Negocio
 {
-    class clsOrdenar
+    class clsMergeSort
     {
-
-        private static List<object[]> loLista = new List<object[]>();
-
-        public void setLista(List<object[]> _loLista) 
-        {
-            loLista = _loLista;
-        }
-
-        public LinkedList<object[]> quickSort(LinkedList<object[]> _loLista) 
-        {
-
-            return _loLista;
-        }
-
-
         //Método portal que llama al método recursivo inicial
         public static void mergeSort(object[] _aoLista, int _iColumna, bool _bTipo)
         {
             mergeSort(_aoLista, 0, _aoLista.Length - 1, _iColumna, _bTipo);
         }
 
-        static private void mergeSort(object[] _aoLista, int _iInicio, int _iFin, int _iColumna, bool _bTipo)
+        private static void mergeSort(object[] _aoLista, int _iInicio, int _iFin, int _iColumna, bool _bTipo)
         {
             //Condicion de parada
             if (_iInicio == _iFin)
@@ -46,7 +31,7 @@ namespace Multicore.Negocio
         }
 
         //Método que mezcla las dos mitades ordenadas
-        static private object[] merge(object[] _aoLista, int _iInicio1, int _iFin1, int _iInicio2, int _Fin2, int _iColumna, bool _bTipo)
+        private static object[] merge(object[] _aoLista, int _iInicio1, int _iFin1, int _iInicio2, int _Fin2, int _iColumna, bool _bTipo)
         {
             //int i = _iInicio1;
             //int b = _iInicio2;
@@ -84,7 +69,7 @@ namespace Multicore.Negocio
                                 _iInicio1++;
                             }
                         }
-                        else 
+                        else
                         {
                             if (((string[])_aoLista[_iInicio2])[_iColumna].CompareTo(((string[])_aoLista[_iInicio1])[_iColumna]) > 0)
                             {
@@ -109,68 +94,6 @@ namespace Multicore.Negocio
                 }
             }
             return aoCadena;
-        }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        public static void quicksort(object[] _aoLista, int _iColumna, bool _bTipo)
-        {
-            Quicksort(_aoLista, 0, _aoLista.Length - 1, _iColumna, _bTipo);
-        }
-
-        public static void Quicksort(object[] _aoLista, int _iInicio, int _iFin, int _iColumna, bool _bTipo)
-        {
-            int i = _iInicio, j = _iFin;
-            string pivot = ((string[])_aoLista[(_iInicio + _iFin) / 2])[_iColumna];
-
-            while (i <= j)
-            {
-                if (_bTipo)
-                {
-                    while (((string[])_aoLista[i])[_iColumna].CompareTo(pivot) < 0)
-                    {
-                        i++;
-                    }
-
-                    while (((string[])_aoLista[j])[_iColumna].CompareTo(pivot) > 0)
-                    {
-                        j--;
-                    }
-                }
-                else 
-                {
-                    while (((string[])_aoLista[i])[_iColumna].CompareTo(pivot) > 0)
-                    {
-                        i++;
-                    }
-
-                    while (((string[])_aoLista[j])[_iColumna].CompareTo(pivot) < 0)
-                    {
-                        j--;
-                    }
-                }
-                
-                if (i <= j)
-                {
-                    // Swap
-                    string[] tmp = (string[])_aoLista[i];
-                    _aoLista[i] = _aoLista[j];
-                    _aoLista[j] = tmp;
-
-                    i++;
-                    j--;
-                }
-            }
-
-            // Recursive calls
-            if (_iInicio < j)
-            {
-                Quicksort(_aoLista, _iInicio, j, _iColumna, _bTipo);
-            }
-
-            if (i < _iFin)
-            {
-                Quicksort(_aoLista, i, _iFin, _iColumna, _bTipo);
-            }
         }
     }
 }
