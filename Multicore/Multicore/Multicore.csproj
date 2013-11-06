@@ -65,8 +65,10 @@
     <Compile Include="Negocio\clsArchivo.cs" />
     <Compile Include="Negocio\clsEncriptarXOR.cs" />
     <Compile Include="Negocio\clsEncriptarCesar.cs" />
+    <Compile Include="Negocio\clsMatriz.cs" />
     <Compile Include="Negocio\clsMergeSort.cs" />
     <Compile Include="Negocio\clsMulticore.cs" />
+    <Compile Include="Negocio\clsNumero.cs" />
     <Compile Include="Negocio\clsQuickSort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Interfaz\borreme.resx">

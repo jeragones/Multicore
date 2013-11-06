@@ -52,15 +52,26 @@ namespace Multicore.Interfaz
 
             //string jj = clsMergeSort.mergeSort(0,false,false);
             //var timer = Stopwatch.StartNew();
-            string h1 = clsMergeSort.mergeSort(0, false, true); // distritos
-            string h = clsMergeSort.mergeSort(0, false, false); // 
+            //string h1 = clsMergeSort.mergeSort(0, false, true); // distritos
+            //string h = clsMergeSort.mergeSort(0, false, false); // 
             //timer.Stop();
             //var timer1 = Stopwatch.StartNew();
             //string h1 = clsQuickSort.quickSort(0, false, true); // true -> desc
             //string h = clsQuickSort.quickSort(0,false,false); // false -> asc
             //timer1.Stop();
-            int y = 0;
+            //int y = 0;
 
+
+
+            clsNumero insNumero = new clsNumero();
+            StringBuilder mm = insNumero.numerosPrimos(350);
+
+            int ss = 0;
+
+            //clsMatriz insMatriz = new clsMatriz();
+            //insMatriz.operacionMatriz("m1+m2*m1-m2/m1", 10, 10, true);
+
+            
 
 
 

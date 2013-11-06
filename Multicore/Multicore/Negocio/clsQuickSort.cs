@@ -9,6 +9,13 @@ namespace Multicore.Negocio
 {
     class clsQuickSort
     {
+        /// <summary>
+        /// Metodo de ordenamiento QuickSort
+        /// </summary>
+        /// <param name="_iColumna">Columna en la que se basa para ordenar las filas</param>
+        /// <param name="_bTipo">Tipo de ordenamiento</param>
+        /// <param name="_bConcurrencia">Indica si se ordena de forma concurrente o no</param>
+        /// <returns>Retorna el tiempo de ejecucion de la funcion</returns>
         public static string quickSort(int _iColumna, bool _bTipo, bool _bConcurrencia) 
         {
             clsArchivo insArchivo = new clsArchivo();
@@ -59,6 +66,14 @@ namespace Multicore.Negocio
             return Convert.ToString(vTiempo.Elapsed);
         }
 
+        /// <summary>
+        /// Metodo de ordenamiento auxiliar de QuickSort
+        /// </summary>
+        /// <param name="_aoLineas">Lista que se va a ordenar</param>
+        /// <param name="_iColumna">Columna en la que se basa para ordenar las filas</param>
+        /// <param name="_bTipo">Tipo de ordenamiento</param>
+        /// <param name="_bConcurrencia">Indica si se ordena de forma concurrente o no</param>
+        /// <returns>Texto ordenado</returns>
         private static StringBuilder quickSort(List<string> _aoLineas, int _iColumna, bool _bTipo, bool _bConcurrencia)
         {
             List<string[]> loLista = new List<string[]>();
@@ -75,17 +90,6 @@ namespace Multicore.Negocio
 
             quickSort(loLista, 0, loLista.Count - 1, _iColumna, _bTipo, _bConcurrencia);
 
-            ///* ***************************************************************************************** */
-            //if (_bConcurrencia)
-            //{
-            //    Parallel.Invoke(() => { });
-            //}
-            //else /* ------------------------------------------------------------------------------------ */
-            //{
-
-            //}
-            ///* ***************************************************************************************** */
-
             foreach (string[] sColumna in loLista)
                 sbTexto.AppendLine(string.Join(",", sColumna));
 
@@ -94,6 +98,15 @@ namespace Multicore.Negocio
             return sbTexto;
         }
 
+        /// <summary>
+        /// Metodo de ordenamiento auxilair de QuickSort
+        /// </summary>
+        /// <param name="_loLista">Lista que se va a ordenar</param>
+        /// <param name="_iInicio">indice inicial de la sublista</param>
+        /// <param name="_iFin">indice final de la sublista</param>
+        /// <param name="_iColumna">Columna en la que se basa para ordenar las filas</param>
+        /// <param name="_bTipo">Tipo de ordenamiento</param>
+        /// <param name="_bConcurrencia">Indica si se ordena de forma concurrente o no</param>
         private static void quickSort(List<string[]> _loLista, int _iInicio, int _iFin, int _iColumna, bool _bTipo, bool _bConcurrencia)
         {
             int i = _iInicio, j = _iFin;

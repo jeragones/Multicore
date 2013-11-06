@@ -12,7 +12,6 @@ namespace Multicore.Negocio
         /// <summary>
         /// Carga archivos de texto del explorador
         /// </summary>
-        /// <param name="_sPath">Direccion del archivo</param>
         /// <returns>Informacion que contiene el archivo</returns>
         public List<string> cargarArchivo()
         {
@@ -33,6 +32,11 @@ namespace Multicore.Negocio
             return null;
         }
 
+        /// <summary>
+        /// Carga archivos de texto del explorador
+        /// </summary>
+        /// <param name="_sPath">Direccion del archivo</param>
+        /// <returns>Informacion que contiene el archivo</returns>
         public string cargarArchivo(string _sPath)
         {
             StreamReader srFile = new StreamReader(_sPath, Encoding.UTF8);
@@ -41,8 +45,10 @@ namespace Multicore.Negocio
             return sTexto;   
         }
 
-
-
+        /// <summary>
+        /// Guarda archivos de texto en el explorador
+        /// </summary>
+        /// <param name="_sTexto">texto que se va a guardar en el archivo</param>
         public void guardarArchivo(StringBuilder _sTexto)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
