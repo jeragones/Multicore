@@ -160,8 +160,8 @@ namespace Multicore
             }
             res = clsEncriptarXOR.XOR(texto);
 
-            string fileNameEncriptado = (@"C:\Users\jdbr\Desktop\EncriptadoXOR.txt");
-            string fileNameClave = (@"C:\Users\jdbr\Desktop\ClaveXOR.txt");
+            string fileNameEncriptado = (@"C:\Users\jdbr\Desktop\Encriptado_xor.txt");
+            string fileNameClave = (@"C:\Users\jdbr\Desktop\Clave_xor.txt");
             StreamWriter writerEncrip = File.CreateText(fileNameEncriptado);
             StreamWriter writerClave = File.CreateText(fileNameClave);
             writerEncrip.Write(res[1]);
@@ -172,7 +172,7 @@ namespace Multicore
             /*
             string s = clsEncriptarXOR.generarClave();
             string en = clsEncriptarXOR.encriptXOR(s, "Daniel .-.,123456");
-            string des = clsEncriptarXOR.encriptXOR(s, en);
+            string des = clsEncriptarXOR.desencriptXOR(s, en);
             */
             
         }
@@ -195,7 +195,7 @@ namespace Multicore
                 texto = sr.ReadToEnd();
             }
 
-            string des=clsEncriptarXOR.encriptXOR(clave,texto);
+            string des=clsEncriptarXOR.desencriptXOR(clave,texto);
             string fileNameEncriptado = (@"C:\Users\jdbr\Desktop\DesencriptadoXOR.txt");
            
             StreamWriter writerEncrip = File.CreateText(fileNameEncriptado);
