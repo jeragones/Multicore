@@ -56,15 +56,19 @@ namespace Multicore.Negocio
         /// <returns>10 palabras</returns>
         public StringBuilder getPalabrasComunes() 
         {
+            //string sPalabras="";
             StringBuilder sPalabras = new StringBuilder();
             for (int i = 0; i < 10; i++) 
             {
                 if (i == 0)
-                    sPalabras.Append(loPalabrasComunes.ElementAt(i));
-                else 
+                    //sPalabras += loPalabrasComunes.ElementAt(i);
+                sPalabras.Append(loPalabrasComunes.ElementAt(i)[0]);
+                else
                 {
+
+                    //sPalabras += ", " + loPalabrasComunes.ElementAt(i);
                     sPalabras.Append(", ");
-                    sPalabras.Append(loPalabrasComunes.ElementAt(i));
+                    sPalabras.Append(loPalabrasComunes.ElementAt(i)[0]);
                 }
             }
             return sPalabras;

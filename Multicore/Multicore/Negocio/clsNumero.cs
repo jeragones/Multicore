@@ -19,7 +19,7 @@ namespace Multicore.Negocio
 
             while (_iNumero > 1)
             {
-                if (primo(iNumero) && (_iNumero % iNumero) == 0)
+                if (primo(iNumero, _bConcurrencia) && (_iNumero % iNumero) == 0)
                 {
                     _iNumero = _iNumero / iNumero;
                     if (sbTexto.Length > 0)
@@ -37,7 +37,7 @@ namespace Multicore.Negocio
         /// </summary>
         /// <param name="_iNumero">Numero que se evalua</param>
         /// <returns>Retorna tru si el numero efectivamente es primo</returns>
-        private bool primo(int _iNumero) 
+        private bool primo(int _iNumero, bool _bConcurrencia) 
         {
             int iContador = 0;
             
