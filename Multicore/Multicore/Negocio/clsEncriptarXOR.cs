@@ -14,14 +14,14 @@ namespace Multicore.Negocio
         /// Metodo que genera la clave necesaria para encriptar y desencriptar
         /// </summary>
         /// <returns>Retorna la clave creada aleatoriamente</returns>
-        public static string generarClave()
+        public static string generarClave(string txt)
         {
             string str="";
             
             Random random = new Random();
             
 
-            for (int i = 0; i < 50;i++ )
+            for (int i = 0; i < txt.Length;i++ )
             {
                 int rdm = random.Next(48, 126);
                 if (rdm > 57 && rdm < 65 || rdm > 90 && rdm < 97 || rdm > 122)
@@ -64,18 +64,7 @@ namespace Multicore.Negocio
         public static string encriptXORParalelo(string clave, string texto)
         {
             string encrip = "";
-            /*int i = 0;
-            Parallel.ForEach(texto,c=>
-            {
-                if (i >= clave.Length)
-                {
-                    i -= clave.Length;
-                }
-                int cl = Convert.ToInt16(clave[i]);
-                int _c = (int)c + cl;
-                encrip += ((char)_c);
-                i++;
-            });*/
+            
             int i = 0;
             Parallel.For(0, texto.Length, e =>
             {
@@ -114,7 +103,7 @@ namespace Multicore.Negocio
         public static string[] encriptarXOR(string txt, bool parallel)
         {
             string[] resultado = new string[2];
-            string clave = generarClave();
+            string clave = generarClave(txt);
             resultado[0] = clave;
             if (parallel == false)
             {

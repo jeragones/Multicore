@@ -158,7 +158,7 @@ namespace Multicore
                 System.IO.StreamReader sr = new System.IO.StreamReader(mensaje, System.Text.Encoding.Default);
                 texto = sr.ReadToEnd();
             }
-            res = clsEncriptarXOR.encriptarXOR(texto,true);
+            res = clsEncriptarXOR.encriptarXOR(texto,false);
 
             string fileNameEncriptado = (@"C:\Users\jdbr\Desktop\Encriptado_xor.cfr");
             string fileNameClave = (@"C:\Users\jdbr\Desktop\Clave_xor.sk");
