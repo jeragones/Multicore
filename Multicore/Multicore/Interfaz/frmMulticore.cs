@@ -158,7 +158,21 @@ namespace Multicore
                 System.IO.StreamReader sr = new System.IO.StreamReader(mensaje, System.Text.Encoding.Default);
                 texto = sr.ReadToEnd();
             }
-            res = clsEncriptarXOR.encriptarXOR(texto,true);
+            if (checkParallel.Checked)
+            {
+                var timer = Stopwatch.StartNew();
+                res = clsEncriptarXOR.encriptarXOR(texto, true);
+                timer.Stop();
+                labelresultado.Text = Convert.ToString(timer.Elapsed);
+            }
+            else
+            {
+                var timer = Stopwatch.StartNew();
+                res = clsEncriptarXOR.encriptarXOR(texto, false);
+                timer.Stop();
+                labelresultado.Text = Convert.ToString(timer.Elapsed);
+            }
+           
             string[] enc = (string[])res[1];
 
             string fileNameEncriptado = (@"C:\Users\jdbr\Desktop\Encriptado_xor.cfr");
@@ -170,12 +184,7 @@ namespace Multicore
             writerEncrip.Close();
             writerClave.Close();
         
-            /*
-            string s = clsEncriptarXOR.generarClave();
-            string en = clsEncriptarXOR.encriptXOR(s, "Daniel .-.,123456");
-            string des = clsEncriptarXOR.desencriptXOR(s, en);
-            */
-            
+                        
         }
 
         private void desencriptar_Click(object sender, EventArgs e)
@@ -195,8 +204,23 @@ namespace Multicore
                 System.IO.StreamReader sr = new System.IO.StreamReader(mensaje, System.Text.Encoding.UTF8);
                 texto = sr.ReadToEnd();
             }
+            string[] des=null;
+            if (checkParallel.Checked)
+            {
+                var timer = Stopwatch.StartNew();
+                des = clsEncriptarXOR.desencriptarXOR(clave, texto, true);
+            
+                timer.Stop();
+                labelresultado.Text = Convert.ToString(timer.Elapsed);
+            }
+            else
+            {
+                var timer = Stopwatch.StartNew();
+                des = clsEncriptarXOR.desencriptarXOR(clave, texto, false);
+                timer.Stop();
+                labelresultado.Text = Convert.ToString(timer.Elapsed);
+            }
 
-            string[] des=clsEncriptarXOR.desencriptarXOR(clave,texto,true);
             string fileNameEncriptado = (@"C:\Users\jdbr\Desktop\DesencriptadoXOR.txt");
            
             StreamWriter writerEncrip = File.CreateText(fileNameEncriptado);
@@ -207,10 +231,8 @@ namespace Multicore
             
         }
 
-        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        
+        
 
     }
 }

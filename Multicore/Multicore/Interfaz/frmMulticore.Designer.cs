@@ -28,23 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.opcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.normalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.paraleloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.análisisDeTextoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.encriptaciónDeTextoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.metodo1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.metodo2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ordenamientoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.factorizaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.temaLibreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlAnalisis = new System.Windows.Forms.Panel();
             this.btnAnalisis = new System.Windows.Forms.Button();
-            this.txtTexto = new System.Windows.Forms.TextBox();
             this.pnlAcciones = new System.Windows.Forms.Panel();
             this.txtPalabrasComunes = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -54,7 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblIdioma = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pnlEncriptacion = new System.Windows.Forms.Panel();
+            this.pnlEncriptacio = new System.Windows.Forms.Panel();
             this.desencriptar = new System.Windows.Forms.Button();
             this.cargarClave = new System.Windows.Forms.Button();
             this.encriptarXOR = new System.Windows.Forms.Button();
@@ -63,130 +47,13 @@
             this.labelresultado = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.btnEncriptar = new System.Windows.Forms.Button();
-            this.menuStrip1.SuspendLayout();
-            this.pnlAnalisis.SuspendLayout();
             this.pnlAcciones.SuspendLayout();
-            this.pnlEncriptacion.SuspendLayout();
+            this.pnlEncriptacio.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archivoToolStripMenuItem,
-            this.eToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(598, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // archivoToolStripMenuItem
-            // 
-            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.opcionesToolStripMenuItem,
-            this.salirToolStripMenuItem});
-            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.archivoToolStripMenuItem.Text = "Archivo";
-            // 
-            // opcionesToolStripMenuItem
-            // 
-            this.opcionesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.normalToolStripMenuItem,
-            this.paraleloToolStripMenuItem});
-            this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
-            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.opcionesToolStripMenuItem.Text = "Opciones";
-            // 
-            // normalToolStripMenuItem
-            // 
-            this.normalToolStripMenuItem.Name = "normalToolStripMenuItem";
-            this.normalToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.normalToolStripMenuItem.Text = "Normal";
-            // 
-            // paraleloToolStripMenuItem
-            // 
-            this.paraleloToolStripMenuItem.Name = "paraleloToolStripMenuItem";
-            this.paraleloToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.paraleloToolStripMenuItem.Text = "Paralelo";
-            // 
-            // salirToolStripMenuItem
-            // 
-            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.salirToolStripMenuItem.Text = "Salir";
-            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
-            // 
-            // eToolStripMenuItem
-            // 
-            this.eToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.análisisDeTextoToolStripMenuItem,
-            this.encriptaciónDeTextoToolStripMenuItem,
-            this.ordenamientoToolStripMenuItem,
-            this.factorizaciónToolStripMenuItem,
-            this.temaLibreToolStripMenuItem});
-            this.eToolStripMenuItem.Name = "eToolStripMenuItem";
-            this.eToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.eToolStripMenuItem.Text = "Tareas";
-            // 
-            // análisisDeTextoToolStripMenuItem
-            // 
-            this.análisisDeTextoToolStripMenuItem.Name = "análisisDeTextoToolStripMenuItem";
-            this.análisisDeTextoToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.análisisDeTextoToolStripMenuItem.Text = "Análisis de Texto";
-            // 
-            // encriptaciónDeTextoToolStripMenuItem
-            // 
-            this.encriptaciónDeTextoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.metodo1ToolStripMenuItem,
-            this.metodo2ToolStripMenuItem});
-            this.encriptaciónDeTextoToolStripMenuItem.Name = "encriptaciónDeTextoToolStripMenuItem";
-            this.encriptaciónDeTextoToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.encriptaciónDeTextoToolStripMenuItem.Text = "Encriptación de Texto";
-            // 
-            // metodo1ToolStripMenuItem
-            // 
-            this.metodo1ToolStripMenuItem.Name = "metodo1ToolStripMenuItem";
-            this.metodo1ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.metodo1ToolStripMenuItem.Text = "Metodo 1";
-            // 
-            // metodo2ToolStripMenuItem
-            // 
-            this.metodo2ToolStripMenuItem.Name = "metodo2ToolStripMenuItem";
-            this.metodo2ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.metodo2ToolStripMenuItem.Text = "Metodo 2";
-            // 
-            // ordenamientoToolStripMenuItem
-            // 
-            this.ordenamientoToolStripMenuItem.Name = "ordenamientoToolStripMenuItem";
-            this.ordenamientoToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.ordenamientoToolStripMenuItem.Text = "Ordenamiento";
-            // 
-            // factorizaciónToolStripMenuItem
-            // 
-            this.factorizaciónToolStripMenuItem.Name = "factorizaciónToolStripMenuItem";
-            this.factorizaciónToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.factorizaciónToolStripMenuItem.Text = "Factorización";
-            // 
-            // temaLibreToolStripMenuItem
-            // 
-            this.temaLibreToolStripMenuItem.Name = "temaLibreToolStripMenuItem";
-            this.temaLibreToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.temaLibreToolStripMenuItem.Text = "Tema Libre";
-            // 
-            // pnlAnalisis
-            // 
-            this.pnlAnalisis.Controls.Add(this.btnAnalisis);
-            this.pnlAnalisis.Controls.Add(this.txtTexto);
-            this.pnlAnalisis.Controls.Add(this.pnlAcciones);
-            this.pnlAnalisis.Location = new System.Drawing.Point(0, 27);
-            this.pnlAnalisis.Name = "pnlAnalisis";
-            this.pnlAnalisis.Size = new System.Drawing.Size(597, 354);
-            this.pnlAnalisis.TabIndex = 1;
             // 
             // btnAnalisis
             // 
-            this.btnAnalisis.Location = new System.Drawing.Point(510, 193);
+            this.btnAnalisis.Location = new System.Drawing.Point(493, 126);
             this.btnAnalisis.Name = "btnAnalisis";
             this.btnAnalisis.Size = new System.Drawing.Size(75, 23);
             this.btnAnalisis.TabIndex = 2;
@@ -194,17 +61,10 @@
             this.btnAnalisis.UseVisualStyleBackColor = true;
             this.btnAnalisis.Click += new System.EventHandler(this.btnAnalisis_Click);
             // 
-            // txtTexto
-            // 
-            this.txtTexto.Location = new System.Drawing.Point(12, 14);
-            this.txtTexto.Multiline = true;
-            this.txtTexto.Name = "txtTexto";
-            this.txtTexto.Size = new System.Drawing.Size(573, 173);
-            this.txtTexto.TabIndex = 1;
-            // 
             // pnlAcciones
             // 
             this.pnlAcciones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAcciones.Controls.Add(this.btnAnalisis);
             this.pnlAcciones.Controls.Add(this.txtPalabrasComunes);
             this.pnlAcciones.Controls.Add(this.label4);
             this.pnlAcciones.Controls.Add(this.lblCaracteres);
@@ -213,9 +73,9 @@
             this.pnlAcciones.Controls.Add(this.label2);
             this.pnlAcciones.Controls.Add(this.lblIdioma);
             this.pnlAcciones.Controls.Add(this.label1);
-            this.pnlAcciones.Location = new System.Drawing.Point(12, 222);
+            this.pnlAcciones.Location = new System.Drawing.Point(12, 12);
             this.pnlAcciones.Name = "pnlAcciones";
-            this.pnlAcciones.Size = new System.Drawing.Size(573, 124);
+            this.pnlAcciones.Size = new System.Drawing.Size(573, 154);
             this.pnlAcciones.TabIndex = 0;
             // 
             // txtPalabrasComunes
@@ -295,26 +155,27 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Idioma:";
             // 
-            // pnlEncriptacion
+            // pnlEncriptacio
             // 
-            this.pnlEncriptacion.Controls.Add(this.desencriptar);
-            this.pnlEncriptacion.Controls.Add(this.cargarClave);
-            this.pnlEncriptacion.Controls.Add(this.encriptarXOR);
-            this.pnlEncriptacion.Controls.Add(this.btnDesencriptar);
-            this.pnlEncriptacion.Controls.Add(this.checkParallel);
-            this.pnlEncriptacion.Controls.Add(this.labelresultado);
-            this.pnlEncriptacion.Controls.Add(this.label6);
-            this.pnlEncriptacion.Controls.Add(this.btnEncriptar);
-            this.pnlEncriptacion.Location = new System.Drawing.Point(12, 387);
-            this.pnlEncriptacion.Name = "pnlEncriptacion";
-            this.pnlEncriptacion.Size = new System.Drawing.Size(573, 120);
-            this.pnlEncriptacion.TabIndex = 2;
+            this.pnlEncriptacio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlEncriptacio.Controls.Add(this.desencriptar);
+            this.pnlEncriptacio.Controls.Add(this.cargarClave);
+            this.pnlEncriptacio.Controls.Add(this.btnEncriptar);
+            this.pnlEncriptacio.Controls.Add(this.encriptarXOR);
+            this.pnlEncriptacio.Controls.Add(this.btnDesencriptar);
+            this.pnlEncriptacio.Controls.Add(this.checkParallel);
+            this.pnlEncriptacio.Controls.Add(this.labelresultado);
+            this.pnlEncriptacio.Controls.Add(this.label6);
+            this.pnlEncriptacio.Location = new System.Drawing.Point(12, 172);
+            this.pnlEncriptacio.Name = "pnlEncriptacio";
+            this.pnlEncriptacio.Size = new System.Drawing.Size(573, 136);
+            this.pnlEncriptacio.TabIndex = 2;
             // 
             // desencriptar
             // 
-            this.desencriptar.Location = new System.Drawing.Point(429, 70);
+            this.desencriptar.Location = new System.Drawing.Point(15, 93);
             this.desencriptar.Name = "desencriptar";
-            this.desencriptar.Size = new System.Drawing.Size(86, 23);
+            this.desencriptar.Size = new System.Drawing.Size(107, 23);
             this.desencriptar.TabIndex = 14;
             this.desencriptar.Text = "Desencriptar XOR";
             this.desencriptar.UseVisualStyleBackColor = true;
@@ -322,9 +183,9 @@
             // 
             // cargarClave
             // 
-            this.cargarClave.Location = new System.Drawing.Point(429, 41);
+            this.cargarClave.Location = new System.Drawing.Point(15, 64);
             this.cargarClave.Name = "cargarClave";
-            this.cargarClave.Size = new System.Drawing.Size(86, 23);
+            this.cargarClave.Size = new System.Drawing.Size(107, 23);
             this.cargarClave.TabIndex = 13;
             this.cargarClave.Text = "Cargar Clave";
             this.cargarClave.UseVisualStyleBackColor = true;
@@ -332,9 +193,9 @@
             // 
             // encriptarXOR
             // 
-            this.encriptarXOR.Location = new System.Drawing.Point(429, 12);
+            this.encriptarXOR.Location = new System.Drawing.Point(15, 35);
             this.encriptarXOR.Name = "encriptarXOR";
-            this.encriptarXOR.Size = new System.Drawing.Size(86, 23);
+            this.encriptarXOR.Size = new System.Drawing.Size(107, 23);
             this.encriptarXOR.TabIndex = 12;
             this.encriptarXOR.Text = "Encriptar XOR";
             this.encriptarXOR.UseVisualStyleBackColor = true;
@@ -342,11 +203,11 @@
             // 
             // btnDesencriptar
             // 
-            this.btnDesencriptar.Location = new System.Drawing.Point(16, 65);
+            this.btnDesencriptar.Location = new System.Drawing.Point(128, 65);
             this.btnDesencriptar.Name = "btnDesencriptar";
-            this.btnDesencriptar.Size = new System.Drawing.Size(75, 23);
+            this.btnDesencriptar.Size = new System.Drawing.Size(106, 23);
             this.btnDesencriptar.TabIndex = 11;
-            this.btnDesencriptar.Text = "Desencriptar";
+            this.btnDesencriptar.Text = "Desencriptar Cesar";
             this.btnDesencriptar.UseVisualStyleBackColor = true;
             this.btnDesencriptar.Click += new System.EventHandler(this.btnDesencriptar_Click);
             // 
@@ -379,11 +240,11 @@
             // 
             // btnEncriptar
             // 
-            this.btnEncriptar.Location = new System.Drawing.Point(16, 36);
+            this.btnEncriptar.Location = new System.Drawing.Point(128, 35);
             this.btnEncriptar.Name = "btnEncriptar";
-            this.btnEncriptar.Size = new System.Drawing.Size(75, 23);
+            this.btnEncriptar.Size = new System.Drawing.Size(106, 23);
             this.btnEncriptar.TabIndex = 3;
-            this.btnEncriptar.Text = "Encriptar";
+            this.btnEncriptar.Text = "Encriptar Cesar";
             this.btnEncriptar.UseVisualStyleBackColor = true;
             this.btnEncriptar.Click += new System.EventHandler(this.btnEncriptar_Click);
             // 
@@ -391,55 +252,23 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(598, 520);
-            this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pnlAnalisis);
-            this.Controls.Add(this.pnlEncriptacion);
-            this.MainMenuStrip = this.menuStrip1;
+            this.ClientSize = new System.Drawing.Size(594, 520);
+            this.Controls.Add(this.pnlEncriptacio);
+            this.Controls.Add(this.pnlAcciones);
             this.Name = "frmMulticore";
             this.Text = "Ejecuciones Paralelas";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.pnlAnalisis.ResumeLayout(false);
-            this.pnlAnalisis.PerformLayout();
             this.pnlAcciones.ResumeLayout(false);
             this.pnlAcciones.PerformLayout();
-            this.pnlEncriptacion.ResumeLayout(false);
-            this.pnlEncriptacion.PerformLayout();
+            this.pnlEncriptacio.ResumeLayout(false);
+            this.pnlEncriptacio.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem análisisDeTextoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem encriptaciónDeTextoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ordenamientoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem factorizaciónToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem temaLibreToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem metodo1ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem metodo2ToolStripMenuItem;
-        private System.Windows.Forms.Panel pnlAnalisis;
-        private System.Windows.Forms.TextBox txtTexto;
-        private System.Windows.Forms.Panel pnlAcciones;
-        private System.Windows.Forms.Label lblIdioma;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtPalabrasComunes;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblCaracteres;
-        private System.Windows.Forms.Label lblPalabras;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ToolStripMenuItem opcionesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem normalToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem paraleloToolStripMenuItem;
         private System.Windows.Forms.Button btnAnalisis;
-        private System.Windows.Forms.Panel pnlEncriptacion;
+        private System.Windows.Forms.Panel pnlEncriptacio;
         private System.Windows.Forms.Button btnEncriptar;
         private System.Windows.Forms.Label labelresultado;
         private System.Windows.Forms.Label label6;
@@ -448,6 +277,15 @@
         private System.Windows.Forms.Button cargarClave;
         private System.Windows.Forms.Button encriptarXOR;
         private System.Windows.Forms.Button desencriptar;
+        private System.Windows.Forms.Panel pnlAcciones;
+        private System.Windows.Forms.TextBox txtPalabrasComunes;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblCaracteres;
+        private System.Windows.Forms.Label lblPalabras;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblIdioma;
+        private System.Windows.Forms.Label label1;
     }
 }
 
