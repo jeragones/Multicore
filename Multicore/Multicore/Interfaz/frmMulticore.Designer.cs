@@ -55,6 +55,7 @@
             this.lblIdioma = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlEncriptacion = new System.Windows.Forms.Panel();
+            this.desencriptar = new System.Windows.Forms.Button();
             this.cargarClave = new System.Windows.Forms.Button();
             this.encriptarXOR = new System.Windows.Forms.Button();
             this.btnDesencriptar = new System.Windows.Forms.Button();
@@ -62,7 +63,6 @@
             this.labelresultado = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.btnEncriptar = new System.Windows.Forms.Button();
-            this.desencriptar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnlAnalisis.SuspendLayout();
             this.pnlAcciones.SuspendLayout();
@@ -95,7 +95,7 @@
             this.normalToolStripMenuItem,
             this.paraleloToolStripMenuItem});
             this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
-            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.opcionesToolStripMenuItem.Text = "Opciones";
             // 
             // normalToolStripMenuItem
@@ -113,8 +113,9 @@
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.salirToolStripMenuItem.Text = "Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // eToolStripMenuItem
             // 
@@ -309,6 +310,16 @@
             this.pnlEncriptacion.Size = new System.Drawing.Size(573, 120);
             this.pnlEncriptacion.TabIndex = 2;
             // 
+            // desencriptar
+            // 
+            this.desencriptar.Location = new System.Drawing.Point(429, 70);
+            this.desencriptar.Name = "desencriptar";
+            this.desencriptar.Size = new System.Drawing.Size(86, 23);
+            this.desencriptar.TabIndex = 14;
+            this.desencriptar.Text = "Desencriptar XOR";
+            this.desencriptar.UseVisualStyleBackColor = true;
+            this.desencriptar.Click += new System.EventHandler(this.desencriptar_Click);
+            // 
             // cargarClave
             // 
             this.cargarClave.Location = new System.Drawing.Point(429, 41);
@@ -375,16 +386,6 @@
             this.btnEncriptar.Text = "Encriptar";
             this.btnEncriptar.UseVisualStyleBackColor = true;
             this.btnEncriptar.Click += new System.EventHandler(this.btnEncriptar_Click);
-            // 
-            // desencriptar
-            // 
-            this.desencriptar.Location = new System.Drawing.Point(429, 70);
-            this.desencriptar.Name = "desencriptar";
-            this.desencriptar.Size = new System.Drawing.Size(86, 23);
-            this.desencriptar.TabIndex = 14;
-            this.desencriptar.Text = "Desencriptar XOR";
-            this.desencriptar.UseVisualStyleBackColor = true;
-            this.desencriptar.Click += new System.EventHandler(this.desencriptar_Click);
             // 
             // frmMulticore
             // 

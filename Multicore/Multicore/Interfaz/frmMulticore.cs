@@ -145,7 +145,7 @@ namespace Multicore
         {
             string mensaje = "";
             string texto = "";
-            string[] res = null;
+            List<object> res = null;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Archivos txt|*.txt";
             openFileDialog.FileName = "Seleccione un archivo";
@@ -158,13 +158,14 @@ namespace Multicore
                 System.IO.StreamReader sr = new System.IO.StreamReader(mensaje, System.Text.Encoding.Default);
                 texto = sr.ReadToEnd();
             }
-            res = clsEncriptarXOR.encriptarXOR(texto,false);
+            res = clsEncriptarXOR.encriptarXOR(texto,true);
+            string[] enc = (string[])res[1];
 
             string fileNameEncriptado = (@"C:\Users\jdbr\Desktop\Encriptado_xor.cfr");
             string fileNameClave = (@"C:\Users\jdbr\Desktop\Clave_xor.sk");
             StreamWriter writerEncrip = File.CreateText(fileNameEncriptado);
             StreamWriter writerClave = File.CreateText(fileNameClave);
-            writerEncrip.Write(res[1]);
+            writerEncrip.Write(string.Join(" ",enc));
             writerClave.Write(res[0]);
             writerEncrip.Close();
             writerClave.Close();
@@ -195,15 +196,20 @@ namespace Multicore
                 texto = sr.ReadToEnd();
             }
 
-            string des=clsEncriptarXOR.desencriptXOR(clave,texto);
+            string[] des=clsEncriptarXOR.desencriptarXOR(clave,texto,true);
             string fileNameEncriptado = (@"C:\Users\jdbr\Desktop\DesencriptadoXOR.txt");
            
             StreamWriter writerEncrip = File.CreateText(fileNameEncriptado);
             
-            writerEncrip.WriteLine(des);
+            writerEncrip.WriteLine(string.Join(" ",des));
             
             writerEncrip.Close();
             
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
     }
