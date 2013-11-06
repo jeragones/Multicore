@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Multicore.Negocio
 {
@@ -74,14 +75,14 @@ namespace Multicore.Negocio
         /// </summary>
         /// <param name="_sTexto">Texto que se debe analizar</param>
         /// <param name="_bConcurrencia">Bandera que indica si se debe analizar con procesamiento concurrente o no</param>
-        public void analizarTexto(string _sTexto, bool _bConcurrencia)
+        public string analizarTexto(bool _bConcurrencia)
         {
             string sPath = Directory.GetParent(Path.GetDirectoryName(Application.StartupPath)).FullName + "\\Datos\\diccionario.txt";
             clsArchivo insArvhivo = new clsArchivo();
             string[] asIdiomas = insArvhivo.cargarArchivo(sPath).Split(new char[] { '\n' });
             LinkedList<object[]> lsIdiomas = new LinkedList<object[]>();
-            string[] asPalabras = _sTexto.Split(new char[] { ' ' });
-            
+            string[] asPalabras = insArvhivo.cargarArchivos().Split(new char[] { ' ' });
+            var vTiempo = Stopwatch.StartNew();
             iCantidadPalabras = asPalabras.Length;
             object[,] moIdiomas = null;
             List<object[]> comunes = null;
@@ -148,6 +149,8 @@ namespace Multicore.Negocio
             identificarIdioma(moIdiomas);
             var lsPalabras = comunes.OrderByDescending(x => x[1]).ToList();
             loPalabrasComunes = new List<object[]>(lsPalabras);
+            vTiempo.Stop();
+            return Convert.ToString(vTiempo.Elapsed);
         }
 
         /// <summary>

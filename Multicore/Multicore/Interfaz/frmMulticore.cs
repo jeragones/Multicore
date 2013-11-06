@@ -26,9 +26,12 @@ namespace Multicore
         private void btnAnalisis_Click(object sender, EventArgs e)
         {
             clsAnalisisTexto insAnalisisTexto = new clsAnalisisTexto();
-            borreme form = new borreme();
-            form.Show();
-
+            
+            labelresultado.Text = insAnalisisTexto.analizarTexto(checkParallel.Checked);
+            lblCaracteres.Text = insAnalisisTexto.getCantidadCaracteres();
+            lblIdioma.Text = insAnalisisTexto.getIdioma();
+            lblPalabras.Text = insAnalisisTexto.getCantidadPalagras();
+            txtPalabrasComunes.Text = insAnalisisTexto.getPalabrasComunes().ToString();
         }
 
         private void btnEncriptar_Click(object sender, EventArgs e)
@@ -231,8 +234,56 @@ namespace Multicore
             
         }
 
-        
-        
+        private void btnQuickSort_Click(object sender, EventArgs e)
+        {
+            if (checkParallel.Checked)
+            {
+                if (chkOrden.Checked)
+                    labelresultado.Text = clsQuickSort.quickSort(0, false, true);
+                else
+                    labelresultado.Text = clsQuickSort.quickSort(0, true, true);
+            }
+            else
+            {
+                if (chkOrden.Checked)
+                    labelresultado.Text = clsQuickSort.quickSort(0, false, false);
+                else
+                    labelresultado.Text = clsQuickSort.quickSort(0, true, false);
+            }
+        }
 
+        private void btnMergeSort_Click(object sender, EventArgs e)
+        {
+            if (checkParallel.Checked)
+            {
+                if (chkOrden.Checked)
+                    labelresultado.Text = clsMergeSort.mergeSort(0, false, true);
+                else
+                    labelresultado.Text = clsMergeSort.mergeSort(0, true, true);
+            }
+            else 
+            {
+                if (chkOrden.Checked)
+                    labelresultado.Text = clsMergeSort.mergeSort(0, false, false);
+                else
+                    labelresultado.Text = clsMergeSort.mergeSort(0, true, false);
+            }
+        }
+
+        private void btnNumeros_Click(object sender, EventArgs e)
+        {
+            clsNumero insNumero = new clsNumero();
+            var timer = Stopwatch.StartNew();
+            if (checkParallel.Checked)
+            {
+                lblNumeros.Text = insNumero.numerosPrimos(Convert.ToInt16(txtNumero.Text), true).ToString();
+            }
+            else
+            {
+                lblNumeros.Text = insNumero.numerosPrimos(Convert.ToInt16(txtNumero.Text), false).ToString();
+            }
+            timer.Stop();
+            labelresultado.Text = Convert.ToString(timer.Elapsed);
+        }
     }
 }

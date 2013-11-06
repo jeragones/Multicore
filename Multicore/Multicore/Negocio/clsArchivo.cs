@@ -35,6 +35,26 @@ namespace Multicore.Negocio
         /// <summary>
         /// Carga archivos de texto del explorador
         /// </summary>
+        /// <returns>Informacion que contiene el archivo</returns>
+        public string cargarArchivos()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Archivos txt|*.txt";
+            openFileDialog.Title = "Cargar Archivo";
+            openFileDialog.ShowDialog();
+            if (openFileDialog.FileName != "")
+            {
+                StreamReader srFile = new StreamReader(openFileDialog.OpenFile(), Encoding.UTF8);
+                string sTexto = srFile.ReadToEnd();
+                srFile.Close();
+                return sTexto;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Carga archivos de texto del explorador
+        /// </summary>
         /// <param name="_sPath">Direccion del archivo</param>
         /// <returns>Informacion que contiene el archivo</returns>
         public string cargarArchivo(string _sPath)

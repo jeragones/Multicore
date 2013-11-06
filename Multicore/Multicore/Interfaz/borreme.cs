@@ -63,8 +63,8 @@ namespace Multicore.Interfaz
 
 
 
-            clsNumero insNumero = new clsNumero();
-            StringBuilder mm = insNumero.numerosPrimos(350);
+            //clsNumero insNumero = new clsNumero();
+            //StringBuilder mm = insNumero.numerosPrimos(350);
 
             int ss = 0;
 
@@ -80,10 +80,10 @@ namespace Multicore.Interfaz
 
 
 
-            //clsAnalisisTexto insAnalisisTexto = new clsAnalisisTexto();
+            clsAnalisisTexto insAnalisisTexto = new clsAnalisisTexto();
 
             //var timer2 = Stopwatch.StartNew();
-            //insAnalisisTexto.analizarTexto(true);
+            insAnalisisTexto.analizarTexto(true);
             //timer2.Stop();
 
             //var timer3 = Stopwatch.StartNew();

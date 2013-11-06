@@ -39,14 +39,22 @@
             this.lblIdioma = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlEncriptacio = new System.Windows.Forms.Panel();
+            this.btnMergeSort = new System.Windows.Forms.Button();
+            this.btnQuickSort = new System.Windows.Forms.Button();
             this.desencriptar = new System.Windows.Forms.Button();
             this.cargarClave = new System.Windows.Forms.Button();
+            this.btnEncriptar = new System.Windows.Forms.Button();
             this.encriptarXOR = new System.Windows.Forms.Button();
             this.btnDesencriptar = new System.Windows.Forms.Button();
             this.checkParallel = new System.Windows.Forms.CheckBox();
             this.labelresultado = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnEncriptar = new System.Windows.Forms.Button();
+            this.chkOrden = new System.Windows.Forms.CheckBox();
+            this.btnNumeros = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblNumeros = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtNumero = new System.Windows.Forms.TextBox();
             this.pnlAcciones.SuspendLayout();
             this.pnlEncriptacio.SuspendLayout();
             this.SuspendLayout();
@@ -158,6 +166,14 @@
             // pnlEncriptacio
             // 
             this.pnlEncriptacio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlEncriptacio.Controls.Add(this.txtNumero);
+            this.pnlEncriptacio.Controls.Add(this.label7);
+            this.pnlEncriptacio.Controls.Add(this.lblNumeros);
+            this.pnlEncriptacio.Controls.Add(this.label5);
+            this.pnlEncriptacio.Controls.Add(this.btnNumeros);
+            this.pnlEncriptacio.Controls.Add(this.chkOrden);
+            this.pnlEncriptacio.Controls.Add(this.btnMergeSort);
+            this.pnlEncriptacio.Controls.Add(this.btnQuickSort);
             this.pnlEncriptacio.Controls.Add(this.desencriptar);
             this.pnlEncriptacio.Controls.Add(this.cargarClave);
             this.pnlEncriptacio.Controls.Add(this.btnEncriptar);
@@ -170,6 +186,26 @@
             this.pnlEncriptacio.Name = "pnlEncriptacio";
             this.pnlEncriptacio.Size = new System.Drawing.Size(573, 136);
             this.pnlEncriptacio.TabIndex = 2;
+            // 
+            // btnMergeSort
+            // 
+            this.btnMergeSort.Location = new System.Drawing.Point(240, 65);
+            this.btnMergeSort.Name = "btnMergeSort";
+            this.btnMergeSort.Size = new System.Drawing.Size(106, 23);
+            this.btnMergeSort.TabIndex = 16;
+            this.btnMergeSort.Text = "Ordenar MergeSort";
+            this.btnMergeSort.UseVisualStyleBackColor = true;
+            this.btnMergeSort.Click += new System.EventHandler(this.btnMergeSort_Click);
+            // 
+            // btnQuickSort
+            // 
+            this.btnQuickSort.Location = new System.Drawing.Point(240, 36);
+            this.btnQuickSort.Name = "btnQuickSort";
+            this.btnQuickSort.Size = new System.Drawing.Size(106, 23);
+            this.btnQuickSort.TabIndex = 15;
+            this.btnQuickSort.Text = "Ordenar QuickSort";
+            this.btnQuickSort.UseVisualStyleBackColor = true;
+            this.btnQuickSort.Click += new System.EventHandler(this.btnQuickSort_Click);
             // 
             // desencriptar
             // 
@@ -190,6 +226,16 @@
             this.cargarClave.Text = "Cargar Clave";
             this.cargarClave.UseVisualStyleBackColor = true;
             this.cargarClave.Click += new System.EventHandler(this.encriptDesencript_Click);
+            // 
+            // btnEncriptar
+            // 
+            this.btnEncriptar.Location = new System.Drawing.Point(128, 35);
+            this.btnEncriptar.Name = "btnEncriptar";
+            this.btnEncriptar.Size = new System.Drawing.Size(106, 23);
+            this.btnEncriptar.TabIndex = 3;
+            this.btnEncriptar.Text = "Encriptar Cesar";
+            this.btnEncriptar.UseVisualStyleBackColor = true;
+            this.btnEncriptar.Click += new System.EventHandler(this.btnEncriptar_Click);
             // 
             // encriptarXOR
             // 
@@ -238,15 +284,61 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "Tiempo de Ejecucuión:";
             // 
-            // btnEncriptar
+            // chkOrden
             // 
-            this.btnEncriptar.Location = new System.Drawing.Point(128, 35);
-            this.btnEncriptar.Name = "btnEncriptar";
-            this.btnEncriptar.Size = new System.Drawing.Size(106, 23);
-            this.btnEncriptar.TabIndex = 3;
-            this.btnEncriptar.Text = "Encriptar Cesar";
-            this.btnEncriptar.UseVisualStyleBackColor = true;
-            this.btnEncriptar.Click += new System.EventHandler(this.btnEncriptar_Click);
+            this.chkOrden.AutoSize = true;
+            this.chkOrden.Location = new System.Drawing.Point(240, 94);
+            this.chkOrden.Name = "chkOrden";
+            this.chkOrden.Size = new System.Drawing.Size(83, 17);
+            this.chkOrden.TabIndex = 17;
+            this.chkOrden.Text = "Ascendente";
+            this.chkOrden.UseVisualStyleBackColor = true;
+            // 
+            // btnNumeros
+            // 
+            this.btnNumeros.Location = new System.Drawing.Point(352, 36);
+            this.btnNumeros.Name = "btnNumeros";
+            this.btnNumeros.Size = new System.Drawing.Size(106, 23);
+            this.btnNumeros.TabIndex = 18;
+            this.btnNumeros.Text = "Numeros Primos";
+            this.btnNumeros.UseVisualStyleBackColor = true;
+            this.btnNumeros.Click += new System.EventHandler(this.btnNumeros_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label5.Location = new System.Drawing.Point(352, 65);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(52, 13);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Números:";
+            // 
+            // lblNumeros
+            // 
+            this.lblNumeros.AutoSize = true;
+            this.lblNumeros.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lblNumeros.Location = new System.Drawing.Point(410, 65);
+            this.lblNumeros.Name = "lblNumeros";
+            this.lblNumeros.Size = new System.Drawing.Size(0, 13);
+            this.lblNumeros.TabIndex = 3;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label7.Location = new System.Drawing.Point(352, 93);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(47, 13);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Número:";
+            // 
+            // txtNumero
+            // 
+            this.txtNumero.Location = new System.Drawing.Point(405, 90);
+            this.txtNumero.Name = "txtNumero";
+            this.txtNumero.Size = new System.Drawing.Size(100, 20);
+            this.txtNumero.TabIndex = 20;
             // 
             // frmMulticore
             // 
@@ -286,6 +378,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblIdioma;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnQuickSort;
+        private System.Windows.Forms.Button btnMergeSort;
+        private System.Windows.Forms.CheckBox chkOrden;
+        private System.Windows.Forms.Label lblNumeros;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnNumeros;
+        private System.Windows.Forms.TextBox txtNumero;
+        private System.Windows.Forms.Label label7;
     }
 }
 
