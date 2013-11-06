@@ -7,21 +7,23 @@ using System.Threading.Tasks;
 
 namespace Multicore.Negocio
 {
+    
     class clsEncriptarXOR
     {
         
         /// <summary>
         /// Metodo que genera la clave necesaria para encriptar y desencriptar
         /// </summary>
+        /// <param name="_sTxt">Texto que se desea encriptar</param>
         /// <returns>Retorna la clave creada aleatoriamente</returns>
-        private static string generarClave(string txt)
+        private static string generarClave(string _sTxt)
         {
             string str="";
             
             Random random = new Random();
             
 
-            for (int i = 0; i < txt.Length;i++ )
+            for (int i = 0; i < _sTxt.Length;i++ )
             {
                 int rdm = random.Next(48, 126);
                 if (rdm > 57 && rdm < 65 || rdm > 90 && rdm < 97 || rdm > 122)
@@ -40,19 +42,19 @@ namespace Multicore.Negocio
         /// <summary>
         /// Metodo que encripta de forma secuencial un texto mediante convinacion XOR 
         /// </summary>
-        /// <param name="clave">Clave necesaria para encriptar y desencriptar</param>
-        /// <param name="texto">Texto que se desea encriptar</param>
+        /// <param name="_sClave">Clave necesaria para encriptar y desencriptar</param>
+        /// <param name="_sTexto">Texto que se desea encriptar</param>
         /// <returns>Retorna el texto encriptado</returns>
-     private static string[] encriptXORSecuencial(string clave, string texto)
+     private static string[] encriptXORSecuencial(string _sClave, string _sTexto)
         {
-            string[] words = texto.Split(' ');
+            string[] words = _sTexto.Split(' ');
             for (int e = 0; e < words.Length; e++)
             {
                 int i = 0;
                 string nWord = "";
                 foreach (char c in words[e])
                 {
-                    int cl = Convert.ToInt16(clave[i]);
+                    int cl = Convert.ToInt16(_sClave[i]);
                     int _c = (int)c + cl;
                     nWord += ((char)_c);
                     i++;
@@ -62,16 +64,22 @@ namespace Multicore.Negocio
             return words;
         }
 
-     private static string[] desencriptXORSecuencial(string clave, string texto)
+        /// <summary>
+        /// Metodo que desencripta de forma secuencial un texto mediante convinacion XOR
+        /// </summary>
+        /// <param name="_sClave">Clave necesaria para desencriptar</param>
+        /// <param name="_sTexto">Texto que se desencriptara</param>
+        /// <returns>Retorna un arreglo de strings con las palabras del texto ya desencriptadas</returns>
+     private static string[] desencriptXORSecuencial(string _sClave, string _sTexto)
      {
-         string[] words = texto.Split(' ');
+         string[] words = _sTexto.Split(' ');
          for (int e = 0; e < words.Length; e++)
          {
              int i = 0;
              string nWord = "";
              foreach (char c in words[e])
              {
-                 int cl = Convert.ToInt16(clave[i]);
+                 int cl = Convert.ToInt16(_sClave[i]);
                  int _c = (int)c - cl;
                  nWord += ((char)_c);
                  i++;
@@ -81,16 +89,22 @@ namespace Multicore.Negocio
          return words;
      }
 
-     private static string[] encriptXORParalelo(string clave, string texto)
+        /// <summary>
+        /// Metodo que encripta un texto de forma paralela mediante convinacion XOR
+        /// </summary>
+        /// <param name="_sClave">Clave necesaria para encriptar el texto</param>
+        /// <param name="_sTexto">Texto que se desea encriptar</param>
+        /// <returns>Retorna un arreglo de strings con las palabras encriptadas</returns>
+     private static string[] encriptXORParalelo(string _sClave, string _sTexto)
      {
-         string[] words = texto.Split(' ');
+         string[] words = _sTexto.Split(' ');
          Parallel.For(0, words.Length, e =>
          {
              int i = 0;
              string nWord = "";
              foreach (char c in words[e])
              {
-                 int cl = Convert.ToInt16(clave[i]);
+                 int cl = Convert.ToInt16(_sClave[i]);
                  int _c = (int)c + cl;
                  nWord += ((char)_c);
                  i++;
@@ -101,16 +115,22 @@ namespace Multicore.Negocio
          return words;
      }
 
-     private static string[] desencriptXORParalelo(string clave, string texto)
+     /// <summary>
+     /// Metodo que desencripta de forma paralela un texto mediante convinacion XOR
+     /// </summary>
+     /// <param name="_sClave">Clave necesaria para desencriptar</param>
+     /// <param name="_sTexto">Texto que se desencriptara</param>
+     /// <returns>Retorna un arreglo de strings con las palabras del texto ya desencriptadas</returns>
+     private static string[] desencriptXORParalelo(string _sClave, string _sTexto)
      {
-         string[] words = texto.Split(' ');
+         string[] words = _sTexto.Split(' ');
          Parallel.For(0, words.Length, e =>
          {
              int i = 0;
              string nWord = "";
              foreach (char c in words[e])
              {
-                 int cl = Convert.ToInt16(clave[i]);
+                 int cl = Convert.ToInt16(_sClave[i]);
                  int _c = (int)c - cl;
                  nWord += ((char)_c);
                  i++;
@@ -123,23 +143,28 @@ namespace Multicore.Negocio
 
               
         
-        
-        public static List<object> encriptarXOR(string txt, bool parallel)
+        /// <summary>
+        /// Metodo principal para encriptar un texto mediante convinacion XOR
+        /// </summary>
+        /// <param name="_sTxt">Texto que se desea encriptar</param>
+        /// <param name="_bParallel">Bandera que indica la forma de ejecución, true = paralelo y false = secuencial</param>
+        /// <returns>Retorna un lista de objetos, en esta se encuentra la clave y el texto encriptado</returns>
+        public static List<object> encriptarXOR(string _sTxt, bool _bParallel)
         {
             
-            string clave = generarClave(txt);
+            string clave = generarClave(_sTxt);
             string[] mensaje = null;
             
-            if (parallel == false)
+            if (_bParallel == false)
             {
-                
-                mensaje = encriptXORSecuencial(clave, txt);
+
+                mensaje = encriptXORSecuencial(clave, _sTxt);
                 
                 
             }
-            else if (parallel == true)
+            else if (_bParallel == true)
             {
-                mensaje = encriptXORParalelo(clave, txt);
+                mensaje = encriptXORParalelo(clave, _sTxt);
                 
             }
             List<object> resultado = new List<object>() {clave,mensaje};
@@ -147,22 +172,28 @@ namespace Multicore.Negocio
 
         }
 
-        public static string[] desencriptarXOR(string clave,string txt, bool parallel)
+        /// <summary>
+        /// Metodo principal para desencriptar un texto mediante convinacion XOR
+        /// </summary>
+        /// <param name="_sTxt">Texto que se desea desencriptar</param>
+        /// <param name="_bParallel">Bandera que indica la forma de ejecución, true = paralelo y false = secuencial</param>
+        /// <returns>Retorna un lista de objetos, en esta se encuentra la clave y el texto desencriptado</returns>
+        public static string[] desencriptarXOR(string _sClave,string _sTxt, bool _bParallel)
         {
 
             
             string[] mensaje = null;
 
-            if (parallel == false)
+            if (_bParallel == false)
             {
 
-                mensaje = desencriptXORSecuencial(clave, txt);
+                mensaje = desencriptXORSecuencial(_sClave, _sTxt);
 
 
             }
-            else if (parallel == true)
+            else if (_bParallel == true)
             {
-                mensaje = desencriptXORParalelo(clave, txt);
+                mensaje = desencriptXORParalelo(_sClave, _sTxt);
 
             }
             

@@ -20,19 +20,19 @@ namespace Multicore.Negocio
         /// <param name="texto"> Texto que se desea encriptar </param>
         /// <param name="salto"> Numero de saltos entre los caragteres de la tabla ascii</param>
         /// <returns>Retorna el mensaje encriptado</returns>
-        public static string encriptarCesar_Secuencial(string texto,int salto)
+        public static string encriptarCesar_Secuencial(string _sTexto,int _iSalto)
         {
             //texto encriptado
             string encriptado="";
             //valor ascii de la letra a cambiar
             int letra;
-            for (int i = 0; i < texto.Length; i++)
+            for (int i = 0; i < _sTexto.Length; i++)
             {
-                int carac=Convert.ToInt32(texto[i]);
+                int carac = Convert.ToInt32(_sTexto[i]);
                 if (carac > 64 && carac < 91 || carac > 96 && carac < 123)
                 {
                     //obtiene el valor ascii
-                    letra = Convert.ToInt32(texto[i]) + salto;
+                    letra = Convert.ToInt32(_sTexto[i]) + _iSalto;
                     //pasa de Z a A 
                     if (letra > 90 && letra <90 ||letra > 122)
                     {
@@ -53,22 +53,22 @@ namespace Multicore.Negocio
         /// <summary>
         /// Metodo de cifrado por sustitucion Paralelo(Cifrado Cesar)
         /// </summary>
-        /// <param name="texto"> Texto que se desea encriptar </param>
-        /// <param name="salto"> Numero de saltos entre los caragteres de la tabla ascii</param>
+        /// <param name="_sTexto"> Texto que se desea encriptar </param>
+        /// <param name="_iSalto"> Numero de saltos entre los caragteres de la tabla ascii</param>
         /// <returns>Retorna el mensaje encriptado</returns>
-        public static string encriptarCesar_Parallel(string texto, int salto)
+        public static string encriptarCesar_Parallel(string _sTexto, int _iSalto)
         {
             //texto encriptado
             string encriptado = "";
             //valor ascii de la letra a cambiar
             int letra;
-            Parallel.For(0, texto.Length, i =>
+            Parallel.For(0, _sTexto.Length, i =>
             {
-                int carac = Convert.ToInt32(texto[i]);
+                int carac = Convert.ToInt32(_sTexto[i]);
                 if (carac > 64 && carac < 91 || carac > 96 && carac < 123)
                 {
                     //obtiene el valor ascii
-                    letra = Convert.ToInt32(texto[i]) + salto;
+                    letra = Convert.ToInt32(_sTexto[i]) + _iSalto;
                     //pasa de Z a A 
                     if (letra > 90 && letra < 97 || letra > 122)
                     {
@@ -90,106 +90,106 @@ namespace Multicore.Negocio
         /// <summary>
         /// Metodo que encripta un texto por medio del cifrado cesar, se ejecuta de forma paralela o secuancial esto depende de una bandera que indica el modo de ejecucion
         /// </summary>
-        /// <param name="texto">Texto que sera encriptado</param>
-        /// <param name="salto">Numero de saltos que se necesitan para encriptar</param>
-        /// <param name="parallel">Bandera que indica si la encriptacion sera de forma paralela o secuencial</param>
+        /// <param name="_sTexto">Texto que sera encriptado</param>
+        /// <param name="_iSalto">Numero de saltos que se necesitan para encriptar</param>
+        /// <param name="_bParallel">Bandera que indica si la encriptacion sera de forma paralela o secuencial</param>
         /// <returns>Retorna el mensaje encriptado</returns>
-        public static string encriptCesar(string texto, int salto, bool parallel)
+        public static string encriptCesar(string _sTexto, int _iSalto, bool _bParallel)
         {
-            string mitad1;
-            string mitad2;
-            int largoTexto = texto.Count();
-            int mitad = largoTexto / 2;
-            mitad1 = texto.Substring(0,mitad);
-            mitad2 = texto.Substring(mitad,mitad);
+            string sMitad1;
+            string sMitad2;
+            int largoTexto = _sTexto.Count();
+            int iMitad = largoTexto / 2;
+            sMitad1 = _sTexto.Substring(0,iMitad);
+            sMitad2 = _sTexto.Substring(iMitad,iMitad);
             //texto encriptado
-            string encriptado = "";
+            string sEncriptado = "";
             //valor ascii de la letra a cambiar
-            if (parallel == false)
+            if (_bParallel == false)
             {
-                encriptado=encriptarCesar_Secuencial(texto, salto);
+                sEncriptado=encriptarCesar_Secuencial(_sTexto, _iSalto);
                 
             }
-            else if (parallel == true)
+            else if (_bParallel == true)
             {
-                string r1="";
-                string r2="";
+                string sResult1="";
+                string sResult2="";
                 Parallel.Invoke(()=>
                              {
-                                 r1=encriptarCesar_Parallel(mitad1,salto);
+                                 sResult1=encriptarCesar_Parallel(sMitad1,_iSalto);
                              }, //close second Action
 
                              () =>
                              {
-                                 r2=encriptarCesar_Parallel(mitad2,salto);
+                                 sResult2=encriptarCesar_Parallel(sMitad2,_iSalto);
                              } //close third Action
                          ); //close parallel.invoke
 
-                encriptado = r1 + r2;
+                sEncriptado = sResult1 + sResult2;
                 
             }
 
-            return encriptado;
+            return sEncriptado;
         }
 
 
         /// <summary>
         /// Metodo que desencripta un texto de manera Paralela
         /// </summary>
-        /// <param name="encriptado">Mensaje encriptado</param>
-        /// <param name="salto">Nuemro de saltos necesarios para desencriptar el mensaje</param>
+        /// <param name="_sEncriptado">Mensaje encriptado</param>
+        /// <param name="_iSalto">Nuemro de saltos necesarios para desencriptar el mensaje</param>
         /// <returns>Retorna el mensaje original</returns>
-        public static string desencriptarCesar_Parallel(string encriptado, int salto)
+        public static string desencriptarCesar_Parallel(string _sEncriptado, int _iSalto)
         {
             //texto encriptado
-            string desencriptado = "";
+            string s_Desencriptado = "";
             //valor ascii de la letra a cambiar
-            int letra;
-            Parallel.For(0, encriptado.Length, i =>
+            int _iLetra;
+            Parallel.For(0, _sEncriptado.Length, i =>
             {
-                int carac = Convert.ToInt32(encriptado[i]);
+                int carac = Convert.ToInt32(_sEncriptado[i]);
                 if (carac > 64 && carac < 91 || carac > 96 && carac < 123)
                 {
                     //obtiene el valor ascii
-                    letra = Convert.ToInt32(encriptado[i]) - salto;
+                    _iLetra = Convert.ToInt32(_sEncriptado[i]) - _iSalto;
                     //pasa de Z a A y viceversa
-                    if (letra < 65 || letra > 90 && letra < 97 || letra > 122)
+                    if (_iLetra < 65 || _iLetra > 90 && _iLetra < 97 || _iLetra > 122)
                     {
-                        letra = letra + 26;
+                        _iLetra = _iLetra + 26;
                     }
 
                     //convieerte el valor ascii a caracter
-                    desencriptado += Convert.ToChar(letra);
+                    s_Desencriptado += Convert.ToChar(_iLetra);
                 }
                 else
                 {
-                    encriptado += Convert.ToChar(carac);
+                    _sEncriptado += Convert.ToChar(carac);
                 }
 
             });
 
-            return desencriptado;
+            return s_Desencriptado;
         }
 
         /// <summary>
         /// Metodo que desencripta un texto de manera secuencial
         /// </summary>
-        /// <param name="encriptado">Mensaje encriptado</param>
-        /// <param name="salto">Nuemro de saltos necesarios para desencriptar el mensaje</param>
+        /// <param name="_sEncriptado">Mensaje encriptado</param>
+        /// <param name="_iSalto">Nuemro de saltos necesarios para desencriptar el mensaje</param>
         /// <returns>Retorna el mensaje original</returns>
-        public static string desencriptarCesar_Secuencial(string encriptado, int salto)
+        public static string desencriptarCesar_Secuencial(string _sEncriptado, int _iSalto)
         {
             //texto encriptado
             string desencriptado = "";
             //valor ascii de la letra a cambiar
             int letra;
-            for (int i = 0; i < encriptado.Length; i++)
+            for (int i = 0; i < _sEncriptado.Length; i++)
             {
-                int carac = Convert.ToInt32(encriptado[i]);
+                int carac = Convert.ToInt32(_sEncriptado[i]);
                 if (carac > 64 && carac < 91 || carac > 96 && carac < 123)
                 {
                     //obtiene el valor ascii
-                    letra = Convert.ToInt32(encriptado[i]) - salto;
+                    letra = Convert.ToInt32(_sEncriptado[i]) - _iSalto;
                     //pasa de Z a A 
                     if (letra < 41)
                     {
@@ -210,44 +210,44 @@ namespace Multicore.Negocio
         /// <summary>
         /// Metodo que desencripta un texto por medio del cifrado cesar, se ejecuta de forma paralela o secuancial esto depende de una bandera que indica el modo de ejecucion
         /// </summary>
-        /// <param name="encriptado">Texto que sera encriptado</param>
-        /// <param name="salto">Numero de saltos que se necesitan para desencriptar</param>
-        /// <param name="parallel">Bandera que indica si la desencriptacion sera de forma paralela o secuencial</param>
+        /// <param name="_sEncriptado">Texto que sera encriptado</param>
+        /// <param name="_iSalto">Numero de saltos que se necesitan para desencriptar</param>
+        /// <param name="_iParallel">Bandera que indica si la desencriptacion sera de forma paralela o secuencial</param>
         /// <returns>Retorna el mensaje original desencriptado</returns>
-        public static string desencriptCesar(string encriptado, int salto, bool parallel)
+        public static string desencriptCesar(string _sEncriptado, int _iSalto, bool _iParallel)
         {
             string desencriptado = "";
 
             string mitad1;
             string mitad2;
-            int largoTexto = encriptado.Count();
+            int largoTexto = _sEncriptado.Count();
             int mitad = largoTexto / 2;
-            mitad1 = encriptado.Substring(0, mitad);
-            mitad2 = encriptado.Substring(mitad, mitad);
+            mitad1 = _sEncriptado.Substring(0, mitad);
+            mitad2 = _sEncriptado.Substring(mitad, mitad);
             //texto encriptado
           
             //valor ascii de la letra a cambiar
-            if (parallel == false)
+            if (_iParallel == false)
             {
-                desencriptado = desencriptarCesar_Secuencial(encriptado, salto);
+                desencriptado = desencriptarCesar_Secuencial(_sEncriptado, _iSalto);
 
             }
-            else if (parallel == true)
+            else if (_iParallel == true)
             {
                 string r1 = "";
                 string r2 = "";
                 Parallel.Invoke(() =>
                     {
-                        r1 = desencriptarCesar_Parallel(mitad1, salto);
+                        r1 = desencriptarCesar_Parallel(mitad1, _iSalto);
                     }, //close second Action
 
                     () =>
                     {
-                        r2 = desencriptarCesar_Parallel(mitad2, salto);
+                        r2 = desencriptarCesar_Parallel(mitad2, _iSalto);
                     } //close third Action
                 ); //close parallel.invoke
 
-                encriptado = r1 + r2;
+                _sEncriptado = r1 + r2;
                
             }
 
