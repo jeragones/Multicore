@@ -124,7 +124,7 @@ namespace Multicore
         {
             string mensaje = "";
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Archivos Key|*.txt";
+            openFileDialog.Filter = "Archivos Key|*.sk";
             openFileDialog.FileName = "Seleccione un Archivo Clave ";
             openFileDialog.Title = "Seleccione un archivo";
             openFileDialog.InitialDirectory = "C:\\";
@@ -158,10 +158,10 @@ namespace Multicore
                 System.IO.StreamReader sr = new System.IO.StreamReader(mensaje, System.Text.Encoding.Default);
                 texto = sr.ReadToEnd();
             }
-            res = clsEncriptarXOR.XOR(texto);
+            res = clsEncriptarXOR.encriptarXOR(texto,true);
 
-            string fileNameEncriptado = (@"C:\Users\jdbr\Desktop\Encriptado_xor.txt");
-            string fileNameClave = (@"C:\Users\jdbr\Desktop\Clave_xor.txt");
+            string fileNameEncriptado = (@"C:\Users\jdbr\Desktop\Encriptado_xor.cfr");
+            string fileNameClave = (@"C:\Users\jdbr\Desktop\Clave_xor.sk");
             StreamWriter writerEncrip = File.CreateText(fileNameEncriptado);
             StreamWriter writerClave = File.CreateText(fileNameClave);
             writerEncrip.Write(res[1]);
@@ -183,7 +183,7 @@ namespace Multicore
             string texto = "";
             
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Archivos txt|*.txt";
+            openFileDialog.Filter = "Archivos Cifrados|*.cfr";
             openFileDialog.FileName = "Seleccione un archivo";
             openFileDialog.Title = "Seleccione un archivo";
             openFileDialog.InitialDirectory = "C:\\";
@@ -191,7 +191,7 @@ namespace Multicore
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 mensaje = openFileDialog.FileName;
-                System.IO.StreamReader sr = new System.IO.StreamReader(mensaje, System.Text.Encoding.Default);
+                System.IO.StreamReader sr = new System.IO.StreamReader(mensaje, System.Text.Encoding.UTF8);
                 texto = sr.ReadToEnd();
             }
 
