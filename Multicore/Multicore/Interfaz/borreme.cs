@@ -34,13 +34,30 @@ namespace Multicore.Interfaz
             //                                new string[] { "301031", "LIMON" },
             //                                new string[] { "301031", "CONSULADO" }};
 
+
+            //List<string[]> aoLineas = new List<string[]>();// insArchivo.cargarArchivo();
+            //aoLineas.Add(new string[] { "2", "ALAJUELA" });
+            //aoLineas.Add(new string[] { "1", "SAN JOSE" });
+            //aoLineas.Add(new string[] { "3", "CARTAGO" });
+            //aoLineas.Add(new string[] { "6", "HEREDIA" });
+            //aoLineas.Add(new string[] { "5", "GUANACASTE" });
+            //aoLineas.Add(new string[] { "4", "PUNTARENAS" });
+            //aoLineas.Add(new string[] { "8", "LIMON" });
+            //aoLineas.Add(new string[] { "7", "CONSULADO" });
+
+
+
+
+
+
+            string jj = clsMergeSort.mergeSort(0,false,false);
             //var timer = Stopwatch.StartNew();
-            //clsMergeSort.mergeSort(words, 0, true); // distritos
-            //clsMergeSort.mergeSort(words1, 5, false); // 
+            //string h1 = clsMergeSort.mergeSort(0, false, true); // distritos
+            //string h = clsMergeSort.mergeSort(0, false, false); // 
             //timer.Stop();
             //var timer1 = Stopwatch.StartNew();
-            string h1 = clsQuickSort.quickSort(0, false, true); // true -> desc
-            string h = clsQuickSort.quickSort(0,false,false); // false -> asc
+            //string h1 = clsQuickSort.quickSort(0, false, true); // true -> desc
+            //string h = clsQuickSort.quickSort(0,false,false); // false -> asc
             //timer1.Stop();
             int y = 0;
 

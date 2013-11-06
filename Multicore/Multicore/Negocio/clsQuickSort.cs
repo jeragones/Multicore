@@ -73,7 +73,7 @@ namespace Multicore.Negocio
                 loLista.Add(asTmp);
             } 
 
-            QuickSort(loLista, 0, loLista.Count - 1, _iColumna, _bTipo, _bConcurrencia);
+            quickSort(loLista, 0, loLista.Count - 1, _iColumna, _bTipo, _bConcurrencia);
 
             ///* ***************************************************************************************** */
             //if (_bConcurrencia)
@@ -94,7 +94,7 @@ namespace Multicore.Negocio
             return sbTexto;
         }
 
-        private static void QuickSort(List<string[]> _loLista, int _iInicio, int _iFin, int _iColumna, bool _bTipo, bool _bConcurrencia)
+        private static void quickSort(List<string[]> _loLista, int _iInicio, int _iFin, int _iColumna, bool _bTipo, bool _bConcurrencia)
         {
             int i = _iInicio, j = _iFin;
             string sPivot = ((string[])_loLista[(_iInicio + _iFin) / 2])[_iColumna];
@@ -168,9 +168,9 @@ namespace Multicore.Negocio
                 }
             }
             if (_iInicio < j)
-                QuickSort(_loLista, _iInicio, j, _iColumna, _bTipo, _bConcurrencia);
+                quickSort(_loLista, _iInicio, j, _iColumna, _bTipo, _bConcurrencia);
             if (i < _iFin)
-                QuickSort(_loLista, i, _iFin, _iColumna, _bTipo, _bConcurrencia);
+                quickSort(_loLista, i, _iFin, _iColumna, _bTipo, _bConcurrencia);
         }
     }
 }

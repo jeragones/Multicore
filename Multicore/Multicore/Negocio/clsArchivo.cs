@@ -22,8 +22,7 @@ namespace Multicore.Negocio
             openFileDialog.ShowDialog();
             if (openFileDialog.FileName != "")
             {
-                StreamReader srFile = new StreamReader(openFileDialog.OpenFile());
-                char[] jj=new char[100];
+                StreamReader srFile = new StreamReader(openFileDialog.OpenFile(), Encoding.UTF8);
                 string sTexto;
                 List<string> lsTexto = new List<string>();
                 while ((sTexto = srFile.ReadLine()) != null)
@@ -36,7 +35,7 @@ namespace Multicore.Negocio
 
         public string cargarArchivo(string _sPath)
         {
-            StreamReader srFile = new StreamReader(_sPath);
+            StreamReader srFile = new StreamReader(_sPath, Encoding.UTF8);
             string sTexto = srFile.ReadToEnd();
             srFile.Close();
             return sTexto;   
