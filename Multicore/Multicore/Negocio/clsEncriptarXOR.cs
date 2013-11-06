@@ -48,13 +48,15 @@ namespace Multicore.Negocio
             int i = 0;
             foreach (char c in texto)
             {
+                
                 if (i >= clave.Length)
                 {
                     i -= clave.Length;
                 }
-                int _c = (int)c ^ clave[i];
-                
-                encrip+=((char)_c);
+                int cl = Convert.ToInt16(clave[i]);
+                int _c = (int)c + cl;
+
+                encrip += ((char)_c);
                 i++;
             }
             
@@ -63,6 +65,28 @@ namespace Multicore.Negocio
             return encrip;
         }
 
+        public static string desencriptXOR(string clave, string texto)
+        {
+            string encrip = "";
+            int i = 0;
+            foreach (char c in texto)
+            {
+                
+                if (i >= clave.Length)
+                {
+                    i -= clave.Length;
+                }
+                int cl = Convert.ToInt16(clave[i]);
+                int _c = (int)c - cl;
+
+                encrip += ((char)_c);
+                i++;
+            }
+
+
+
+            return encrip;
+        }
 
 
         public static string[] XOR(string txt)
