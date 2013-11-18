@@ -49,12 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaz\borreme.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Interfaz\borreme.Designer.cs">
-      <DependentUpon>borreme.cs</DependentUpon>
-    </Compile>
     <Compile Include="Interfaz\frmMulticore.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,9 +65,6 @@
     <Compile Include="Negocio\clsNumero.cs" />
     <Compile Include="Negocio\clsQuickSort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Interfaz\borreme.resx">
-      <DependentUpon>borreme.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Interfaz\frmMulticore.resx">
       <DependentUpon>frmMulticore.cs</DependentUpon>
     </EmbeddedResource>
