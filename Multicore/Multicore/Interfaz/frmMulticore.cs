@@ -11,7 +11,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Multicore.Interfaz;
+//using Multicore.Interfaz;
 
 namespace Multicore
 {

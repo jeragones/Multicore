@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Threading.Tasks;
-using Multicore.Interfaz;
+//using Multicore.Interfaz;
 
 namespace Multicore
 {
